@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import kataraUser from './katara.json';
-import events from './event.json';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import kataraUser from "./katara.json";
+import events from "./event.json";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App user={kataraUser} events = {events}/>
+    <App user={kataraUser} events={events} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
