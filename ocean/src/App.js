@@ -9,9 +9,11 @@ import Menu from "./Menu";
 import Footer from "./Footer";
 // import TweenOne from "rc-tween-one";
 import Navbar from "./components/Navbar/navbar.js";
+import Banner from "./components/Banner/banner.js";
 
 import kataraUser from "./katara.json";
 import zukoUser from "./zuko.json";
+import GlobalStyle from "./GlobalStyle";
 
 export class App extends Component {
   constructor(props) {
@@ -90,20 +92,21 @@ export class App extends Component {
     return (
       <div>
         <ThemeProvider theme={theme}>
-          <div className="App" onScroll={this.handleScroll}>
-            <Navbar />
-            <Aquarium user={this.state.user} />
-            <Menu
-              user={this.state.user}
-              events={this.state.events}
-              menuStatus={this.state.menuStatus}
-            />
-            <MenuController
-              switchMenuStatus={this.switchMenuStatus}
-              menuStatus={this.state.menuStatus}
-            />
-            <Footer />
-            {/* {this.state.displayScroll ? (
+          {/* <div className="App" onScroll={this.handleScroll}> */}
+          <Navbar />
+          <Banner />
+          <Aquarium user={this.state.user} />
+          <Menu
+            user={this.state.user}
+            events={this.state.events}
+            menuStatus={this.state.menuStatus}
+          />
+          <MenuController
+            switchMenuStatus={this.switchMenuStatus}
+            menuStatus={this.state.menuStatus}
+          />
+          <Footer />
+          {/* {this.state.displayScroll ? (
               <div className="scrolly">
                 <TweenOne
                   animation={{
@@ -121,7 +124,7 @@ export class App extends Component {
                 </TweenOne>
               </div>
             ) : null} */}
-          </div>
+          {/* </div> */}
         </ThemeProvider>
       </div>
     );

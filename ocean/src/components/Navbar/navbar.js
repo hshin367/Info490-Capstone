@@ -1,18 +1,26 @@
+import PropTypes from "prop-types";
+import React from "react";
 import styled from "styled-components";
-import { Container, NavbarItemsContainer } from "./navbarStyle.js";
+import { Container, NavbarItemsContainer, NavItem } from "./navbarStyle.js";
+
+const NavLink = ({ href, children }) => (
+  <NavItem>
+    <a href={href}>{children}</a>
+  </NavItem>
+);
 
 const Navbar = () => {
   return (
     <Container>
-      <a href="/">
-        <img height={30} />
-      </a>
+      <NavLink href="/">RESTORE</NavLink>
+
       <NavbarItemsContainer>
-        <div href="/aquarium">AQUARIUM</div>
+        <NavLink href="/">HOME</NavLink>
+        <NavLink href="/">AQUARIUM</NavLink>
 
         {/* // TODO : Create dropdown component */}
-        <div href="/events">EVENTS</div>
-        <div href="/account">ACCOUNT</div>
+        <NavLink href="/">EVENTS</NavLink>
+        <NavLink href="/">ACCOUNT</NavLink>
       </NavbarItemsContainer>
     </Container>
   );
