@@ -39,13 +39,13 @@ const verticalInterval = {
   base: `${calcRem(10)} 0 ${calcRem(10)} 0`,
 };
 
-const deviceSizes = {
+const sizes = {
   xxs: "320px",
   xs: "375px",
   sm: "576px",
   m: "768px",
   l: "1024px",
-  xl: "1200px",
+  xl: "1300px",
   xxl: "1400px",
 };
 
@@ -60,7 +60,7 @@ const colors = {
 const theme = {
   fontSizes,
   colors,
-  deviceSizes,
+  sizes,
   paddings,
   margins,
   interval,

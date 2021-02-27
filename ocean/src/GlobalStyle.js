@@ -2,9 +2,10 @@ import styled, { createGlobalStyle } from "styled-components";
 import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
-  a { 
-    text-decoration: none;
+  h1 { 
+    color: white;
   }
+
 `;
 
 GlobalStyle.displayName = "GlobalStyle";

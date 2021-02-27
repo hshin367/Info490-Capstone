@@ -1,31 +1,80 @@
 import React from "react";
+import styled from "styled-components";
+
 import { Carousel } from "antd";
+import { Container } from "./style.js";
 import "antd/dist/antd.css";
 
-const contentStyle = {
-  height: "160px",
-  color: "black",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
+import SliderItem from "./SliderItem/sliderItem.js";
 
-const SlidingCarousel = () => {
+const StyledSlider = styled(Carousel)`
+  height: 60vh;
+`;
+
+const SliderItemContainer = styled.div`
+  height: 60vh;
+`;
+
+const Bg = styled.div`
+  background-image: url(${process.env.PUBLIC_URL +
+  "/img/Capstone/Banner1.png"});
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: top left;
+
+  height: 100%;
+  width: auto;
+  position: relative;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  color: white;
+`;
+
+const SlidingCarousel = (props) => {
+  const slideContent = () => props.map((d) => <div></div>);
+
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  };
+
   return (
-    <Carousel autoplay>
-      <div>
-        <h3 style={contentStyle}>1</h3>
+    <StyledSlider {...settings}>
+      <SliderItemContainer>
+        <Bg>
+          <SliderItem />
+        </Bg>
+      </SliderItemContainer>
+
+      <SliderItemContainer>
+        {" "}
+        <Bg>{/* <div>sdfsd</div> */}</Bg>
+      </SliderItemContainer>
+
+      <SliderItemContainer>
+        {" "}
+        <Bg>{/* <div>sdfsd</div> */}</Bg>
+      </SliderItemContainer>
+
+      <SliderItemContainer>
+        {" "}
+        <Bg>{/* <div>sdfsd</div> */}</Bg>
+      </SliderItemContainer>
+
+      {/* <div>
+        <img src="img/Capstone/Banner3.png" alt="Logo" />
       </div>
       <div>
-        <h3 style={contentStyle}>2</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>3</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>4</h3>
-      </div>
-    </Carousel>
+        <img src="img/Capstone/Banner4.png" alt="Logo" />
+      </div> */}
+    </StyledSlider>
   );
 };
 

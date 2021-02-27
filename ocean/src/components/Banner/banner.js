@@ -13,9 +13,9 @@ import { Container } from "./style.js";
 
 const Banner = () => {
   return (
-    <div>
+    <Container>
       <SlidingCarousel />
-    </div>
+    </Container>
   );
 };
 

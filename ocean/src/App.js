@@ -1,15 +1,15 @@
 // import logo from './logo.svg';
 import React, { Component } from "react";
-import { ThemeProvider } from "styled-components";
+import Routes from "./Routes/index.js";
+
+import styled, { ThemeProvider } from "styled-components";
 import theme from "./theme";
 
 // import "./index.css";
-import Aquarium from "./Aquarium";
-import Menu from "./Menu";
 import Footer from "./Footer";
 // import TweenOne from "rc-tween-one";
 import Navbar from "./components/Navbar/navbar.js";
-import Banner from "./components/Banner/banner.js";
+// import Banner from "./components/Banner/banner.js";
 
 import kataraUser from "./katara.json";
 import zukoUser from "./zuko.json";
@@ -91,20 +91,11 @@ export class App extends Component {
   render() {
     return (
       <div>
+        <GlobalStyle />
         <ThemeProvider theme={theme}>
-          {/* <div className="App" onScroll={this.handleScroll}> */}
           <Navbar />
-          <Banner />
-          <Aquarium user={this.state.user} />
-          <Menu
-            user={this.state.user}
-            events={this.state.events}
-            menuStatus={this.state.menuStatus}
-          />
-          <MenuController
-            switchMenuStatus={this.switchMenuStatus}
-            menuStatus={this.state.menuStatus}
-          />
+          <Routes />
+
           <Footer />
           {/* {this.state.displayScroll ? (
               <div className="scrolly">
@@ -124,7 +115,6 @@ export class App extends Component {
                 </TweenOne>
               </div>
             ) : null} */}
-          {/* </div> */}
         </ThemeProvider>
       </div>
     );
