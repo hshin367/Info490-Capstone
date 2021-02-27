@@ -5,7 +5,9 @@ const GlobalStyle = createGlobalStyle`
   h1 { 
     color: white;
   }
-
+  * {
+    font-family: "Open Sans", sans-serif;
+  }
 `;
 
 GlobalStyle.displayName = "GlobalStyle";

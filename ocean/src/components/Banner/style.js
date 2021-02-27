@@ -4,10 +4,24 @@ import theme from "../../theme";
 const Container = styled.div`
   color: ${theme.colors.white};
   height: fit-content;
+  position: relative;
   // display: flex;
   // width: 100%;
   align-items: center;
   justify-content: space-between;
 `;
 
-export { Container };
+const DateContent = styled.div`
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  font-size: ${theme.fontSizes.xl};
+`;
+
+const TDate = styled.div`
+  font-size: ${theme.fontSizes.xxxl};
+  font-weight: 600;
+  line-height: 1;
+`;
+
+export { Container, DateContent, TDate };

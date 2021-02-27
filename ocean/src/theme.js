@@ -6,7 +6,7 @@ const fontSizes = {
   lg: calcRem(18),
   xl: calcRem(20),
   xxl: calcRem(22),
-  xxxl: calcRem(24),
+  xxxl: calcRem(66),
   titleSize: calcRem(50),
 };
 
