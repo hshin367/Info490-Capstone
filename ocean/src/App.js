@@ -11,8 +11,6 @@ import Footer from "./Footer";
 import Navbar from "./components/Navbar/navbar.js";
 // import Banner from "./components/Banner/banner.js";
 
-import kataraUser from "./katara.json";
-import zukoUser from "./zuko.json";
 import GlobalStyle from "./GlobalStyle";
 
 export class App extends Component {
@@ -30,20 +28,6 @@ export class App extends Component {
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
-
-  switchUser = () => {
-    if (this.state.user.user === "Katara") {
-      this.setState((currState) => {
-        let stateChanges = { user: zukoUser };
-        return stateChanges;
-      });
-    } else {
-      this.setState((currState) => {
-        let stateChanges = { user: kataraUser };
-        return stateChanges;
-      });
-    }
-  };
 
   switchMenuStatus = (newStatus) => {
     if (newStatus === "aquarium" || newStatus === "events") {
