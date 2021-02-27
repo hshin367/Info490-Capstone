@@ -5,10 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import kataraUser from "./katara.json";
 import events from "./event.json";
+import Login from "./Login";
+import RegistrationForm from "./RegistrationForm";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App user={kataraUser} events={events} />
+    {/* <App user={kataraUser} events={events} /> */}
+    {/* <Login /> */}
+    <RegistrationForm />
   </React.StrictMode>,
   document.getElementById("root")
 );

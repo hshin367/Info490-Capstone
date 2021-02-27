@@ -1,0 +1,49 @@
+body {
+  background-image: url(./img/LoginBackground.png);
+  background-size: cover;
+}
+
+#login-panel {
+  text-align: center;
+  position: absolute;
+  left: 35%;
+  top: 25%;
+  width: 30%;
+  height: 30%;
+  justify-content: center;
+}
+
+.ant-form-item-control-input-content {
+  backgrounopacity: 0.7;
+}
+
+/* .ant-input-prefix {
+  background-color: white;
+  opacity: 1;
+  text-emphasis-color: white;
+} */
+
+#form-btn {
+  width: 100%;
+  background-color: transparent;
+  list-style: 1;
+  color: white;
+}
+
+#form-btn:hover {
+  background-color: white;
+  color: #081d69;
+}
+
+/* #components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+} */
