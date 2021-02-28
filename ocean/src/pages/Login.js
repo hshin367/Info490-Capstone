@@ -1,8 +1,9 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Bg, Container } from "./styles/style.js";
-// import "./Login.css";
+import { Bg, Container, TextBox } from "./styles/style.js";
+import { LogoText } from "../components/Logo/style.js";
+import "./Login.css";
 
 const Login = () => {
   const onFinish = (values) => {
@@ -12,8 +13,9 @@ const Login = () => {
   return (
     <Bg>
       <Container>
-        <h1 style={{ color: "white" }}> LOGO </h1>
-        <h1 style={{ color: "white" }}> RESTORE </h1>
+        <LogoText alignCenter> LOGO </LogoText>
+        <LogoText alignCenter> RESTORE </LogoText>
+
         <Form
           name="normal_login"
           className="login-form"
@@ -70,7 +72,9 @@ const Login = () => {
             >
               LOGIN
             </Button>
-            <h3 style={{ color: "white" }}> OR </h3>
+            <TextBox alignCenter color="white">
+              OR
+            </TextBox>
             <Button htmlType="button" id="form-btn">
               CREATE ACCOUNT
             </Button>

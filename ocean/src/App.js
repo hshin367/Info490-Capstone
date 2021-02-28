@@ -75,11 +75,13 @@ export class App extends Component {
     return (
       <div>
         <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <Navbar />
-          <Routes />
-          {/* <Footer /> */}
-        </ThemeProvider>
+        <div className="wrapper">
+          <ThemeProvider theme={theme}>
+            <Navbar />
+            <Routes />
+            {/* <Footer /> */}
+          </ThemeProvider>
+        </div>
       </div>
     );
   }

@@ -5,6 +5,11 @@ const GlobalStyle = createGlobalStyle`
   h1 { 
     color: white;
   }
+
+  .wrapper { 
+    height: 100vh;
+  }
+
   * {
     font-family: "Open Sans", sans-serif;
   }
@@ -12,6 +17,8 @@ const GlobalStyle = createGlobalStyle`
   nav + div { 
     padding-top: 50px;
   }
+
+
 
 `;
 
