@@ -3,15 +3,14 @@ import React, { Component } from "react";
 import Routes from "./Routes/index.js";
 
 import styled, { ThemeProvider } from "styled-components";
+import GlobalStyle from "./GlobalStyle";
+import { Layout } from "antd";
 import theme from "./theme";
 
-// import "./index.css";
-import Footer from "./Footer";
-// import TweenOne from "rc-tween-one";
 import Navbar from "./components/Navbar/navbar.js";
-// import Banner from "./components/Banner/banner.js";
 
-import GlobalStyle from "./GlobalStyle";
+// TODO : consider shifting to antd layouts for responsivenss.
+const { Header, Footer, Sider, Content } = Layout;
 
 export class App extends Component {
   constructor(props) {
@@ -79,26 +78,7 @@ export class App extends Component {
         <ThemeProvider theme={theme}>
           <Navbar />
           <Routes />
-
-          <Footer />
-          {/* {this.state.displayScroll ? (
-              <div className="scrolly">
-                <TweenOne
-                  animation={{
-                    y: 15,
-                    yoyo: true,
-                    repeat: -1,
-                    duration: 1000,
-                  }}
-                >
-                  <img
-                    src="img/chevron.svg"
-                    alt="scroll-arrow"
-                    onClick={this.handleClickScrollButton}
-                  />
-                </TweenOne>
-              </div>
-            ) : null} */}
+          {/* <Footer /> */}
         </ThemeProvider>
       </div>
     );

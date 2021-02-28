@@ -1,54 +1,48 @@
 import styled from "styled-components";
 import theme from "../../theme";
 
-const Container = styled.div`
+const Container = styled.nav`
   display: flex;
   justify-content: center;
+  position: fixed;
+  width: 100vw;
 `;
 
 const NavbarWrapper = styled.div`
   color: ${theme.colors.white};
-  position: fixed;
+  position: relative;
   z-index: 1030;
+  width: 1200px;
 
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 10px;
-  width: 100vw;
+  padding: 10px 25px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   @media (min-width: ${({ theme }) => theme.sizes.xs}) {
-    padding-left: 25px;
-    padding-right: 23px;
   }
   @media (min-width: ${({ theme }) => theme.sizes.sm}) {
-    max-width: ${({ theme }) => theme.sizes.m};
+    // max-width: ${({ theme }) => theme.sizes.m};
   }
   @media (min-width: ${({ theme }) => theme.sizes.m}) {
-    max-width: ${({ theme }) => theme.sizes.l};
+    // max-width: ${({ theme }) => theme.sizes.l};
   }
   @media (min-width: ${({ theme }) => theme.sizes.l}) {
-    padding-left: 50px;
-    padding-right: 50px;
-    max-width: 1300px;
   }
 `;
 
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 40%;
+  // justify-content: space-between;
+  padding-left: 40%;
 `;
 
 const NavItem = styled.li`
   text-decoration: none;
   list-style: none;
+  padding: 0 20px;
   color: ${theme.colors.white};
   a {
     color: ${theme.colors.white};

@@ -8,6 +8,11 @@ const GlobalStyle = createGlobalStyle`
   * {
     font-family: "Open Sans", sans-serif;
   }
+
+  nav + div { 
+    padding-top: 50px;
+  }
+
 `;
 
 GlobalStyle.displayName = "GlobalStyle";
