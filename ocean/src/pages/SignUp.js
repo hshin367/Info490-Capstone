@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
-  AutoComplete,
-  DatePicker,
-  Space,
-} from "antd";
+import { Form, Input, Select, Row, Col, Checkbox, DatePicker } from "antd";
 import "./Login.css";
 import { Bg, Container, TextBox, SignUpFormContainer } from "./styles/style.js";
 import { SignupButton } from "../components/Button/button.js";
@@ -46,11 +34,6 @@ const config = {
       message: "Date of Birth* (yyyy/mm/dd)",
     },
   ],
-};
-
-const halfForm = {
-  display: "inline-block",
-  width: "calc(50%)",
 };
 
 const RegistrationForm = () => {
