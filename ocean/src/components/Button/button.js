@@ -5,15 +5,14 @@ import { Button } from "antd";
 import { darken, lighten } from "polished";
 import theme from "../../theme";
 
+// TODO : look for a better way of css ordering for the colors part.
+// TODO : esp. the button:hover, active.
+
 const colors = css`
   ${(props) => {
-    console.log(props.color);
     const selectedColor = props.theme.colors[props.color];
     const fontColor =
       props.color === "white" ? theme.colors.dark_blue : theme.colors.white;
-
-    console.log(selectedColor);
-    console.log(fontColor);
 
     return css`
       background: ${selectedColor};
@@ -71,6 +70,7 @@ const StyledButton = styled(Button)`
   ${sizes}
   &:hover {
     background: ${darken(0.2, "white")};
+    color: ;
   }
   &:active {
     background: ${darken(0.1, "white")};
