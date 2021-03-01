@@ -18,7 +18,7 @@ const SliderItemContainer = styled.div`
 const Bg = styled.div`
   background-image: url(${process.env.PUBLIC_URL +
   "/img/Capstone/Banner1.png"});
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: top left;
 

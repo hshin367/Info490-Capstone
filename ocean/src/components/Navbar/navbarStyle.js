@@ -6,6 +6,7 @@ const Container = styled.nav`
   justify-content: center;
   position: fixed;
   width: 100vw;
+  z-index: 1030;
 `;
 
 const NavbarWrapper = styled.div`

@@ -1,44 +1,96 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+// import "antd/dist/antd.css";
+import { Button } from "antd";
 import { darken, lighten } from "polished";
 import theme from "../../theme";
 
-const StyledButton = styled.button`
-  display: inline-flex;
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  // Size
-  height: 2.25rem;
-  font-size: 1rem;
-
-  // colors
+const colors = css`
   ${(props) => {
-    const selected = props.theme.palette[props.color];
+    console.log(props.color);
+    const selectedColor = props.theme.colors[props.color];
+    const fontColor =
+      props.color === "white" ? theme.colors.dark_blue : theme.colors.white;
+
+    console.log(selectedColor);
+    console.log(fontColor);
+
     return css`
-      background: ${selected};
-      &:hover {
-        background: ${lighten(0.1, selected)};
-      }
-      &:active {
-        background: ${darken(0.1, selected)};
-      }
+      background: ${selectedColor};
+      color: ${theme.colors.dark_blue};
     `;
   }}
 `;
 
-const Button = ({ children, ...rest }) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+const sizes = css`
+  ${(props) =>
+    props.size === "large" &&
+    css`
+      height: 3rem;
+      font-size: ${theme.fontSizes.lg};
+    `}
+
+  ${(props) =>
+    props.size === "medium" &&
+    css`
+      height: 2.25rem;
+      font-size: ${theme.fontSizes.base};
+    `}
+
+  ${(props) =>
+    props.size === "small" &&
+    css`
+      height: 2rem;
+      font-size: ${theme.fontSizes.small};
+    `}
+  
+  ${(props) =>
+    props.size === "signup" &&
+    css`
+      height: 2rem;
+      width: 10rem;
+      font-size: ${theme.fontSizes.small};
+    `}
+`;
+
+const StyledButton = styled(Button)`
+  display: inline-flex;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  align-items: center;
+  // colors
+  ${colors};
+  justify-content: center;
+  color: ${theme.colors.dark_blue};
+  // Size
+  ${sizes}
+  &:hover {
+    background: ${darken(0.2, "white")};
+  }
+  &:active {
+    background: ${darken(0.1, "white")};
+  }
+`;
+
+// const Button = ({ children, ...rest }) => {
+//   return <StyledButton {...rest}>{children}</StyledButton>;
+// };
+
+const SignupButton = ({ children, ...rest }) => {
+  return (
+    <StyledButton color="white" size="signup" {...rest}>
+      {children}
+    </StyledButton>
+  );
 };
 
 Button.defaultProps = {
   color: theme.colors.dark_blue,
 };
 
-export default Button;
+export { SignupButton };

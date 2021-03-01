@@ -15,7 +15,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   nav + div { 
-    padding-top: 50px;
+    // padding-top: 50px;
+  }
+
+  button a { 
+    color: none;
   }
 
 
