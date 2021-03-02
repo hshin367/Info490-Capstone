@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     color: none;
   }
 
+  // Border-radius
 
 
 `;

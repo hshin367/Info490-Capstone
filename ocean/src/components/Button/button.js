@@ -89,8 +89,16 @@ const SignupButton = ({ children, ...rest }) => {
   );
 };
 
+const WhiteButton = ({ children, ...rest }) => {
+  return (
+    <StyledButton color="white" size="medium" {...rest}>
+      {children}
+    </StyledButton>
+  );
+};
+
 Button.defaultProps = {
   color: theme.colors.dark_blue,
 };
 
-export { SignupButton };
+export { SignupButton, WhiteButton };

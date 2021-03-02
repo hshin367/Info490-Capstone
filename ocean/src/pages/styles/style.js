@@ -1,7 +1,25 @@
-import styled from "styled-components";
-import theme from "../../theme";
+import styled, { css } from "styled-components";
 import img from "../../img/LoginBackground.png";
-import Form from "antd/lib/form/Form";
+
+const sizes = css`
+  ${(props) =>
+    props.size === "large" &&
+    css`
+      ${props.theme.fontSizes.lg}
+    `}
+
+  ${(props) =>
+    props.size === "medium" &&
+    css`
+      ${props.theme.fontSizes.base}
+    `}
+
+  ${(props) =>
+    props.size === "title" &&
+    css`
+      ${props.theme.fontSizes.xxl}
+    `}
+`;
 
 // Login
 const Bg = styled.div`
@@ -19,6 +37,7 @@ const Flex = styled.div`
   display: flex;
 `;
 
+// TODO : take in a variable for the style (row, col)
 const Container = styled(Flex)`
   flex-direction: column;
   justify-content: center;
@@ -30,7 +49,8 @@ const SignUpFormContainer = styled(Flex)`
     props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.3)" : ""};
   flex-direction: ${(props) => props.flexDirection};
   width: ${(props) => props.width};
-  padding: ${theme.paddings.xl} ${theme.paddings.xxxl};
+  padding: ${(props) => props.theme.paddings.xl}
+    ${(props) => props.theme.paddings.xxxl};
   border-radius: 7px;
 `;
 
@@ -43,22 +63,25 @@ const HalfFormContainer = styled(Flex)`
 const TextBox = styled.div`
   color: ${(props) =>
     props.color === "white"
-      ? theme.colors.white
+      ? props.theme.colors.white
       : props.color === "darkBlue"
-      ? theme.colors.dark_blue
-      : theme.colors.black};
+      ? props.theme.colors.dark_blue
+      : props.color === "black"
+      ? props.theme.colors.black
+      : "inherit"};
   text-align: ${(props) => (props.alignCenter ? "center" : "left")};
   display: ${(props) => props.display};
+  font-size: ${sizes};
   padding: ${(props) =>
     props.padding === "sm"
-      ? theme.paddings.small
+      ? props.theme.paddings.small
       : props.padding === "lg"
-      ? theme.paddings.lg
+      ? props.theme.paddings.lg
       : props.padding === "xl"
-      ? theme.paddings.xl
+      ? props.theme.paddings.xl
       : props.padding === "xxl"
-      ? theme.paddings.xl
-      : theme.paddings.base};
+      ? props.theme.paddings.xl
+      : props.theme.paddings.base};
 `;
 
-export { Bg, Container, TextBox, SignUpFormContainer, HalfFormContainer };
+export { Bg, Container, TextBox, SignUpFormContainer, HalfFormContainer, Flex };
