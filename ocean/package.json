@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.5.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
     "antd": "^4.12.3",
+    "polished": "^4.1.1",
     "prop-types": "^15.7.2",
     "rc-tween-one": "^2.7.3",
     "react": "^17.0.1",
