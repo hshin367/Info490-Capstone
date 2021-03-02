@@ -1,174 +1,151 @@
 // import logo from './logo.svg';
-import React, { Component } from 'react'; 
-import './index.css';
-import Aquarium from './Aquarium';
-import Menu from './Menu';
-import Footer from './Footer'
-import TweenOne from 'rc-tween-one';
+import React, { Component } from "react";
+import Routes from "./Routes/index.js";
 
-import kataraUser from './katara.json';
-import zukoUser from './zuko.json';
+import styled, { ThemeProvider } from "styled-components";
+import GlobalStyle from "./GlobalStyle";
+import { Layout } from "antd";
+import theme from "./theme";
 
+import Navbar from "./components/Navbar/navbar.js";
+
+// TODO : consider shifting to antd layouts for responsivenss.
+const { Header, Footer, Sider, Content } = Layout;
 
 export class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       user: this.props.user,
       events: this.props.events,
       menuStatus: "aquarium",
       scrollPosition: 0,
-      displayScroll: true
-    }
+      displayScroll: true,
+    };
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
- }
-
-  switchUser = () =>{
-    if(this.state.user.user === "Katara"){
-      this.setState((currState) => {
-        let stateChanges = { user: zukoUser};
-        return stateChanges;
-      }); 
-    } else {
-     this.setState((currState) => {
-        let stateChanges = { user: kataraUser};
-        return stateChanges;
-      });
-    }
+    window.addEventListener("scroll", this.handleScroll);
   }
 
   switchMenuStatus = (newStatus) => {
-    if(newStatus === "aquarium" || newStatus === "events"){
+    if (newStatus === "aquarium" || newStatus === "events") {
       //this.setState({ menuStatus: newStatus });
       this.setState((currState) => {
         let stateChanges = { menuStatus: newStatus };
         return stateChanges;
       });
     }
-  }
+  };
 
   //Scroll Stuff
-  handleScroll = (event) =>{
-    console.log("hi")
-    let e = event.target
-    this.setState({
-      scrollPosition:window.pageYOffset
-    }, this.checkScroll)
-  }
+  handleScroll = (event) => {
+    console.log("hi");
+    let e = event.target;
+    this.setState(
+      {
+        scrollPosition: window.pageYOffset,
+      },
+      this.checkScroll
+    );
+  };
 
-   checkScroll = () => {
-    if(this.state.scrollPosition < 250){
-      console.log(this.state.scrollPosition)
+  checkScroll = () => {
+    if (this.state.scrollPosition < 250) {
+      console.log(this.state.scrollPosition);
       this.setState({
-        displayScroll:true
-      })
+        displayScroll: true,
+      });
     } else {
       this.setState({
-        displayScroll:false
-      })
+        displayScroll: false,
+      });
     }
-  } 
-  
+  };
+
   handleClickScrollButton = () => {
     window.scroll({
       top: 570,
       left: 0,
       behavior: "smooth",
     });
-  }
- 
-  render(){  
+  };
+
+  render() {
     return (
       <div>
-        <div className="App"  onScroll = {this.handleScroll}>
-          <Aquarium user={this.state.user}/>
-          <Menu user={this.state.user} events={this.state.events} menuStatus={this.state.menuStatus}/>
-          <UserProfile user={this.state.user} switchUser={this.switchUser}/>
-          <MenuController switchMenuStatus={this.switchMenuStatus} menuStatus={this.state.menuStatus}/>
-          <img src="img/favicon.ico" alt="logo" className="logo"/>
-          <Footer/>  
-          {this.state.displayScroll?
-          <div className = "scrolly">
-             <TweenOne 
-            animation={{ 
-                y:15,
-                yoyo: true,
-                repeat: -1, 
-                duration: 1000
-            }}>
-            <img src="img/chevron.svg" alt="scroll-arrow" onClick={this.handleClickScrollButton}/>
-            </TweenOne>
-          </div >
-          : null}
+        <GlobalStyle />
+        <div className="wrapper">
+          <ThemeProvider theme={theme}>
+            <Navbar />
+            <Routes />
+            {/* <Footer /> */}
+          </ThemeProvider>
         </div>
       </div>
-
-      
     );
   }
 }
 
-class UserProfile extends Component{
+class UserProfile extends Component {
+  profileHandleClick = (event) => {
+    this.props.switchUser();
+  };
 
-profileHandleClick = (event) =>{
-  this.props.switchUser()
-}
-
-  render(){
-    return(
+  render() {
+    return (
       <div className="profile" onClick={this.profileHandleClick}>
-        <img src={this.props.user.pic} alt="profile pic"/>
+        <img src={this.props.user.pic} alt="profile pic" />
         <h1>{this.props.user.user.toUpperCase()}</h1>
       </div>
-    )
+    );
   }
 }
 
-class MenuController extends Component{
-  aquariumHandleClick = (event) =>{
+class MenuController extends Component {
+  aquariumHandleClick = (event) => {
     this.props.switchMenuStatus("aquarium");
-  }
+  };
 
-  eventsHandleClick = (event) =>{
+  eventsHandleClick = (event) => {
     this.props.switchMenuStatus("events");
-  }
+  };
 
   aquarium = () => {
-    if(this.props.menuStatus === 'aquarium'){
-    return (<h1 className = 'selected' onClick={this.aquariumHandleClick}>AQUARIUM</h1>)
+    if (this.props.menuStatus === "aquarium") {
+      return (
+        <h1 className="selected" onClick={this.aquariumHandleClick}>
+          AQUARIUM
+        </h1>
+      );
     } else {
-      return (<h1 onClick={this.aquariumHandleClick}>AQUARIUM</h1>)
+      return <h1 onClick={this.aquariumHandleClick}>AQUARIUM</h1>;
     }
-  }
+  };
 
   events = () => {
-    if(this.props.menuStatus === 'events'){
-    return (<h1 className = 'selected' onClick={this.eventsHandleClick}>EVENTS</h1>)
+    if (this.props.menuStatus === "events") {
+      return (
+        <h1 className="selected" onClick={this.eventsHandleClick}>
+          EVENTS
+        </h1>
+      );
     } else {
-      return (<h1 onClick={this.eventsHandleClick}>EVENTS</h1>)
+      return <h1 onClick={this.eventsHandleClick}>EVENTS</h1>;
     }
-  }
+  };
 
-
-  render(){
-      return(
-          <div className="menu-controller">
-              <nav>
-              <ul className="menu-list">
-
-                      <ul>
-                          {this.aquarium()}
-                      </ul>
-                      <ul >
-                          {this.events()}
-                      </ul>
-                  </ul>
-              </nav>
-          </div>
-      )
+  render() {
+    return (
+      <div className="menu-controller">
+        <nav>
+          <ul className="menu-list">
+            <ul>{this.aquarium()}</ul>
+            <ul>{this.events()}</ul>
+          </ul>
+        </nav>
+      </div>
+    );
   }
 }
 

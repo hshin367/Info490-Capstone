@@ -1,0 +1,90 @@
+#login-panel {
+  text-align: center;
+  position: absolute;
+  left: 35%;
+  top: 25%;
+  width: 30%;
+  height: 30%;
+  justify-content: center;
+}
+
+.ant-input {
+  background-color: transparent;
+  border-radius: 7px;
+}
+
+.ant-btn:hover,
+.ant-btn:active,
+.ant-btn:focus {
+  color: inherit;
+}
+
+.ant-picker {
+  background-color: transparent;
+  border-radius: 7px;
+}
+
+.ant-input-affix-wrapper {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+  border: none;
+}
+
+.button-form .ant-form-item-control-input-content {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Fix the border cascading issue (find a better way to include border styling using cascading property */
+.ant-input-affix-wrapper,
+.ant-input-password {
+  background-color: transparent;
+  border-radius: 7px;
+  border: 1px solid #d9d9d9;
+}
+
+.ant-input-prefix {
+  opacity: 1;
+  text-emphasis-color: white;
+}
+
+.ant-input-affix-wrapper > input.ant-input {
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+}
+
+.ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input:hover,
+.ant-form-item-has-error .ant-input-affix-wrapper:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#form-btn {
+  width: 100%;
+  background-color: transparent;
+  list-style: 1;
+  color: white;
+}
+
+#form-btn:hover {
+  background-color: white;
+  color: #081d69;
+}
+
+span svg {
+  color: white;
+}
+
+/* #components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+} */

@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
+  /* margin: 0; */
+
   /* font-family: 'Montserrat', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -110,7 +110,7 @@ code {
   /* display: flex; */
   /* flex-direction: row; */
 }
-ul.menu-list{
+ul.menu-list {
   padding-left: 0rem;
 }
 .menu-list ul {
