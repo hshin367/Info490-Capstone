@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {useHistory} from "react-router-dom";
 import { Form, Input, Select, Row, Col, Checkbox, DatePicker } from "antd";
 import "./Login.css";
 import { Bg, Container, TextBox, SignUpFormContainer } from "./styles/style.js";
@@ -37,6 +38,48 @@ const config = {
 };
 
 const RegistrationForm = () => {
+  const [email,setEmail]=useState();
+  const [password,setPassword]=useState();
+  const [confirmPassword,setConfirmPassword]=useState();
+  const [handle,setHandle]=useState();
+  
+  const history = useHistory();
+  useEffect(() => {
+    if(localStorage.getItem("user-info")) {
+      history.push("/")
+    }
+  })
+
+  function handleErrors(response) {
+    if (!response.ok) throw Error(response.statusText);
+    return response;
+  }
+
+  function signUp(){
+    let item = {email,password,confirmPassword,handle};
+    console.warn(item);
+    
+    fetch("https://us-central1-restore-uw.cloudfunctions.net/api/signup", {
+      method:"POST",
+      headers: {
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      },
+      body: JSON.stringify(item)
+    })
+    .then(handleErrors)
+    .then((response) => {    
+      return response.json();
+    })
+    .then((result) => {    
+      localStorage.setItem("user-info", JSON.stringify(result))
+      history.push("/")
+    })
+    .catch((error) => {
+        console.log(error)
+    });
+  }
+
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
@@ -123,7 +166,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input placeholder="Email*" />
+          <Input placeholder="Email*" value={email} onChange={(e)=>setEmail(e.target.value)}/>
         </Form.Item>
       </Col>
 
@@ -160,7 +203,7 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input placeholder="Username" />
+        <Input placeholder="Username" value={handle} onChange={(e)=>setHandle(e.target.value)}/>
       </Form.Item>
 
       <Form.Item
@@ -173,7 +216,7 @@ const RegistrationForm = () => {
         ]}
         hasFeedback
       >
-        <Input.Password placeholder="Password*" />
+        <Input.Password placeholder="Password*" value={password} onChange={(e)=>setPassword(e.target.value)}/>
       </Form.Item>
 
       <Form.Item
@@ -198,7 +241,7 @@ const RegistrationForm = () => {
           }),
         ]}
       >
-        <Input.Password placeholder="Confirm Password*" />
+        <Input.Password placeholder="Confirm Password*" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
       </Form.Item>
     </>
   );
@@ -312,7 +355,7 @@ const RegistrationForm = () => {
                     {accountInfo}
                     {agreement}
                     <Form.Item className="button-form">
-                      <SignupButton>SIGN UP</SignupButton>
+                      <SignupButton onClick={signUp}>SIGN UP</SignupButton>
                     </Form.Item>
                   </Form>
                 </Col>

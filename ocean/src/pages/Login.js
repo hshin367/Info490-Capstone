@@ -16,10 +16,16 @@ const Login = () => {
       history.push("/")
     }
   })
+
+  function handleErrors(response) {
+    if (!response.ok) throw Error(response.statusText);
+    return response;
+  }
+
   async function login(){
     console.warn(email, password)
     let item ={email,password};
-    let result = await fetch("https://us-central1-restore-uw.cloudfunctions.net/api/login", {
+    await fetch("https://us-central1-restore-uw.cloudfunctions.net/api/login", {
       method:"POST",
       headers: {
         "Content-Type":"application/json",
@@ -27,14 +33,17 @@ const Login = () => {
       },
       body: JSON.stringify(item)
     })
+    .then(handleErrors)
+    .then((response) => {    
+      return response.json();
+    })
+    .then((result) => {    
+      localStorage.setItem("user-info", JSON.stringify(result))
+      history.push("/")
+    })
     .catch((error) => {
         console.log(error)
     });
-
-    result = await result.json();
-    console.log(result)
-    localStorage.setItem("user-info", JSON.stringify(result))
-    history.push("/")
   }
 
   const onFinish = (values) => {
