@@ -25,6 +25,12 @@ const sizes = css`
     css`
       ${props.theme.fontSizes.xxxl}
     `}
+
+  ${(props) =>
+    props.size === "xs" &&
+    css`
+      ${props.theme.fontSizes.xs}
+    `}
 `;
 
 // Login
@@ -42,6 +48,7 @@ const Bg = styled.div`
 const Flex = styled.div`
   display: flex;
   justify-content: ${(props) => props.justifyContent};
+  align-items: ${(props) => props.alignItems};
   flex-direction: ${(props) => props.flexDirection};
   position: ${(props) => props.position};
   padding: ${(props) =>
@@ -101,7 +108,8 @@ const TextBox = styled.div`
   text-align: ${(props) => (props.alignCenter ? "center" : "left")};
   display: ${(props) => props.display};
   font-size: ${sizes};
-  font-weight: ${(props) => props.bold && "700"};
+  font-weight: ${(props) =>
+    props.bold ? "700" : props.light ? "300" : "normal"};
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small

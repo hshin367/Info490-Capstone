@@ -2,6 +2,7 @@ const calcRem = (size) => `${size / 16}rem`;
 
 // there needs to be a difference in the fish name text and the Date, Your Events. (These are larger)
 const fontSizes = {
+  xs: calcRem(12),
   small: calcRem(14),
   base: calcRem(16),
   lg: calcRem(18),

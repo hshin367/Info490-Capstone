@@ -29,8 +29,6 @@ const YourEvents = () => {
   );
 };
 
-const UpcomingEvents = () => {};
-
 const Events = () => {
   const [event, setEvent] = useState("");
 
@@ -70,4 +68,4 @@ const Events = () => {
   );
 };
 
-export { YourEvents, UpcomingEvents };
+export { YourEvents };

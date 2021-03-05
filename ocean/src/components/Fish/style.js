@@ -4,7 +4,8 @@ import { TextBox } from "../../pages/styles/style.js";
 const FishTextContainer = styled.div`
   position: absolute;
   right: 250px;
-  bottom: 30px;
+  // original - 30px, for demo 60px
+  bottom: 60px;
 `;
 
 // https://bennettfeely.com/clippy/ for creating clip paths

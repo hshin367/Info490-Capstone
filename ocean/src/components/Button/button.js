@@ -12,7 +12,9 @@ const colors = css`
   ${(props) => {
     const selectedColor = props.theme.colors[props.color];
     const fontColor =
-      props.color === "white" ? theme.colors.dark_blue : theme.colors.white;
+      props.color === "white"
+        ? props.theme.colors.white
+        : props.theme.colors.dark_blue;
 
     return css`
       background: ${selectedColor};
@@ -62,15 +64,15 @@ const StyledButton = styled(Button)`
   padding-left: 1rem;
   padding-right: 1rem;
   align-items: center;
+  font-weight: normal;
   // colors
   ${colors};
   justify-content: center;
-  color: ${theme.colors.dark_blue};
+  color: ${(props) => props.textColor === "white" && "white"};
   // Size
   ${sizes}
   &:hover {
     background: ${darken(0.2, "white")};
-    color: ;
   }
   &:active {
     background: ${darken(0.1, "white")};
@@ -97,8 +99,16 @@ const WhiteButton = ({ children, ...rest }) => {
   );
 };
 
+const DarkBlueButton = ({ children, ...rest }) => {
+  return (
+    <StyledButton color="dark_blue" textColor="white" size="medium" {...rest}>
+      {children}
+    </StyledButton>
+  );
+};
+
 Button.defaultProps = {
   color: theme.colors.dark_blue,
 };
 
-export { SignupButton, WhiteButton };
+export { SignupButton, WhiteButton, DarkBlueButton };

@@ -304,6 +304,7 @@ const RegistrationForm = () => {
                     name="register"
                     onFinish={onFinish}
                     scrollToFirstError
+                    className="signup"
                   >
                     {name}
                     {emailPhone}
@@ -312,7 +313,7 @@ const RegistrationForm = () => {
                     {accountInfo}
                     {agreement}
                     <Form.Item className="button-form">
-                      <SignupButton>Have an account?</SignupButton>
+                      {/* <SignupButton>Have an account?</SignupButton> */}
                     </Form.Item>
                     <Form.Item className="button-form">
                       <SignupButton>SIGN UP</SignupButton>

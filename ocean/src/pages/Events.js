@@ -1,28 +1,30 @@
+/**
+ * Page for Upcoming Events
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import Banner from "../components/Banner/banner.js";
-import { YourEvents } from "../components/Events/YourEvents.js";
-import { Flex } from ".././pages/styles/style.js";
-import Fish from "../components/Fish/Fish.js";
+import UpcomingEvents from "../components/Events/UpcomingEvents.js";
+import { Flex } from "./styles/style.js";
 
 const LowerHalf = () => {
   // if signed in, show YourEvents, if not, show Upcoming
   return (
     <Flex flexDirection="column" paddingLeft="xxl" position="relative">
-      <YourEvents />
-      <Fish />
+      <UpcomingEvents />
     </Flex>
   );
 };
 
 /**
- * Dashboard Component
+ * Event Component
  * @description Renders image filled banner on the main page.
  *
  * @property {string}
  */
 
-const Dashboard = () => {
+const Events = () => {
   return (
     <>
       <Banner />
@@ -31,4 +33,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Events;

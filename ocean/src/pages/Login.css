@@ -8,6 +8,10 @@
   justify-content: center;
 }
 
+.signup .ant-input {
+  color: white;
+}
+
 .ant-input {
   background-color: transparent;
   border-radius: 7px;
