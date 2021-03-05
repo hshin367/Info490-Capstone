@@ -312,6 +312,9 @@ const RegistrationForm = () => {
                     {accountInfo}
                     {agreement}
                     <Form.Item className="button-form">
+                      <SignupButton>Have an account?</SignupButton>
+                    </Form.Item>
+                    <Form.Item className="button-form">
                       <SignupButton>SIGN UP</SignupButton>
                     </Form.Item>
                   </Form>

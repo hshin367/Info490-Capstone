@@ -1,19 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image } from "./style.js";
+import { FishImage, FishText, FishTextContainer } from "./style.js";
+
+const FishPictureText = (props) => {
+  console.log(props.fish.date);
+  return (
+    <FishTextContainer>
+      <FishText>{props.fish.date}</FishText>
+      <FishText size="name">{props.fish.fishType}</FishText>
+    </FishTextContainer>
+  );
+};
 
 const Fish = () => {
-  const sampleData = [
+  let sampleData = [
     {
       date: "January 21, 2021",
       fishType: "JellyFish",
-      img: "Real-clownfish.jpg",
+      imgName: "Real-clownfish.jpg",
     },
   ];
 
   return (
     <div>
-      <Image url="Real-clownfish.jpg" />
+      {sampleData.map((fish) => (
+        <>
+          <FishImage url={fish.imgName}>
+            <FishPictureText fish={fish} />
+          </FishImage>
+        </>
+      ))}
     </div>
   );
 };
