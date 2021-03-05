@@ -27,8 +27,10 @@ const EventBoxesContainer = styled(Flex)`
   padding: 1.625rem 0.625rem 0px 0.625rem;
 `;
 
+// contains the events boxes.
+// draws a solid border on the left.
 const EventsContainer = styled(Flex)`
-  border-left: solid;
+  border-left: 1.3px solid;
   position: relative;
   margin-top: ${(props) => props.theme.margins.xxl};
 `;
@@ -39,7 +41,7 @@ const Circle = styled.div`
   clip-path: circle();
   background: ${(props) => props.theme.colors.dark_blue};
   top: 0;
-  left: -6.5px;
+  left: -5px;
   width: 10px;
   height: 10px;
 `;

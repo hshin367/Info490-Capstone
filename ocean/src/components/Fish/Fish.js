@@ -16,7 +16,7 @@ const Fish = () => {
   let sampleData = [
     {
       date: "January 21, 2021",
-      fishType: "JellyFish",
+      fishType: "ClownFish",
       imgName: "Real-clownfish.jpg",
     },
   ];

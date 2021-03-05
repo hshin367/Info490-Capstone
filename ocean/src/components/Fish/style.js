@@ -19,14 +19,13 @@ const FishImage = styled.div`
   height: 400px;
   width: 500px;
   z-index: 1;
-  linear-gradient: rgba(255, 0, 0, 0.45);
   // box-shadow: -14px 4px 20px 9px white;
-  background-color: rgba(0, 0, 0, 0.3); // Tint color
+  background-color: rgba(0, 0, 0, 0.4); // Tint color
   background-blend-mode: multiply;
 `;
 
 const FishText = styled(TextBox)`
-  padding: ${(props) => props.theme.paddings.xs};
+  padding: ${(props) => props.theme.paddings.xs} 0;
   font-size: ${(props) =>
     props.size === "name"
       ? props.theme.fontSizes.xxxl
