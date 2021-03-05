@@ -6,8 +6,9 @@ const fontSizes = {
   lg: calcRem(18),
   xl: calcRem(20),
   xxl: calcRem(22),
-  xxxl: calcRem(66),
-  titleSize: calcRem(50),
+  xxxl: calcRem(28),
+  titleSize: calcRem(40),
+  xxxxl: calcRem(66),
 };
 
 const paddings = {
@@ -15,8 +16,8 @@ const paddings = {
   base: calcRem(10),
   lg: calcRem(12),
   xl: calcRem(14),
-  xxl: calcRem(16),
-  xxxl: calcRem(20),
+  xxl: calcRem(20),
+  xxxl: calcRem(24),
 };
 
 const margins = {
@@ -24,8 +25,8 @@ const margins = {
   base: calcRem(10),
   lg: calcRem(12),
   xl: calcRem(14),
-  xxl: calcRem(16),
-  xxxl: calcRem(18),
+  xxl: calcRem(20),
+  xxxl: calcRem(24),
 };
 
 const interval = {

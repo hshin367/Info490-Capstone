@@ -1,13 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Banner from "../components/Banner/banner.js";
-import Events from "../components/Events/eventBox.js";
+import { YourEvents } from "../components/Events/eventBox.js";
+import { Flex } from ".././pages/styles/style.js";
+import Fish from "../components/Fish/Fish.js";
 
 const LowerHalf = () => {
+  // if signed in, show YourEvents, if not, show Upcoming
   return (
-    <>
-      <Events />
-    </>
+    <Flex flexDirection="column" paddingLeft="xxl" position="relative">
+      <YourEvents />
+      <Fish />
+    </Flex>
   );
 };
 

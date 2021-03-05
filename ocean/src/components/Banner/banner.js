@@ -29,7 +29,7 @@ const Banner = () => {
         <div>{`/ ${today[1]}`}</div>
       </DateContent>
 
-      <SlidingCarousel />
+      <SlidingCarousel date={today} />
     </Container>
   );
 };

@@ -12,6 +12,7 @@ const Container = styled.div`
 `;
 
 const DateContent = styled.div`
+  padding-left: ${(props) => props.theme.paddings.xxxl};
   position: absolute;
   bottom: 0;
   z-index: 3;
@@ -19,7 +20,7 @@ const DateContent = styled.div`
 `;
 
 const TDate = styled.div`
-  font-size: ${theme.fontSizes.xxxl};
+  font-size: ${theme.fontSizes.xxxxl};
   font-weight: 600;
   line-height: 1;
 `;
