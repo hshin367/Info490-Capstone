@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
@@ -26,9 +26,23 @@ const getDate = () => {
   return [date, month];
 };
 
+// TODO : check the incoming date format, handle split, convert to array maybe?
+// create new date obj.
+const makeJSDateObject = (date) => {
+  new Date(date);
+};
+
+const dateCalculator = (curDate, eventDate) => {
+  let dateDiff = eventDate.getTime() - curDate.getTime();
+
+  return Math.floor(dateDiff / (1000 * 60 * 60 * 24));
+};
+
 const UpcomingEvents = () => {
   // Cases: This month and/or the months after.
   // Create components for absolute boxes
+  const [today, setToday] = useState(Date.now());
+
   return (
     <>
       <TitleBarContainer>
@@ -51,6 +65,7 @@ const UpcomingEvents = () => {
 };
 
 const Events = () => {
+  // depending on the date input format, split("") and create a new date obj.
   const sampleData = [
     {
       date: "25/March",
@@ -71,8 +86,6 @@ const Events = () => {
       daysLeft: 21,
     },
   ];
-
-  let today = getDate();
 
   return (
     <EventBoxesContainer>
