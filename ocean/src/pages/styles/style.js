@@ -19,6 +19,18 @@ const sizes = css`
     css`
       ${props.theme.fontSizes.xxl}
     `}
+
+  ${(props) =>
+    props.size === "xxxl" &&
+    css`
+      ${props.theme.fontSizes.xxxl}
+    `}
+
+  ${(props) =>
+    props.size === "xs" &&
+    css`
+      ${props.theme.fontSizes.xs}
+    `}
 `;
 
 // Login
@@ -35,6 +47,30 @@ const Bg = styled.div`
 
 const Flex = styled.div`
   display: flex;
+  justify-content: ${(props) => props.justifyContent};
+  align-items: ${(props) => props.alignItems};
+  flex-direction: ${(props) => props.flexDirection};
+  position: ${(props) => props.position};
+  padding: ${(props) =>
+    props.padding === "sm"
+      ? props.theme.paddings.small
+      : props.padding === "lg"
+      ? props.theme.paddings.lg
+      : props.padding === "xl"
+      ? props.theme.paddings.xl
+      : props.padding === "xxl"
+      ? props.theme.paddings.xxl
+      : props.theme.paddings.base};
+  padding-left: ${(props) =>
+    props.paddingLeft === "sm"
+      ? props.theme.paddings.small
+      : props.paddingLeft === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingLeft === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "xxl"
+      ? props.theme.paddings.xxl
+      : props.theme.paddings.base};
 `;
 
 // TODO : take in a variable for the style (row, col)
@@ -72,6 +108,8 @@ const TextBox = styled.div`
   text-align: ${(props) => (props.alignCenter ? "center" : "left")};
   display: ${(props) => props.display};
   font-size: ${sizes};
+  font-weight: ${(props) =>
+    props.bold ? "700" : props.light ? "300" : "normal"};
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small

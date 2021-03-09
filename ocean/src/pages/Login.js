@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Bg, Container, TextBox } from "./styles/style.js";
@@ -70,13 +71,13 @@ const Login = () => {
               className="login-form-button"
               id="form-btn"
             >
-              LOGIN
+              <Link to={{ pathname: "/" }}>LOGIN</Link>
             </Button>
             <TextBox alignCenter color="white">
               OR
             </TextBox>
             <Button htmlType="button" id="form-btn">
-              CREATE ACCOUNT
+              <Link to={{ pathname: "/signup" }}> CREATE ACCOUNT</Link>
             </Button>
           </div>
         </Form>

@@ -1,0 +1,22 @@
+.searchbar .ant-input-affix-wrapper.ant-input-affix-wrapper-borderless {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid #0c0745;
+  color: #0c0745;
+}
+
+.searchbar {
+  max-width: 250px;
+  right: 100px;
+}
+
+.searchbar
+  .ant-input-affix-wrapper.ant-input-affix-wrapper-borderless
+  > input.ant-input {
+  color: #0c0745;
+}
+
+.searchbar .anticon svg {
+  color: #0c0745;
+}

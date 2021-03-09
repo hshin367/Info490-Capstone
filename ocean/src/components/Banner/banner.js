@@ -25,11 +25,13 @@ const Banner = () => {
     <Container>
       <DateContent>
         TODAY
+        {/* Date */}
         <TDate>{today[0]}</TDate>
+        {/* Month */}
         <div>{`/ ${today[1]}`}</div>
       </DateContent>
 
-      <SlidingCarousel />
+      <SlidingCarousel date={today} />
     </Container>
   );
 };

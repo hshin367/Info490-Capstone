@@ -24,6 +24,13 @@ const GlobalStyle = createGlobalStyle`
 
   // Border-radius
 
+  // TODO: Implement this with styled components: 
+  .ant-btn-background-ghost{ 
+    border-radius : 4px; 
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 2.25rem;
+  }
 
 `;
 

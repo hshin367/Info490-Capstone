@@ -25,7 +25,7 @@ const Navbar = () => {
           <NavLink href="/">AQUARIUM</NavLink>
 
           {/* // TODO : Create dropdown component */}
-          <NavLink href="/">EVENTS</NavLink>
+          <NavLink href="/events">EVENTS</NavLink>
           <NavLink href="/">ACCOUNT</NavLink>
         </NavbarItemsContainer>
       </NavbarWrapper>

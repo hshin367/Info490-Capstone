@@ -1,22 +1,26 @@
 const calcRem = (size) => `${size / 16}rem`;
 
+// there needs to be a difference in the fish name text and the Date, Your Events. (These are larger)
 const fontSizes = {
+  xs: calcRem(12),
   small: calcRem(14),
   base: calcRem(16),
   lg: calcRem(18),
   xl: calcRem(20),
   xxl: calcRem(22),
-  xxxl: calcRem(66),
-  titleSize: calcRem(50),
+  xxxl: calcRem(30),
+  titleSize: calcRem(40),
+  xxxxl: calcRem(66),
 };
 
 const paddings = {
+  xs: calcRem(3),
   small: calcRem(8),
   base: calcRem(10),
   lg: calcRem(12),
   xl: calcRem(14),
-  xxl: calcRem(16),
-  xxxl: calcRem(20),
+  xxl: calcRem(20),
+  xxxl: calcRem(24),
 };
 
 const margins = {
@@ -24,8 +28,8 @@ const margins = {
   base: calcRem(10),
   lg: calcRem(12),
   xl: calcRem(14),
-  xxl: calcRem(16),
-  xxxl: calcRem(18),
+  xxl: calcRem(20),
+  xxxl: calcRem(24),
 };
 
 const interval = {
