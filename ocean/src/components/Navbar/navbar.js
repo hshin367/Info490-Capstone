@@ -36,11 +36,12 @@ const Navbar = () => {
         <NavbarItemsContainer>
           <NavLink href="/">HOME</NavLink>
           <NavLink href="/">AQUARIUM</NavLink>
-
-          {/* // TODO : Create dropdown component */}
           <NavLink href="/events">EVENTS</NavLink>
           <NavLink href="/">ACCOUNT</NavLink>
-          <button onClick={logout}>Log Out</button>
+          {localStorage.getItem("user-info")?
+            <button onClick={logout}>Log Out</button>
+            :null
+          }
         </NavbarItemsContainer>
       </NavbarWrapper>
     </Container>
