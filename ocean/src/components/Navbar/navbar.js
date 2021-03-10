@@ -7,6 +7,7 @@ import {
   NavbarItemsContainer,
   NavItem,
 } from "./navbarStyle.js";
+import { withRouter } from "react-router";
 
 const NavLink = ({ href, children }) => (
   <NavItem>
@@ -14,7 +15,7 @@ const NavLink = ({ href, children }) => (
   </NavItem>
 );
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <Container>
       <NavbarWrapper>
@@ -33,4 +34,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
