@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Events from "../pages/Events";
 
-// TODO : add routes for logout, in, signup, forgot, reset
+// TODO : add routes for forgot
 
 const Routes = () => (
   <Router>

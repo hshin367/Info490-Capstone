@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import kataraUser from "./katara.json";
 import events from "./event.json";
 import { BrowserRouter } from "react-router-dom";
+import Login from "./pages/Login";
 
 ReactDOM.render(
   <React.StrictMode>
