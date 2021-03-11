@@ -9,6 +9,7 @@ import {
 } from "./navbarStyle.js";
 import { withRouter } from "react-router";
 import { useHistory } from "react-router-dom";
+import { WhiteButton } from "../Button/button.js";
 
 const NavLink = ({ href, children }) => (
   <NavItem>
@@ -47,7 +48,7 @@ const Navbar = (props) => {
           <NavLink href="/events">EVENTS</NavLink>
           <NavLink href="/">ACCOUNT</NavLink>
           {localStorage.getItem("user-info") ? (
-            <button onClick={logout}>Log Out</button>
+            <WhiteButton onClick={logout}>Log Out</WhiteButton>
           ) : null}
         </NavbarItemsContainer>
       </NavbarWrapper>
