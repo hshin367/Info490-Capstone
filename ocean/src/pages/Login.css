@@ -80,10 +80,17 @@ span svg {
   color: white;
 }
 
-/* #components-form-demo-normal-login .login-form {
-  max-width: 300px;
+.login-form.ant-form {
+  min-width: 300px;
+  padding-top: 40px;
 }
-#components-form-demo-normal-login .login-form-forgot {
+
+/* horizontal divider */
+.ant-divider-horizontal.ant-divider-with-text {
+  border-top-color: rgba(255, 255, 255, 0.5);
+}
+
+/* #components-form-demo-normal-login .login-form-forgot {
   float: right;
 }
 #components-form-demo-normal-login .ant-col-rtl .login-form-forgot {

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import history from "../Routes/history";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Bg, Container, TextBox } from "./styles/style.js";
-import { LogoText } from "../components/Logo/style.js";
+import { Bg, LoginContainer, TextBox } from "./styles/style.js";
+import { LogoText, LogoImage } from "../components/Logo/style.js";
 import "./Login.css";
+import logo from "../img/Logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -54,8 +55,8 @@ const Login = () => {
 
   return (
     <Bg>
-      <Container>
-        <LogoText alignCenter> LOGO </LogoText>
+      <LoginContainer>
+        <LogoImage large />
         <LogoText alignCenter> RESTORE </LogoText>
 
         <Form
@@ -98,15 +99,15 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Item>
-          <Form.Item>
+          {/* <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
-            </Form.Item>
+            </Form.Item> */}
 
-            {/* <a className="login-form-forgot" href="">
+          {/* <a className="login-form-forgot" href="">
               Forgot password
             </a> */}
-          </Form.Item>
+          {/* </Form.Item> */}
 
           <div>
             <Button
@@ -117,15 +118,17 @@ const Login = () => {
             >
               LOGIN
             </Button>
-            <TextBox alignCenter color="white">
-              OR
-            </TextBox>
+            <Divider>
+              <TextBox alignCenter color="white">
+                OR
+              </TextBox>
+            </Divider>
             <Button htmlType="button" id="form-btn">
               <Link to={{ pathname: "/signup" }}> CREATE ACCOUNT</Link>
             </Button>
           </div>
         </Form>
-      </Container>
+      </LoginContainer>
     </Bg>
   );
 };

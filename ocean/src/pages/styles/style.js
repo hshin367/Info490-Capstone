@@ -79,6 +79,10 @@ const Container = styled(Flex)`
   justify-content: center;
 `;
 
+const LoginContainer = styled(Container)`
+  align-items: center;
+`;
+
 const SignUpFormContainer = styled(Flex)`
   justify-content: ${(props) => props.justifyContent};
   background-color: ${(props) =>
@@ -122,4 +126,12 @@ const TextBox = styled.div`
       : props.theme.paddings.base};
 `;
 
-export { Bg, Container, TextBox, SignUpFormContainer, HalfFormContainer, Flex };
+export {
+  Bg,
+  Container,
+  TextBox,
+  SignUpFormContainer,
+  HalfFormContainer,
+  Flex,
+  LoginContainer,
+};

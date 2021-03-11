@@ -10,6 +10,7 @@ import {
 import { withRouter } from "react-router";
 import { useHistory } from "react-router-dom";
 import { WhiteButton } from "../Button/button.js";
+import Logo from "../Logo/Logo";
 
 const NavLink = ({ href, children }) => (
   <NavItem>
@@ -40,7 +41,9 @@ const Navbar = (props) => {
   return (
     <Container>
       <NavbarWrapper>
-        <NavLink href="/">RESTORE</NavLink>
+        <NavLink href="/">
+          <Logo />
+        </NavLink>
 
         <NavbarItemsContainer>
           <NavLink href="/">HOME</NavLink>
