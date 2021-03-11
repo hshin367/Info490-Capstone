@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
@@ -11,8 +11,9 @@ import {
 } from "./style.js";
 import SearchBar from "../../components/InputForms/SearchBar.js";
 import { DarkBlueButton } from "../Button/button.js";
+import Modals from "../Modals/Modal.js";
 
-import { Row, Col } from "antd";
+import { Row, Col, Checkbox, Form, Button } from "antd";
 
 // TODO : import getDate() from the Banner component later (make it importable)
 // TODO : make the text styles of the cards into a styled component
@@ -26,9 +27,23 @@ const getDate = () => {
   return [date, month];
 };
 
+// TODO : check the incoming date format, handle split, convert to array maybe?
+// create new date obj.
+const makeJSDateObject = (date) => {
+  new Date(date);
+};
+
+const dateCalculator = (curDate, eventDate) => {
+  let dateDiff = eventDate.getTime() - curDate.getTime();
+
+  return Math.floor(dateDiff / (1000 * 60 * 60 * 24));
+};
+
 const UpcomingEvents = () => {
   // Cases: This month and/or the months after.
   // Create components for absolute boxes
+  const [today, setToday] = useState(Date.now());
+
   return (
     <>
       <TitleBarContainer>
@@ -51,6 +66,7 @@ const UpcomingEvents = () => {
 };
 
 const Events = () => {
+  // depending on the date input format, split("") and create a new date obj.
   const sampleData = [
     {
       date: "25/March",
@@ -72,7 +88,15 @@ const Events = () => {
     },
   ];
 
-  let today = getDate();
+  const [modalVisible, setModalVisble] = useState(false);
+
+  const openModal = () => {
+    setModalVisble(true);
+  };
+
+  const closeModal = () => {
+    setModalVisble(false);
+  };
 
   return (
     <EventBoxesContainer>
@@ -95,7 +119,7 @@ const Events = () => {
                 </LocationTime>
               </Col>
 
-              {/* Right side of the Event card  */}
+              {/* TODO : Right side of the Event card - refactor later */}
               <Col
                 span={12}
                 style={{
@@ -127,7 +151,12 @@ const Events = () => {
                   </CircleCounter>
                 </Row>
                 <Row>
-                  <DarkBlueButton>REGISTER</DarkBlueButton>
+                  <DarkBlueButton onClick={openModal}>REGISTER</DarkBlueButton>
+                  <EventRegistrationModal
+                    visible={modalVisible}
+                    closeModal={closeModal}
+                    singleEvent={singleEvent}
+                  />
                 </Row>
               </Col>
             </Row>
@@ -135,6 +164,53 @@ const Events = () => {
         </div>
       ))}
     </EventBoxesContainer>
+  );
+};
+
+const EventRegistrationModal = ({ visible, closeModal }) => {
+  const register = () => {
+    console.log("clicked");
+  };
+
+  return (
+    <Modals
+      title="Event Registration Agreement"
+      visible={visible}
+      closeModal={closeModal}
+      okText="Register"
+      onOk={register}
+      destroyOnClose={true}
+    >
+      <EventRegistrationAgreementForm />
+    </Modals>
+  );
+};
+
+// TODO: include href for the Policies
+const EventRegistrationAgreementForm = () => {
+  return (
+    <Form>
+      <Form.Item
+        name="event-checkbox-privacy"
+        rules={[{ required: true, message: "Please Agree to the Policy!" }]}
+      >
+        <Checkbox.Group>
+          <Checkbox value="PrivacyPolicy">
+            I agree to the Terms or Service and Privacy Policy
+          </Checkbox>
+        </Checkbox.Group>
+      </Form.Item>
+      <Form.Item
+        name="event-checkbox-cleanup"
+        rules={[{ required: true, message: "Please Agree to the Policy!" }]}
+      >
+        <Checkbox.Group>
+          <Checkbox value="CleanupPolicy">
+            I have read and educated myself on the Cleanup Policies
+          </Checkbox>
+        </Checkbox.Group>
+      </Form.Item>
+    </Form>
   );
 };
 

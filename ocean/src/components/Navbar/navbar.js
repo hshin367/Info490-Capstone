@@ -7,7 +7,11 @@ import {
   NavbarItemsContainer,
   NavItem,
 } from "./navbarStyle.js";
+<<<<<<< HEAD
 import {useHistory} from "react-router-dom"
+=======
+import { withRouter } from "react-router";
+>>>>>>> origin/jin-event-registration
 
 const NavLink = ({ href, children }) => (
   <NavItem>
@@ -15,6 +19,7 @@ const NavLink = ({ href, children }) => (
   </NavItem>
 );
 
+<<<<<<< HEAD
 const Navbar = () => {
   let user = JSON.parse(localStorage.getItem("user-info"))
   console.warn(user)
@@ -28,6 +33,9 @@ const Navbar = () => {
     history.push("/login")
   }
 
+=======
+const Navbar = (props) => {
+>>>>>>> origin/jin-event-registration
   return (
     <Container>
       <NavbarWrapper>
@@ -48,4 +56,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
