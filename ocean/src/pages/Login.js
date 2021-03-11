@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Bg, Container, TextBox } from "./styles/style.js";
@@ -8,43 +8,45 @@ import { LogoText } from "../components/Logo/style.js";
 import "./Login.css";
 
 const Login = () => {
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const history = useHistory();
   useEffect(() => {
-    if(localStorage.getItem("user-info")) {
-      history.push("/")
+    if (localStorage.getItem("user-info")) {
+      history.push("/");
     }
-  })
+  });
 
   function handleErrors(response) {
     if (!response.ok) throw Error(response.statusText);
     return response;
   }
 
-  async function login(){
-    console.warn(email, password)
-    let item ={email,password};
+  async function login() {
+    console.warn(email, password);
+    let item = { email, password };
     await fetch("https://us-central1-restore-uw.cloudfunctions.net/api/login", {
-      method:"POST",
+      method: "POST",
       headers: {
-        "Content-Type":"application/json",
-        "Accept":"application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      body: JSON.stringify(item)
+      body: JSON.stringify(item),
     })
-    .then(handleErrors)
-    .then((response) => {    
-      return response.json();
-    })
-    .then((result) => {    
-      localStorage.setItem("user-info", JSON.stringify(result))
-      history.push("/")
-    })
-    .catch((error) => {
-        console.log(error)
-    });
+      .then(handleErrors)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem("user-info", JSON.stringify(result));
+        history.push("/");
+        return result;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const onFinish = (values) => {

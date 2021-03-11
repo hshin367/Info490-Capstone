@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
@@ -14,6 +14,9 @@ import { DarkBlueButton } from "../Button/button.js";
 import Modals from "../Modals/Modal.js";
 
 import { Row, Col, Checkbox, Form, Button } from "antd";
+
+import UserContext from "../User/User";
+import { getEvents } from "../../actions/actions";
 
 // TODO : import getDate() from the Banner component later (make it importable)
 // TODO : make the text styles of the cards into a styled component
@@ -66,27 +69,18 @@ const UpcomingEvents = () => {
 };
 
 const Events = () => {
-  // depending on the date input format, split("") and create a new date obj.
-  const sampleData = [
-    {
-      date: "25/March",
-      fishType: "Shark",
-      location: "Madison Park Beach",
-      time: "2:30PM - 4:00PM",
-      interested: 12,
-      friendsGoing: 3,
-      daysLeft: 20,
-    },
-    {
-      date: "26/March",
-      fishType: "Eel",
-      location: "Madison Park Beach",
-      time: "2:30PM - 4:00PM",
-      interested: 12,
-      friendsGoing: 3,
-      daysLeft: 21,
-    },
-  ];
+  // TODO : depending on the date input format, split("") and create a new date obj.
+  const [events, setEvents] = useState([]);
+  const user = useContext(UserContext);
+
+  useEffect(() => {
+    getAllEvents();
+  }, []);
+
+  const getAllEvents = async () => {
+    let allEvents = await getEvents();
+    setEvents(allEvents.data);
+  };
 
   const [modalVisible, setModalVisble] = useState(false);
 
@@ -100,8 +94,8 @@ const Events = () => {
 
   return (
     <EventBoxesContainer>
-      {sampleData.map((singleEvent, ind) => (
-        <div key={ind}>
+      {events.map((singleEvent) => (
+        <div key={singleEvent.eventId}>
           <EventBox upcoming>
             <Row>
               <Col span={12}>
@@ -110,12 +104,19 @@ const Events = () => {
                 >
                   <TextBox size="title">{singleEvent.date}</TextBox>
                 </div>
-                <TextBox light size="large">
-                  {singleEvent.fishType}
+                <TextBox light padding="sm" size="large">
+                  {singleEvent.name}
+                </TextBox>
+                <TextBox light padding="sm" size="md">
+                  {singleEvent.fish}
                 </TextBox>
                 <LocationTime>
-                  <TextBox size="xs">{singleEvent.location}</TextBox>
-                  <TextBox size="xs">{singleEvent.time}</TextBox>
+                  <TextBox size="xs">
+                    {singleEvent.location}, {singleEvent.city}
+                  </TextBox>
+                  <TextBox size="xs">
+                    {singleEvent.startTime} - {singleEvent.endTime}
+                  </TextBox>
                 </LocationTime>
               </Col>
 

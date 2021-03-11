@@ -2,15 +2,21 @@
 import React, { Component } from "react";
 import Routes from "./Routes/index.js";
 
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import { Layout } from "antd";
 import theme from "./theme";
+import UserContext from "./components/User/User.js";
 
 import Navbar from "./components/Navbar/navbar.js";
 
 // TODO : consider shifting to antd layouts for responsivenss.
 const { Header, Footer, Sider, Content } = Layout;
+
+const user = {
+  name: "sampleName",
+  registeredEvents: [],
+};
 
 export class App extends Component {
   constructor(props) {
@@ -39,41 +45,41 @@ export class App extends Component {
   };
 
   //Scroll Stuff
-  handleScroll = (event) => {
-    console.log("hi");
-    let e = event.target;
-    this.setState(
-      {
-        scrollPosition: window.pageYOffset,
-      },
-      this.checkScroll
-    );
-  };
+  // handleScroll = (event) => {
+  //   console.log("hi");
+  //   let e = event.target;
+  //   this.setState(
+  //     {
+  //       scrollPosition: window.pageYOffset,
+  //     },
+  //     this.checkScroll
+  //   );
+  // };
 
-  checkScroll = () => {
-    if (this.state.scrollPosition < 250) {
-      console.log(this.state.scrollPosition);
-      this.setState({
-        displayScroll: true,
-      });
-    } else {
-      this.setState({
-        displayScroll: false,
-      });
-    }
-  };
+  // checkScroll = () => {
+  //   if (this.state.scrollPosition < 250) {
+  //     console.log(this.state.scrollPosition);
+  //     this.setState({
+  //       displayScroll: true,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       displayScroll: false,
+  //     });
+  //   }
+  // };
 
-  handleClickScrollButton = () => {
-    window.scroll({
-      top: 570,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
+  // handleClickScrollButton = () => {
+  //   window.scroll({
+  //     top: 570,
+  //     left: 0,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   render() {
     return (
-      <div>
+      <UserContext.Provider value={user}>
         <GlobalStyle />
         <div className="wrapper">
           <ThemeProvider theme={theme}>
@@ -82,7 +88,7 @@ export class App extends Component {
             {/* <Footer /> */}
           </ThemeProvider>
         </div>
-      </div>
+      </UserContext.Provider>
     );
   }
 }
