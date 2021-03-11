@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../../theme";
 
+// TODO : carousel right button and left button gone for now (overflow hidden)
 const Container = styled.div`
   color: ${theme.colors.white};
   height: fit-content;
@@ -9,6 +10,8 @@ const Container = styled.div`
   // width: 100%;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
+  z-index: 10;
 `;
 
 const DateContent = styled.div`

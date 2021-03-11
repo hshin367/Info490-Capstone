@@ -15,8 +15,8 @@ const EventBox = styled.div`
   padding: ${(props) =>
     props.upcoming ? props.theme.paddings.xs : props.theme.paddings.lg};
   margin: 0 ${(props) => props.theme.paddings.base};
-  min-width: ${(props) => (props.upcoming ? "400px" : "200px")};
-  min-height: 200px;
+  min-width: ${(props) => (props.upcoming ? "500px" : "220px")};
+  max-height: 200px;
   color: ${(props) =>
     props.today ? props.theme.colors.white : props.theme.colors.dark_blue};
 
@@ -32,6 +32,11 @@ const EventBox = styled.div`
 
 const EventBoxesContainer = styled(Flex)`
   padding: 1.625rem 0.625rem 0px 0.625rem;
+`;
+
+const ScrollableContainer = styled(Flex)`
+  overflow-x: scroll;
+  max-width: 70%;
 `;
 
 // contains the events boxes.
@@ -80,4 +85,5 @@ export {
   Circle,
   TitleBarContainer,
   CircleCounter,
+  ScrollableContainer,
 };

@@ -73,6 +73,12 @@ const Flex = styled.div`
       : props.theme.paddings.base};
 `;
 
+const HorizontalScrollableContainer = styled(Flex)`
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+`;
+
 // TODO : take in a variable for the style (row, col)
 const Container = styled(Flex)`
   flex-direction: column;
@@ -134,4 +140,5 @@ export {
   HalfFormContainer,
   Flex,
   LoginContainer,
+  HorizontalScrollableContainer,
 };

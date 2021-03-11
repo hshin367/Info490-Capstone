@@ -25,6 +25,13 @@ const FishImage = styled.div`
   background-blend-mode: multiply;
 `;
 
+const FinshPicContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  filter: drop-shadow(-200px 10px 41px rgb(255, 255, 255));
+`;
+
 const FishText = styled(TextBox)`
   padding: ${(props) => props.theme.paddings.xs} 0;
   font-size: ${(props) =>
@@ -36,4 +43,4 @@ const FishText = styled(TextBox)`
   color: white;
 `;
 
-export { FishImage, FishText, FishTextContainer };
+export { FishImage, FishText, FishTextContainer, FinshPicContainer };

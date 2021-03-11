@@ -21,6 +21,7 @@ import {
   sortByDate,
 } from "../../helpers/dateCalculations";
 import { upcomingEventsSampleData } from "../../helpers/sampleData";
+import Search from "antd/lib/transfer/search";
 
 // TODO : import getDate() from the Banner component later (make it importable)
 // TODO : make the text styles of the cards into a styled component
@@ -29,6 +30,11 @@ import { upcomingEventsSampleData } from "../../helpers/sampleData";
 const UpcomingEvents = () => {
   // Cases: This month and/or the months after.
   // Create components for absolute boxes
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (e) => {
+    setSearchTerm(e);
+  };
 
   return (
     <>
@@ -37,7 +43,7 @@ const UpcomingEvents = () => {
           UPCOMING EVENTS
         </TextBox>
         <div style={{ paddingRight: "3rem" }}>
-          <SearchBar />
+          <SearchBar handleChange={handleChange} />
         </div>
       </TitleBarContainer>
       <EventsContainer>
@@ -45,20 +51,21 @@ const UpcomingEvents = () => {
           <TextBox style={{ padding: "0" }}>MARCH 2021</TextBox>
         </div>
         <Circle />
-        <Events />
+        <Events searchTerm={searchTerm} />
       </EventsContainer>
     </>
   );
 };
 
-const Events = () => {
+const Events = ({ searchTerm }) => {
   // TODO : depending on the date input format, split("") and create a new date obj.
   // TODO : implement loading
   const [events, setEvents] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const [modalVisible, setModalVisble] = useState(false);
-  const user = useContext(UserContext);
   const [eventId, setEventId] = useState("");
   const [today, setToday] = useState(Date.now());
+  const user = useContext(UserContext);
 
   const sampleData = sortByDate(upcomingEventsSampleData);
 
@@ -66,6 +73,14 @@ const Events = () => {
     // getAllEvents("");
     setEvents(sampleData);
   }, []);
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+      renderSearchResult();
+    } else {
+      setSearchResult(sampleData);
+    }
+  }, [searchTerm]);
 
   const getAllEvents = async () => {
     let allEvents = await getEvents();
@@ -88,83 +103,103 @@ const Events = () => {
     setModalVisble(false);
   };
 
-  return (
-    <EventBoxesContainer>
-      {events.map((singleEvent) => {
-        return (
-          <div key={singleEvent.eventId}>
-            <EventBox upcoming>
-              <Row>
-                <Col span={12}>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <TextBox size="title">{singleEvent.date}</TextBox>
-                  </div>
-                  <TextBox light padding="sm" size="large">
-                    {singleEvent.name}
-                  </TextBox>
-                  <TextBox light padding="sm" size="md">
-                    {singleEvent.fish}
-                  </TextBox>
-                  <LocationTime>
-                    <TextBox size="xs">
-                      {singleEvent.location}, {singleEvent.city}
-                    </TextBox>
-                    <TextBox size="xs">
-                      {singleEvent.startTime} - {singleEvent.endTime}
-                    </TextBox>
-                  </LocationTime>
-                </Col>
+  // searches for event names
+  const renderSearchResult = () => {
+    let searchResult = events.filter((event) => {
+      const nameIndex = event.name
+        ? event.name.toLowerCase().indexOf(searchTerm.toLowerCase())
+        : "";
+      return nameIndex > -1;
+    });
+    setSearchResult(searchResult);
+  };
 
-                {/* TODO : Right side of the Event card - refactor later */}
-                <Col
-                  span={12}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    paddingTop: "15px",
-                  }}
-                >
+  return (
+    <>
+      {searchResult.length === 0 ? (
+        <TextBox size="title">No search Result </TextBox>
+      ) : (
+        <EventBoxesContainer>
+          {searchResult.map((singleEvent) => {
+            return (
+              <div key={singleEvent.eventId}>
+                <EventBox upcoming>
                   <Row>
-                    <CircleCounter small>
-                      <TextBox
-                        size="xs"
+                    <Col span={12}>
+                      <div
                         style={{
-                          padding: "0",
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {calculateDaysLeft(today, singleEvent.date)}
+                        <TextBox size="title">{singleEvent.date}</TextBox>
+                      </div>
+                      <TextBox light padding="sm" size="large">
+                        {singleEvent.name}
                       </TextBox>
-                      <TextBox
-                        size="xs"
-                        style={{
-                          padding: "0",
-                        }}
-                      >
-                        days left
+                      <TextBox light padding="sm" size="md">
+                        {singleEvent.fish}
                       </TextBox>
-                    </CircleCounter>
+                      <LocationTime>
+                        <TextBox size="xs">
+                          {singleEvent.location}, {singleEvent.city}
+                        </TextBox>
+                        <TextBox size="xs">
+                          {singleEvent.startTime} - {singleEvent.endTime}
+                        </TextBox>
+                      </LocationTime>
+                    </Col>
+
+                    {/* TODO : Right side of the Event card - refactor later */}
+                    <Col
+                      span={12}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        paddingTop: "15px",
+                      }}
+                    >
+                      <Row>
+                        <CircleCounter small>
+                          <TextBox
+                            size="xs"
+                            style={{
+                              padding: "0",
+                            }}
+                          >
+                            {calculateDaysLeft(today, singleEvent.date)}
+                          </TextBox>
+                          <TextBox
+                            size="xs"
+                            style={{
+                              padding: "0",
+                            }}
+                          >
+                            days left
+                          </TextBox>
+                        </CircleCounter>
+                      </Row>
+                      <Row>
+                        <DarkBlueButton onClick={openModal}>
+                          REGISTER
+                        </DarkBlueButton>
+                        <EventRegistrationModal
+                          visible={modalVisible}
+                          closeModal={closeModal}
+                          eventId={eventId}
+                        />
+                      </Row>
+                    </Col>
                   </Row>
-                  <Row>
-                    <DarkBlueButton onClick={openModal}>
-                      REGISTER
-                    </DarkBlueButton>
-                    <EventRegistrationModal
-                      visible={modalVisible}
-                      closeModal={closeModal}
-                      eventId={eventId}
-                    />
-                  </Row>
-                </Col>
-              </Row>
-            </EventBox>
-          </div>
-        );
-      })}
-    </EventBoxesContainer>
+                </EventBox>
+              </div>
+            );
+          })}
+        </EventBoxesContainer>
+      )}
+    </>
   );
 };
 

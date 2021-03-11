@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Flex, TextBox } from "../../pages/styles/style.js";
+import { Container, Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
   EventBox,
   EventsContainer,
   EventBoxesContainer,
+  ScrollableContainer,
   Circle,
 } from "./style.js";
 import { MoreOutlined } from "@ant-design/icons";
@@ -22,13 +23,15 @@ const YourEvents = () => {
       <TextBox size="xxxl" color="black" bold>
         YOUR EVENTS
       </TextBox>
-      <EventsContainer>
-        <div style={{ position: "absolute", top: "-0.45rem" }}>
-          <TextBox style={{ padding: "0" }}>MARCH 2021</TextBox>
-        </div>
-        <Circle />
-        <Events token={userToken} />
-      </EventsContainer>
+      <ScrollableContainer>
+        <EventsContainer>
+          <div style={{ position: "absolute", top: "-0.45rem" }}>
+            <TextBox style={{ padding: "0" }}>MARCH 2021</TextBox>
+          </div>
+          <Circle />
+          <Events token={userToken} />
+        </EventsContainer>
+      </ScrollableContainer>
     </>
   );
 };
