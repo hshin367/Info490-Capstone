@@ -4,6 +4,8 @@ const api = {
   events: {
     getEvents: "/events",
     registerforEvent: "/event/",
+    eventsGoing: "/events/going",
+    eventsNotGoing: "/events/notgoing",
   },
 };
 

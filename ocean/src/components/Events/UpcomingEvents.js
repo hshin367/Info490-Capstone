@@ -12,40 +12,23 @@ import {
 import SearchBar from "../../components/InputForms/SearchBar.js";
 import { DarkBlueButton } from "../Button/button.js";
 import Modals from "../Modals/Modal.js";
-
 import { Row, Col, Checkbox, Form, Button } from "antd";
-
 import UserContext from "../User/User";
-import { getEvents } from "../../actions/actions";
+import { getEvents, registerForEvent } from "../../actions/actions";
+import {
+  dateParser,
+  dateCalculator,
+  sortByDate,
+} from "../../helpers/dateCalculations";
+import { goingEventsSampleData } from "../../helpers/sampleData";
 
 // TODO : import getDate() from the Banner component later (make it importable)
 // TODO : make the text styles of the cards into a styled component
 // TODO : Remove the paddings for the textboxes.
 
-const getDate = () => {
-  let tempDate = new Date();
-  let date = tempDate.getDate();
-  let month = tempDate.getMonth() + 1;
-
-  return [date, month];
-};
-
-// TODO : check the incoming date format, handle split, convert to array maybe?
-// create new date obj.
-const makeJSDateObject = (date) => {
-  new Date(date);
-};
-
-const dateCalculator = (curDate, eventDate) => {
-  let dateDiff = eventDate.getTime() - curDate.getTime();
-
-  return Math.floor(dateDiff / (1000 * 60 * 60 * 24));
-};
-
 const UpcomingEvents = () => {
   // Cases: This month and/or the months after.
   // Create components for absolute boxes
-  const [today, setToday] = useState(Date.now());
 
   return (
     <>
@@ -70,22 +53,35 @@ const UpcomingEvents = () => {
 
 const Events = () => {
   // TODO : depending on the date input format, split("") and create a new date obj.
+  // TODO : implement loading
   const [events, setEvents] = useState([]);
+  const [modalVisible, setModalVisble] = useState(false);
   const user = useContext(UserContext);
+  const [eventId, setEventId] = useState("");
+  const [today, setToday] = useState(Date.now());
+
+  const sampleData = sortByDate(goingEventsSampleData);
 
   useEffect(() => {
-    getAllEvents("");
+    // getAllEvents("");
+    setEvents(sampleData);
   }, []);
 
   const getAllEvents = async () => {
     let allEvents = await getEvents();
-    setEvents(allEvents.data);
+    let sortedEvents = sortByDate(allEvents.data);
+    setEvents(sortedEvents);
   };
 
-  const [modalVisible, setModalVisble] = useState(false);
+  const calculateDaysLeft = (today, otherDate) => {
+    let parsedDate = dateParser(otherDate);
+    let daysleft = dateCalculator(today, parsedDate);
+    return daysleft;
+  };
 
-  const openModal = () => {
+  const openModal = (eventId) => {
     setModalVisble(true);
+    setEventId(eventId);
   };
 
   const closeModal = () => {
@@ -94,83 +90,89 @@ const Events = () => {
 
   return (
     <EventBoxesContainer>
-      {events.map((singleEvent) => (
-        <div key={singleEvent.eventId}>
-          <EventBox upcoming>
-            <Row>
-              <Col span={12}>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <TextBox size="title">{singleEvent.date}</TextBox>
-                </div>
-                <TextBox light padding="sm" size="large">
-                  {singleEvent.name}
-                </TextBox>
-                <TextBox light padding="sm" size="md">
-                  {singleEvent.fish}
-                </TextBox>
-                <LocationTime>
-                  <TextBox size="xs">
-                    {singleEvent.location}, {singleEvent.city}
+      {events.map((singleEvent) => {
+        return (
+          <div key={singleEvent.eventId}>
+            <EventBox upcoming>
+              <Row>
+                <Col span={12}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <TextBox size="title">{singleEvent.date}</TextBox>
+                  </div>
+                  <TextBox light padding="sm" size="large">
+                    {singleEvent.name}
                   </TextBox>
-                  <TextBox size="xs">
-                    {singleEvent.startTime} - {singleEvent.endTime}
+                  <TextBox light padding="sm" size="md">
+                    {singleEvent.fish}
                   </TextBox>
-                </LocationTime>
-              </Col>
+                  <LocationTime>
+                    <TextBox size="xs">
+                      {singleEvent.location}, {singleEvent.city}
+                    </TextBox>
+                    <TextBox size="xs">
+                      {singleEvent.startTime} - {singleEvent.endTime}
+                    </TextBox>
+                  </LocationTime>
+                </Col>
 
-              {/* TODO : Right side of the Event card - refactor later */}
-              <Col
-                span={12}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingTop: "15px",
-                }}
-              >
-                <Row>
-                  <CircleCounter small>
-                    <TextBox
-                      size="xs"
-                      style={{
-                        padding: "0",
-                      }}
-                    >
-                      {singleEvent.daysLeft}
-                    </TextBox>
-                    <TextBox
-                      size="xs"
-                      style={{
-                        padding: "0",
-                      }}
-                    >
-                      days left
-                    </TextBox>
-                  </CircleCounter>
-                </Row>
-                <Row>
-                  <DarkBlueButton onClick={openModal}>REGISTER</DarkBlueButton>
-                  <EventRegistrationModal
-                    visible={modalVisible}
-                    closeModal={closeModal}
-                    singleEvent={singleEvent}
-                  />
-                </Row>
-              </Col>
-            </Row>
-          </EventBox>
-        </div>
-      ))}
+                {/* TODO : Right side of the Event card - refactor later */}
+                <Col
+                  span={12}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: "15px",
+                  }}
+                >
+                  <Row>
+                    <CircleCounter small>
+                      <TextBox
+                        size="xs"
+                        style={{
+                          padding: "0",
+                        }}
+                      >
+                        {calculateDaysLeft(today, singleEvent.date)}
+                      </TextBox>
+                      <TextBox
+                        size="xs"
+                        style={{
+                          padding: "0",
+                        }}
+                      >
+                        days left
+                      </TextBox>
+                    </CircleCounter>
+                  </Row>
+                  <Row>
+                    <DarkBlueButton onClick={openModal}>
+                      REGISTER
+                    </DarkBlueButton>
+                    <EventRegistrationModal
+                      visible={modalVisible}
+                      closeModal={closeModal}
+                      eventId={eventId}
+                    />
+                  </Row>
+                </Col>
+              </Row>
+            </EventBox>
+          </div>
+        );
+      })}
     </EventBoxesContainer>
   );
 };
 
-const EventRegistrationModal = ({ visible, closeModal }) => {
+// TODO : check the validity of the forms (if checkbox all selected )
+const EventRegistrationModal = ({ visible, closeModal, eventId }) => {
   const register = () => {
-    console.log("clicked");
+    const res = registerForEvent(eventId);
+    console.log(res);
   };
 
   return (
