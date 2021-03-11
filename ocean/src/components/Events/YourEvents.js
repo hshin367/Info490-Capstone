@@ -10,6 +10,7 @@ import {
 } from "./style.js";
 import { MoreOutlined } from "@ant-design/icons";
 import { getGoingEvents } from "../../actions/actions";
+import { goingEvents, goingEventsSampleData } from "../../helpers/sampleData";
 
 const YourEvents = () => {
   const userToken = JSON.parse(localStorage.getItem("user-info")).token;
@@ -41,32 +42,13 @@ const Events = ({ token }) => {
   }, []);
 
   const getAllEvents = async () => {
-    let sampleData = [
-      {
-        city: "Seattle",
-        commentCount: 0,
-        contactNumber: "(206)601-0607",
-        createdAt: "2021-03-01T01:18:18.380Z",
-        date: "1/1/2021",
-        description: "Let's clean our coasts!",
-        endTime: "1:00PM",
-        fish: "clownfish",
-        goingCount: 1,
-        imageUrl:
-          "https://firebasestorage.googleapis.com/v0/b/restore-uw.appspot.com/o/no-img.png?alt=media",
-        interestedCount: 0,
-        location: "Alki Beach",
-        name: "Coastal Cleanup Event",
-        organizerName: "Fish Student Association",
-        startTime: "10:00AM",
-        state: "WA",
-        userHandle: "ThomasHandleIMG13",
-        zipCode: 98144,
-      },
-    ];
-    let allEvents = await getGoingEvents();
+    let sampleData = goingEventsSampleData;
+    // commented out for the dev. for now.
+    let allEvents;
+    // allEvents = await getGoingEvents();
     if (Array.isArray(allEvents) === false) {
-      // setEvents(sampleData);
+      console.log("sample going data");
+      setEvents(sampleData);
     } else {
       console.log(allEvents);
       setEvents(allEvents);

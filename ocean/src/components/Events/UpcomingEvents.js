@@ -20,7 +20,7 @@ import {
   dateCalculator,
   sortByDate,
 } from "../../helpers/dateCalculations";
-import { goingEventsSampleData } from "../../helpers/sampleData";
+import { upcomingEventsSampleData } from "../../helpers/sampleData";
 
 // TODO : import getDate() from the Banner component later (make it importable)
 // TODO : make the text styles of the cards into a styled component
@@ -60,7 +60,7 @@ const Events = () => {
   const [eventId, setEventId] = useState("");
   const [today, setToday] = useState(Date.now());
 
-  const sampleData = sortByDate(goingEventsSampleData);
+  const sampleData = sortByDate(upcomingEventsSampleData);
 
   useEffect(() => {
     // getAllEvents("");

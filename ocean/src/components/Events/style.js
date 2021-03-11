@@ -54,6 +54,7 @@ const Circle = styled.div`
   height: 10px;
 `;
 
+// For Circles that have numbers inside
 const CircleCounter = styled(Flex)`
   padding: 1px;
   flex-direction: column;
@@ -61,7 +62,7 @@ const CircleCounter = styled(Flex)`
   justify-content: center;
   border-radius: 50%;
   background-color: transparent;
-  border: 1.5px solid black;
+  border: 1.5px solid ${(props) => (props.white ? "white" : "black")};
   width: ${(props) => (props.small ? "70px" : "100px")};
   height: ${(props) => (props.small ? "70px" : "100px")};
 `;
