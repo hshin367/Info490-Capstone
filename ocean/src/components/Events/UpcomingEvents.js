@@ -74,7 +74,7 @@ const Events = () => {
   const user = useContext(UserContext);
 
   useEffect(() => {
-    getAllEvents();
+    getAllEvents("");
   }, []);
 
   const getAllEvents = async () => {

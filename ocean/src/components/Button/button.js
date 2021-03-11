@@ -68,7 +68,7 @@ const StyledButton = styled(Button)`
   // colors
   ${colors};
   justify-content: center;
-  color: ${(props) => props.textColor === "white" && "white"};
+  color: ${(props) => props.textcolor === "white" && "white"};
   // Size
   ${sizes}
   &:hover {
@@ -101,7 +101,7 @@ const WhiteButton = ({ children, ...rest }) => {
 
 const DarkBlueButton = ({ children, ...rest }) => {
   return (
-    <StyledButton color="dark_blue" textColor="white" size="medium" {...rest}>
+    <StyledButton color="dark_blue" textcolor="white" size="medium" {...rest}>
       {children}
     </StyledButton>
   );

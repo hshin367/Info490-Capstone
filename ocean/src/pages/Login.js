@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import history from "../Routes/history";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Bg, Container, TextBox } from "./styles/style.js";
@@ -11,10 +11,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const history = useHistory();
   useEffect(() => {
     if (localStorage.getItem("user-info")) {
-      history.push("/");
+      history.push({ pathname: "/" });
     }
   });
 
@@ -41,7 +40,7 @@ const Login = () => {
       .then((result) => {
         console.log(result);
         localStorage.setItem("user-info", JSON.stringify(result));
-        history.push("/");
+        history.push({ pathname: "/" });
         return result;
       })
       .catch((error) => {
@@ -68,11 +67,11 @@ const Login = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            name="username"
+            name="email"
             rules={[
               {
                 required: true,
-                message: "Please input your Username!",
+                message: "Please input your email!",
               },
             ]}
           >

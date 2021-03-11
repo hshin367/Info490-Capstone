@@ -5,14 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import kataraUser from "./katara.json";
 import events from "./event.json";
-import { BrowserRouter } from "react-router-dom";
-import Login from "./pages/Login";
+import { Router } from "react-router-dom";
+import history from "./Routes/history";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
