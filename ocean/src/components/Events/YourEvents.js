@@ -45,13 +45,13 @@ const Events = ({ token }) => {
   }, []);
 
   const getAllEvents = async () => {
-    let sampleData = goingEventsSampleData;
+    // let sampleData = goingEventsSampleData;
     // commented out for the dev. for now.
     let allEvents;
-    // allEvents = await getGoingEvents();
+    allEvents = await getGoingEvents();
     if (Array.isArray(allEvents) === false) {
       console.log("sample going data");
-      setEvents(sampleData);
+      // setEvents(sampleData);
     } else {
       console.log(allEvents);
       setEvents(allEvents);

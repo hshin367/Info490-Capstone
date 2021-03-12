@@ -13,6 +13,7 @@ import SearchBar from "../../components/InputForms/SearchBar.js";
 import { DarkBlueButton } from "../Button/button.js";
 import Modals from "../Modals/Modal.js";
 import { Row, Col, Checkbox, Form, Button } from "antd";
+import { ShareAltOutlined, StarOutlined } from "@ant-design/icons";
 import UserContext from "../User/User";
 import { getEvents, registerForEvent } from "../../actions/actions";
 import {
@@ -70,22 +71,26 @@ const Events = ({ searchTerm }) => {
   const sampleData = sortByDate(upcomingEventsSampleData);
 
   useEffect(() => {
-    // getAllEvents("");
-    setEvents(sampleData);
+    getAllEvents();
+    // setEvents(sampleData);
   }, []);
 
   useEffect(() => {
     if (searchTerm !== "") {
       renderSearchResult();
     } else {
-      setSearchResult(sampleData);
+      // in prod. there would be events
+      // in dev. there would be sampleD
+      setSearchResult(events);
     }
   }, [searchTerm]);
 
   const getAllEvents = async () => {
-    let allEvents = await getEvents();
+    let allEvents = await getEvents("");
     let sortedEvents = sortByDate(allEvents.data);
+    console.log(sortedEvents);
     setEvents(sortedEvents);
+    setSearchResult(sortedEvents);
   };
 
   const calculateDaysLeft = (today, otherDate) => {
@@ -94,9 +99,9 @@ const Events = ({ searchTerm }) => {
     return daysleft;
   };
 
-  const openModal = (eventId) => {
+  const openModal = (eid) => {
     setModalVisble(true);
-    setEventId(eventId);
+    setEventId(eid);
   };
 
   const closeModal = () => {
@@ -114,6 +119,7 @@ const Events = ({ searchTerm }) => {
     setSearchResult(searchResult);
   };
 
+  // TODO : refactor; isSearchEmpty on state on parent
   return (
     <>
       {searchResult.length === 0 ? (
@@ -124,8 +130,8 @@ const Events = ({ searchTerm }) => {
             return (
               <div key={singleEvent.eventId}>
                 <EventBox upcoming>
-                  <Row>
-                    <Col span={12}>
+                  <Row justify="space-between">
+                    <Col span={10}>
                       <div
                         style={{
                           display: "flex",
@@ -151,48 +157,105 @@ const Events = ({ searchTerm }) => {
                     </Col>
 
                     {/* TODO : Right side of the Event card - refactor later */}
+                    {/* TODO : fix the justifyContent for the card */}
                     <Col
                       span={12}
                       style={{
                         display: "flex",
                         flexDirection: "column",
-                        justifyContent: "space-between",
+                        justifyContent: "space-around",
                         alignItems: "center",
-                        paddingTop: "15px",
+                        paddingTop: "5px",
                       }}
                     >
-                      <Row>
-                        <CircleCounter small>
-                          <TextBox
-                            size="xs"
-                            style={{
-                              padding: "0",
-                            }}
-                          >
-                            {calculateDaysLeft(today, singleEvent.date)}
-                          </TextBox>
-                          <TextBox
-                            size="xs"
-                            style={{
-                              padding: "0",
-                            }}
-                          >
-                            days left
-                          </TextBox>
-                        </CircleCounter>
+                      <Row gutter={13}>
+                        <Col span={8}>
+                          <CircleCounter small>
+                            <TextBox
+                              size="xs"
+                              style={{
+                                padding: "0",
+                              }}
+                            >
+                              {calculateDaysLeft(today, singleEvent.date)}
+                            </TextBox>
+                            <TextBox
+                              size="xs"
+                              style={{
+                                padding: "0",
+                              }}
+                            >
+                              days left
+                            </TextBox>
+                          </CircleCounter>
+                        </Col>
+                        <Col span={8}>
+                          <CircleCounter small>
+                            <TextBox
+                              size="xs"
+                              style={{
+                                padding: "0",
+                              }}
+                            >
+                              {singleEvent.interestedCount}
+                            </TextBox>
+                            <TextBox
+                              size="xs"
+                              style={{
+                                padding: "0",
+                              }}
+                            >
+                              Interested
+                            </TextBox>
+                          </CircleCounter>
+                        </Col>
+                        <Col span={8}>
+                          <CircleCounter small>
+                            <TextBox
+                              size="xs"
+                              style={{
+                                padding: "0",
+                              }}
+                            >
+                              {singleEvent.goingCount}
+                            </TextBox>
+                            <TextBox
+                              size="xs"
+                              style={{
+                                padding: "0",
+                              }}
+                            >
+                              Going
+                            </TextBox>
+                          </CircleCounter>
+                        </Col>
                       </Row>
-                      <Row>
-                        <DarkBlueButton onClick={openModal}>
-                          REGISTER
-                        </DarkBlueButton>
-                        <EventRegistrationModal
-                          visible={modalVisible}
-                          closeModal={closeModal}
-                          eventId={eventId}
-                        />
+                      <Row justify="space-around" gutter={13}>
+                        <Col span={5}>
+                          <DarkBlueButton>
+                            <StarOutlined />
+                          </DarkBlueButton>
+                        </Col>
+                        <Col span={5}>
+                          <DarkBlueButton>
+                            <ShareAltOutlined />
+                          </DarkBlueButton>
+                        </Col>
+                        <Col span={12}>
+                          <DarkBlueButton
+                            onClick={() => openModal(singleEvent.eventId)}
+                          >
+                            REGISTER
+                          </DarkBlueButton>
+                        </Col>
                       </Row>
                     </Col>
                   </Row>
+                  <EventRegistrationModal
+                    visible={modalVisible}
+                    closeModal={closeModal}
+                    eventId={eventId}
+                  />
                 </EventBox>
               </div>
             );
@@ -205,9 +268,12 @@ const Events = ({ searchTerm }) => {
 
 // TODO : check the validity of the forms (if checkbox all selected )
 const EventRegistrationModal = ({ visible, closeModal, eventId }) => {
-  const register = () => {
-    const res = registerForEvent(eventId);
+  const register = async () => {
+    console.log(eventId);
+    const res = await registerForEvent(eventId);
     console.log(res);
+    // alert(res);
+    closeModal();
   };
 
   return (
@@ -216,7 +282,10 @@ const EventRegistrationModal = ({ visible, closeModal, eventId }) => {
       visible={visible}
       closeModal={closeModal}
       okText="Register"
-      onOk={register}
+      onOk={(e) => {
+        e.stopPropagation();
+        register();
+      }}
       destroyOnClose={true}
     >
       <EventRegistrationAgreementForm />

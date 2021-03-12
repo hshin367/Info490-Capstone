@@ -39,14 +39,8 @@ export const registerForEvent = async (eventId) => {
         err.response.status
       );
       console.log("Contents ", err.response.data);
-    }
 
-    if (err.message) {
-      console.log("Wrongful request setup", err.message);
-    }
-
-    if (err.request) {
-      console.log("Wrongful network request", err.reqest);
+      throw Error(err);
     }
   }
 };
