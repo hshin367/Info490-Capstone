@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FishImage, FishText, FishTextContainer } from "./style.js";
+import {
+  FishImage,
+  FishText,
+  FishTextContainer,
+  FinshPicContainer,
+} from "./style.js";
 
 const FishPictureText = (props) => {
   console.log(props.fish.date);
@@ -23,12 +28,12 @@ const Fish = () => {
 
   return (
     <div>
-      {sampleData.map((fish) => (
-        <>
+      {sampleData.map((fish, ind) => (
+        <FinshPicContainer key={ind}>
           <FishImage url={fish.imgName}>
             <FishPictureText fish={fish} />
           </FishImage>
-        </>
+        </FinshPicContainer>
       ))}
     </div>
   );

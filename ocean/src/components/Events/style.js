@@ -13,10 +13,10 @@ const EventBox = styled.div`
     props.today ? props.theme.colors.dark_blue : props.theme.colors.light_blue};
   border-radius: 7px;
   padding: ${(props) =>
-    props.upcoming ? props.theme.paddings.xs : props.theme.paddings.lg};
+    props.upcoming ? props.theme.paddings.small : props.theme.paddings.lg};
   margin: 0 ${(props) => props.theme.paddings.base};
-  min-width: ${(props) => (props.upcoming ? "400px" : "200px")};
-  min-height: 200px;
+  min-width: ${(props) => (props.upcoming ? "500px" : "220px")};
+  max-height: 200px;
   color: ${(props) =>
     props.today ? props.theme.colors.white : props.theme.colors.dark_blue};
 
@@ -32,6 +32,11 @@ const EventBox = styled.div`
 
 const EventBoxesContainer = styled(Flex)`
   padding: 1.625rem 0.625rem 0px 0.625rem;
+`;
+
+const ScrollableContainer = styled(Flex)`
+  overflow-x: scroll;
+  max-width: 70%;
 `;
 
 // contains the events boxes.
@@ -54,6 +59,7 @@ const Circle = styled.div`
   height: 10px;
 `;
 
+// For Circles that have numbers inside
 const CircleCounter = styled(Flex)`
   padding: 1px;
   flex-direction: column;
@@ -61,7 +67,7 @@ const CircleCounter = styled(Flex)`
   justify-content: center;
   border-radius: 50%;
   background-color: transparent;
-  border: 1.5px solid black;
+  border: 1.5px solid ${(props) => (props.white ? "white" : "black")};
   width: ${(props) => (props.small ? "70px" : "100px")};
   height: ${(props) => (props.small ? "70px" : "100px")};
 `;
@@ -79,4 +85,5 @@ export {
   Circle,
   TitleBarContainer,
   CircleCounter,
+  ScrollableContainer,
 };

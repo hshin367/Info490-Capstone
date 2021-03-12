@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Form, Input, Select, Row, Col, Checkbox, DatePicker } from "antd";
 import "./Login.css";
 import { Bg, Container, TextBox, SignUpFormContainer } from "./styles/style.js";
 import { SignupButton } from "../components/Button/button.js";
-import { LogoText } from "../components/Logo/style";
+import { LogoText, LogoImage } from "../components/Logo/style";
+import Logo from "../components/Logo/Logo";
 
 const { Option } = Select;
 
@@ -38,46 +39,46 @@ const config = {
 };
 
 const RegistrationForm = () => {
-  const [email,setEmail]=useState();
-  const [password,setPassword]=useState();
-  const [confirmPassword,setConfirmPassword]=useState();
-  const [handle,setHandle]=useState();
-  
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [handle, setHandle] = useState();
+
   const history = useHistory();
   useEffect(() => {
-    if(localStorage.getItem("user-info")) {
-      history.push("/")
+    if (localStorage.getItem("user-info")) {
+      history.push("/");
     }
-  })
+  });
 
   function handleErrors(response) {
     if (!response.ok) throw Error(response.statusText);
     return response;
   }
 
-  function signUp(){
-    let item = {email,password,confirmPassword,handle};
+  function signUp() {
+    let item = { email, password, confirmPassword, handle };
     console.warn(item);
-    
+
     fetch("https://us-central1-restore-uw.cloudfunctions.net/api/signup", {
-      method:"POST",
+      method: "POST",
       headers: {
-        "Content-Type":"application/json",
-        "Accept":"application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      body: JSON.stringify(item)
+      body: JSON.stringify(item),
     })
-    .then(handleErrors)
-    .then((response) => {    
-      return response.json();
-    })
-    .then((result) => {    
-      localStorage.setItem("user-info", JSON.stringify(result))
-      history.push("/")
-    })
-    .catch((error) => {
-        console.log(error)
-    });
+      .then(handleErrors)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        localStorage.setItem("user-info", JSON.stringify(result));
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const [form] = Form.useForm();
@@ -166,7 +167,11 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input placeholder="Email*" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+          <Input
+            placeholder="Email*"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Form.Item>
       </Col>
 
@@ -184,7 +189,7 @@ const RegistrationForm = () => {
             style={{
               width: "100%",
             }}
-            placeholder="Phone Number*"
+            placeholder="Phone Number"
           />
         </Form.Item>
       </Col>
@@ -203,7 +208,11 @@ const RegistrationForm = () => {
           },
         ]}
       >
-        <Input placeholder="Username" value={handle} onChange={(e)=>setHandle(e.target.value)}/>
+        <Input
+          placeholder="Username"
+          value={handle}
+          onChange={(e) => setHandle(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item
@@ -216,7 +225,11 @@ const RegistrationForm = () => {
         ]}
         hasFeedback
       >
-        <Input.Password placeholder="Password*" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+        <Input.Password
+          placeholder="Password*"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item
@@ -241,7 +254,11 @@ const RegistrationForm = () => {
           }),
         ]}
       >
-        <Input.Password placeholder="Confirm Password*" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
+        <Input.Password
+          placeholder="Confirm Password*"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
       </Form.Item>
     </>
   );
@@ -286,7 +303,7 @@ const RegistrationForm = () => {
             },
           ]}
         >
-          <Input placeholder="Zip Code*" />
+          <Input placeholder="Zip Code" />
         </Form.Item>
       </Col>
     </Row>
@@ -324,8 +341,11 @@ const RegistrationForm = () => {
   return (
     <Bg>
       <Container>
-        <Row>
-          <LogoText>LOGO RESTORE</LogoText>
+        <Row align="middle">
+          <LogoText>
+            <LogoImage large />
+            RESTORE
+          </LogoText>
         </Row>
         <Row>
           <SignUpFormContainer
@@ -339,7 +359,6 @@ const RegistrationForm = () => {
                 <LogoText>Create Account</LogoText>
               </Row>
               <Row justify="space-around" wrap="nowrap">
-                <Col>Picture</Col>
                 <Col span={17}>
                   <Form
                     // {...formItemLayout}
@@ -351,7 +370,6 @@ const RegistrationForm = () => {
                   >
                     {name}
                     {emailPhone}
-                    {date}
                     {location}
                     {accountInfo}
                     {agreement}

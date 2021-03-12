@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Banner from "../components/Banner/banner.js";
 import { YourEvents } from "../components/Events/YourEvents.js";
-import { Flex } from ".././pages/styles/style.js";
+import {
+  Flex,
+  HorizontalScrollableContainer,
+} from ".././pages/styles/style.js";
 import Fish from "../components/Fish/Fish.js";
 
 const LowerHalf = () => {
@@ -10,6 +13,10 @@ const LowerHalf = () => {
   return (
     <Flex flexDirection="column" paddingLeft="xxl" position="relative">
       <YourEvents />
+      {/* <HorizontalScrollableContainer>
+        <YourEvents />
+      </HorizontalScrollableContainer> */}
+
       <Fish />
     </Flex>
   );

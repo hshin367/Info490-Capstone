@@ -73,10 +73,20 @@ const Flex = styled.div`
       : props.theme.paddings.base};
 `;
 
+const HorizontalScrollableContainer = styled(Flex)`
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+`;
+
 // TODO : take in a variable for the style (row, col)
 const Container = styled(Flex)`
   flex-direction: column;
   justify-content: center;
+`;
+
+const LoginContainer = styled(Container)`
+  align-items: center;
 `;
 
 const SignUpFormContainer = styled(Flex)`
@@ -122,4 +132,13 @@ const TextBox = styled.div`
       : props.theme.paddings.base};
 `;
 
-export { Bg, Container, TextBox, SignUpFormContainer, HalfFormContainer, Flex };
+export {
+  Bg,
+  Container,
+  TextBox,
+  SignUpFormContainer,
+  HalfFormContainer,
+  Flex,
+  LoginContainer,
+  HorizontalScrollableContainer,
+};
