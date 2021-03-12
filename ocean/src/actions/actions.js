@@ -31,14 +31,14 @@ export const registerForEvent = async (eventId) => {
         authorization: `Bearer ${userToken}`,
       },
     });
-    return res.data;
+    return res;
   } catch (err) {
     if (err.response) {
       console.log(
-        "Failed to post event to mark as registered for a user Error Status: ",
-        err.response.status
+        "Failed to post event to mark as registered for a user Error Status: " +
+          err.response.status
       );
-      console.log("Contents ", err.response.data);
+      return err.response;
     }
   }
 };

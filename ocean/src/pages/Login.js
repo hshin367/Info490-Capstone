@@ -19,12 +19,13 @@ const Login = () => {
   });
 
   function handleErrors(response) {
-    if (!response.ok) throw Error(response.statusText);
+    if (!response.ok) throw Error(response.status);
+
     return response;
   }
 
   async function login() {
-    console.warn(email, password);
+    // console.warn(email, password);
     let item = { email, password };
     await fetch("https://us-central1-restore-uw.cloudfunctions.net/api/login", {
       method: "POST",
@@ -45,7 +46,7 @@ const Login = () => {
         return result;
       })
       .catch((error) => {
-        console.log(error);
+        alert("Oops, there has been an error : " + error);
       });
   }
 
@@ -79,7 +80,7 @@ const Login = () => {
             <Input
               id="login-info"
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              placeholder="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Item>

@@ -1,22 +1,12 @@
-// import logo from './logo.svg';
 import React, { Component } from "react";
 import Routes from "./Routes/index.js";
 
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
-import { Layout } from "antd";
 import theme from "./theme";
-import UserContext from "./components/User/User.js";
+// import UserContext from "./components/User/User.js";
 
 import Navbar from "./components/Navbar/navbar.js";
-
-// TODO : consider shifting to antd layouts for responsivenss.
-const { Header, Footer, Sider, Content } = Layout;
-
-const user = {
-  name: "sampleName",
-  registeredEvents: [],
-};
 
 export class App extends Component {
   constructor(props) {
@@ -79,16 +69,15 @@ export class App extends Component {
 
   render() {
     return (
-      <UserContext.Provider value={user}>
+      <>
         <GlobalStyle />
         <div className="wrapper">
           <ThemeProvider theme={theme}>
             <Navbar />
             <Routes />
-            {/* <Footer /> */}
           </ThemeProvider>
         </div>
-      </UserContext.Provider>
+      </>
     );
   }
 }

@@ -272,10 +272,10 @@ const Events = ({ searchTerm }) => {
 // TODO : check the validity of the forms (if checkbox all selected )
 const EventRegistrationModal = ({ visible, closeModal, eventId }) => {
   const register = async () => {
-    console.log(eventId);
     const res = await registerForEvent(eventId);
-    console.log(res);
-    // alert(res);
+    if (res.status >= 300) {
+      alert("Alert : " + res.data.error);
+    }
     closeModal();
   };
 
