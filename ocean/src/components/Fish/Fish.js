@@ -8,7 +8,6 @@ import {
 } from "./style.js";
 
 const FishPictureText = (props) => {
-  console.log(props.fish.date);
   return (
     <FishTextContainer>
       <FishText>{props.fish.date}</FishText>
@@ -22,7 +21,7 @@ const Fish = () => {
     {
       date: "January 21, 2021",
       fishType: "ClownFish",
-      imgName: "Real-clownfish.jpg",
+      imgName: "Real-Clownfish.jpg",
     },
   ];
 

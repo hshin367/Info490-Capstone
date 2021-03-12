@@ -39,7 +39,7 @@ const Login = () => {
         return response.json();
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         localStorage.setItem("user-info", JSON.stringify(result));
         history.push({ pathname: "/" });
         return result;
@@ -50,7 +50,7 @@ const Login = () => {
   }
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   return (

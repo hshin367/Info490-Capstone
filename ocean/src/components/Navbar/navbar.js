@@ -25,7 +25,8 @@ const Navbar = (props) => {
   const history = useHistory();
 
   function logout() {
-    console.log("loggin out");
+    alert("logging out");
+    // console.log("loggin out");
     localStorage.clear();
     history.push({ pathname: "/login" });
   }
@@ -34,7 +35,7 @@ const Navbar = (props) => {
     props.location.pathname === "/login" ||
     props.location.pathname === "/signup"
   ) {
-    console.log(props.location);
+    // console.log(props.location);
     return <></>;
   }
 

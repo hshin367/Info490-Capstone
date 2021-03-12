@@ -66,6 +66,7 @@ const Events = ({ searchTerm }) => {
   const [modalVisible, setModalVisble] = useState(false);
   const [eventId, setEventId] = useState("");
   const [today, setToday] = useState(Date.now());
+  const [loading, setLoading] = useState(true);
   const user = useContext(UserContext);
 
   const sampleData = sortByDate(upcomingEventsSampleData);
@@ -88,9 +89,9 @@ const Events = ({ searchTerm }) => {
   const getAllEvents = async () => {
     let allEvents = await getEvents("");
     let sortedEvents = sortByDate(allEvents.data);
-    console.log(sortedEvents);
     setEvents(sortedEvents);
     setSearchResult(sortedEvents);
+    setLoading(false);
   };
 
   const calculateDaysLeft = (today, otherDate) => {
@@ -118,6 +119,8 @@ const Events = ({ searchTerm }) => {
     });
     setSearchResult(searchResult);
   };
+
+  if (loading) return <TextBox size="title">Loading Data...</TextBox>;
 
   // TODO : refactor; isSearchEmpty on state on parent
   return (

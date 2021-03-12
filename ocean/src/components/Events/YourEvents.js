@@ -37,8 +37,9 @@ const YourEvents = () => {
   );
 };
 
-const Events = ({ token }) => {
+const Events = () => {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // TODO : refactor later
   useEffect(() => {
@@ -46,19 +47,30 @@ const Events = ({ token }) => {
   }, []);
 
   const getAllEvents = async () => {
-    let sampleData = goingEventsSampleData;
+    // let sampleData = goingEventsSampleData;
     // commented out for the dev. for now.
     let allEvents;
-    // allEvents = await getGoingEvents();
-    if (Array.isArray(allEvents) === false) {
-      console.log("sample going data");
-      await sortByDate(sampleData);
-      setEvents(sampleData);
-    } else {
-      await sortByDate(allEvents);
-      setEvents(allEvents);
+    allEvents = await getGoingEvents();
+    // if (Array.isArray(allEvents) === false) {
+    //   console.log("sample going data");
+    //   await sortByDate(sampleData);
+    //   setEvents(sampleData);
+    // } else {
+    if (!allEvents) {
+      setLoading(false);
+      return (
+        <TextBox size="title">
+          You Have no events that you have Registered for
+        </TextBox>
+      );
     }
+    await sortByDate(allEvents);
+    setEvents(allEvents);
+    setLoading(false);
+    // }
   };
+
+  if (loading) return <TextBox size="title">Loading Data...</TextBox>;
 
   // TODO : error handle the null data
   return (
