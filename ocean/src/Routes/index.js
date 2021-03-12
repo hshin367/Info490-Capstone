@@ -7,17 +7,19 @@ import SignUp from "../pages/SignUp";
 import Events from "../pages/Events";
 
 import history from "./history";
+import RequireAuth from "./RequireAuth.js";
 
 // TODO : add routes for forgot
 
 const Routes = () => (
   <Router history={history}>
     <Switch>
-      <Route exact path="/" component={Dashboard} />
-      <Route path="/events" component={Events} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={SignUp} />
-      {/* CheckAuth and proceed */}
+      <RequireAuth>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/events" component={Events} />
+      </RequireAuth>
     </Switch>
   </Router>
 );
