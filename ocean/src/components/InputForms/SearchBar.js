@@ -4,12 +4,17 @@ import { SearchOutlined } from "@ant-design/icons";
 import "./searchbar.css";
 import "antd/dist/antd.css";
 
-const SearchBar = () => {
+const SearchBar = ({ handleChange }) => {
+  const onChange = (e) => {
+    handleChange(e.target.value);
+  };
+
   return (
     <div className="searchbar">
       <Input
         placeholder="Search Events"
         bordered={false}
+        onChange={onChange}
         prefix={
           <SearchOutlined style={{ fontSize: "18px", paddingRight: "5px" }} />
         }

@@ -1,15 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Events from "../pages/Events";
 
-// TODO : add routes for logout, in, signup, forgot, reset
+import history from "./history";
+
+// TODO : add routes for forgot
 
 const Routes = () => (
-  <Router>
+  <Router history={history}>
     <Switch>
       <Route exact path="/" component={Dashboard} />
       <Route path="/events" component={Events} />

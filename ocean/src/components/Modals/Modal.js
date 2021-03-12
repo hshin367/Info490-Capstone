@@ -9,7 +9,6 @@ const Modals = ({
   visible,
   children,
   title,
-  handleOK,
   confirmLoading,
   okText,
   cancelText,
@@ -27,7 +26,6 @@ const Modals = ({
         className={className}
         title={title}
         visible={visible}
-        onOK={handleOK}
         onCancel={closeModal}
         confirmLoading={confirmLoading}
         okText={okText}

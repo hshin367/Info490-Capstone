@@ -13,7 +13,7 @@ const NavbarWrapper = styled.div`
   color: ${theme.colors.white};
   position: relative;
   z-index: 1030;
-  width: 1200px;
+  width: 1300px;
 
   padding: 10px 25px;
 
@@ -37,7 +37,7 @@ const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
   // justify-content: space-between;
-  padding-left: 40%;
+  padding-left: 35%;
 `;
 
 const NavItem = styled.li`
