@@ -13,7 +13,7 @@ const EventBox = styled.div`
     props.today ? props.theme.colors.dark_blue : props.theme.colors.light_blue};
   border-radius: 7px;
   padding: ${(props) =>
-    props.upcoming ? props.theme.paddings.xs : props.theme.paddings.lg};
+    props.upcoming ? props.theme.paddings.small : props.theme.paddings.lg};
   margin: 0 ${(props) => props.theme.paddings.base};
   min-width: ${(props) => (props.upcoming ? "500px" : "220px")};
   max-height: 200px;
