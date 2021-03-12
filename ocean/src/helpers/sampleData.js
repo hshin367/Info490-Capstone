@@ -57,6 +57,7 @@ export const goingEventsSampleData = [
     userHandle: "ThomasHandleIMG13",
     zipCode: 98144,
   },
+  null,
   {
     city: "Sample City",
     commentCount: 0,

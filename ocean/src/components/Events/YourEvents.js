@@ -12,6 +12,7 @@ import {
 import { MoreOutlined } from "@ant-design/icons";
 import { getGoingEvents } from "../../actions/actions";
 import { goingEvents, goingEventsSampleData } from "../../helpers/sampleData";
+import { sortByDate } from "../../helpers/dateCalculations";
 
 const YourEvents = () => {
   const userToken = JSON.parse(localStorage.getItem("user-info")).token;
@@ -45,19 +46,21 @@ const Events = ({ token }) => {
   }, []);
 
   const getAllEvents = async () => {
-    // let sampleData = goingEventsSampleData;
+    let sampleData = goingEventsSampleData;
     // commented out for the dev. for now.
     let allEvents;
-    allEvents = await getGoingEvents();
+    // allEvents = await getGoingEvents();
     if (Array.isArray(allEvents) === false) {
       console.log("sample going data");
-      // setEvents(sampleData);
+      await sortByDate(sampleData);
+      setEvents(sampleData);
     } else {
-      console.log(allEvents);
+      await sortByDate(allEvents);
       setEvents(allEvents);
     }
   };
 
+  // TODO : error handle the null data
   return (
     <>
       {events.length === 0 ? (
@@ -66,28 +69,34 @@ const Events = ({ token }) => {
         </TextBox>
       ) : (
         <EventBoxesContainer>
-          {events.map((singleEvent, ind) => (
-            <div key={ind}>
-              <EventBox today={singleEvent.date === "05/March" && true}>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <TextBox size="title">{singleEvent.date}</TextBox>
-                  <MoreOutlined style={{ fontSize: "25px" }} />
+          {events.map(
+            (singleEvent, ind) =>
+              singleEvent !== null && (
+                <div key={ind}>
+                  <EventBox today={singleEvent.date === "05/March" && true}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <TextBox size="title">{singleEvent.date}</TextBox>
+                      <MoreOutlined style={{ fontSize: "25px" }} />
+                    </div>
+                    <TextBox padding="sm">{singleEvent.name}</TextBox>
+                    <TextBox padding="sm">{singleEvent.fish}</TextBox>
+                    <LocationTime>
+                      <TextBox size="xs" padding="sm">
+                        {singleEvent.location}
+                      </TextBox>
+                      <TextBox size="xs" padding="sm">
+                        {singleEvent.startTime} - {singleEvent.endTime}
+                      </TextBox>
+                    </LocationTime>
+                  </EventBox>
                 </div>
-                <TextBox padding="sm">{singleEvent.name}</TextBox>
-                <TextBox padding="sm">{singleEvent.fish}</TextBox>
-                <LocationTime>
-                  <TextBox size="xs" padding="sm">
-                    {singleEvent.location}
-                  </TextBox>
-                  <TextBox size="xs" padding="sm">
-                    {singleEvent.startTime} - {singleEvent.endTime}
-                  </TextBox>
-                </LocationTime>
-              </EventBox>
-            </div>
-          ))}
+              )
+          )}
         </EventBoxesContainer>
       )}
     </>

@@ -28,8 +28,8 @@ const Fish = () => {
 
   return (
     <div>
-      {sampleData.map((fish) => (
-        <FinshPicContainer>
+      {sampleData.map((fish, ind) => (
+        <FinshPicContainer key={ind}>
           <FishImage url={fish.imgName}>
             <FishPictureText fish={fish} />
           </FishImage>

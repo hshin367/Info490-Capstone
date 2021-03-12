@@ -77,10 +77,10 @@ const InfoContent = ({ date, interested, going }) => {
 
 const SliderItem = (props) => {
   return (
-    <Flex>
+    <>
       {/* Main content component */}
       {bannerEventSampleData.map((singleEvent, ind) => (
-        <>
+        <Flex key={ind}>
           <MainContent key={ind}>
             <h1>{singleEvent.title}</h1>
             <p>{singleEvent.date}</p>
@@ -98,10 +98,10 @@ const SliderItem = (props) => {
             interested={singleEvent.interestedCount}
             going={singleEvent.goingCount}
           />
-        </>
+        </Flex>
       ))}
       {/* InfoContent */}
-    </Flex>
+    </>
   );
 };
 

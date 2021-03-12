@@ -28,7 +28,15 @@ export const dateParser = (date) => {
   return parsedDate;
 };
 
+export const checkNull = (array) => {
+  return array.filter((el) => el);
+};
+
 export const sortByDate = (array) => {
+  if (array === undefined) {
+    return [{}];
+  }
+  array = checkNull(array);
   array.sort((a, b) => {
     return new Date(a.date) - new Date(b.date);
   });
