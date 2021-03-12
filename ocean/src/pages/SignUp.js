@@ -4,7 +4,8 @@ import { Form, Input, Select, Row, Col, Checkbox, DatePicker } from "antd";
 import "./Login.css";
 import { Bg, Container, TextBox, SignUpFormContainer } from "./styles/style.js";
 import { SignupButton } from "../components/Button/button.js";
-import { LogoText } from "../components/Logo/style";
+import { LogoText, LogoImage } from "../components/Logo/style";
+import Logo from "../components/Logo/Logo";
 
 const { Option } = Select;
 
@@ -340,8 +341,11 @@ const RegistrationForm = () => {
   return (
     <Bg>
       <Container>
-        <Row>
-          <LogoText>LOGO RESTORE</LogoText>
+        <Row align="middle">
+          <LogoText>
+            <LogoImage large />
+            RESTORE
+          </LogoText>
         </Row>
         <Row>
           <SignUpFormContainer

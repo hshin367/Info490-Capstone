@@ -59,28 +59,38 @@ const Events = ({ token }) => {
   };
 
   return (
-    <EventBoxesContainer>
-      {events.map((singleEvent, ind) => (
-        <div key={ind}>
-          <EventBox today={singleEvent.date === "05/March" && true}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <TextBox size="title">{singleEvent.date}</TextBox>
-              <MoreOutlined style={{ fontSize: "25px" }} />
+    <>
+      {events.length === 0 ? (
+        <TextBox size="title">
+          You Have no events that you have Registered for!{" "}
+        </TextBox>
+      ) : (
+        <EventBoxesContainer>
+          {events.map((singleEvent, ind) => (
+            <div key={ind}>
+              <EventBox today={singleEvent.date === "05/March" && true}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <TextBox size="title">{singleEvent.date}</TextBox>
+                  <MoreOutlined style={{ fontSize: "25px" }} />
+                </div>
+                <TextBox padding="sm">{singleEvent.name}</TextBox>
+                <TextBox padding="sm">{singleEvent.fish}</TextBox>
+                <LocationTime>
+                  <TextBox size="xs" padding="sm">
+                    {singleEvent.location}
+                  </TextBox>
+                  <TextBox size="xs" padding="sm">
+                    {singleEvent.startTime} - {singleEvent.endTime}
+                  </TextBox>
+                </LocationTime>
+              </EventBox>
             </div>
-            <TextBox padding="sm">{singleEvent.name}</TextBox>
-            <TextBox padding="sm">{singleEvent.fish}</TextBox>
-            <LocationTime>
-              <TextBox size="xs" padding="sm">
-                {singleEvent.location}
-              </TextBox>
-              <TextBox size="xs" padding="sm">
-                {singleEvent.startTime} - {singleEvent.endTime}
-              </TextBox>
-            </LocationTime>
-          </EventBox>
-        </div>
-      ))}
-    </EventBoxesContainer>
+          ))}
+        </EventBoxesContainer>
+      )}
+    </>
   );
 };
 
