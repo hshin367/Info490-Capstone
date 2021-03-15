@@ -39,8 +39,6 @@ export const registerForEvent = async (eventId) => {
         err.response.status
       );
       console.log("Contents ", err.response.data);
-
-      throw Error(err);
     }
   }
 };
