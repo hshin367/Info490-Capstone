@@ -15,9 +15,9 @@ Jin Son - jinson@uw.edu
 ## For Task Management
 - GitHub Project is being used currently in conjunction with Issues board. 
 - To view the currently open issues, please go to Issues  
-  [img](mdImages/issues.png)
+  ![img](mdImages/issues.png)
 - To view the project board with the status of all the open/in-progress tasks, go to Projects  
-  [img](mdImages/projects.png)
+  ![img](mdImages/projects.png)
 - Once you are dong with the task, create a Pull Request that links the task with the PR  
-  [img](mdImages/pull_request.png)
+  ![img](mdImages/pull_request.png)
   
