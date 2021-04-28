@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import history from "../Routes/history";
-import { Form, Input, Button, Checkbox, Divider } from "antd";
+import { Form, Input, Button, Row, Checkbox, Divider } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Bg, LoginContainer, TextBox } from "./styles/style.js";
+import { Bg, LoginContainer, TextBox, SignUpFormContainer, Container } from "./styles/style.js";
 import { LogoText, LogoImage } from "../components/Logo/style.js";
 import "./Login.css";
 import logo from "../img/Logo.png";
@@ -55,81 +55,79 @@ const Login = () => {
   };
 
   return (
-    <Bg>
-      <LoginContainer>
-        <LogoImage large />
-        <LogoText alignCenter> RESTORE </LogoText>
-
-        <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-        >
-          <Form.Item
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input
-              id="login-info"
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Password!",
-              },
-            ]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Item>
-          {/* <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox style={{ color: "white" }}>Remember me</Checkbox>
-            </Form.Item> */}
-
-          {/* <a className="login-form-forgot" href="">
-              Forgot password
-            </a> */}
-          {/* </Form.Item> */}
-
-          <div>
-            <Button
-              htmlType="submit"
-              className="login-form-button"
-              id="form-btn"
-              onClick={login}
+    <Bg style={{justifyContent:"center"}}>
+      <Container>
+        <SignUpFormContainer>
+          <div style={{backgroundColor:"rgba(255, 255, 255, 0.4)"}}>
+            <Row>
+              <LogoText alignCenter> RESTORE </LogoText>
+            </Row>
+            <Row justify="space-around" wrap="nowrap">
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
             >
-              LOGIN
-            </Button>
-            <Divider>
-              <TextBox alignCenter color="white">
-                OR
-              </TextBox>
-            </Divider>
-            <Button htmlType="button" id="form-btn">
-              <Link to={{ pathname: "/signup" }}> CREATE ACCOUNT</Link>
-            </Button>
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your email!",
+                  },
+                ]}
+              >
+                <Input
+                  id="login-info"
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Password!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Item>
+
+              <Button
+                htmlType="submit"
+                className="login-form-button"
+                id="form-btn"
+                onClick={login}
+              >
+                Sign In
+              </Button>
+
+              <h3 style={{color:"white"}}>Not a member? <Link to={{ pathname: "/signup" }} style={{color:"white", textDecoration:"underline"}}>Sign Up</Link> now!</h3>
+              
+            </Form>
+            </Row>
           </div>
-        </Form>
-      </LoginContainer>
+          <div style={{backgroundColor:"rgba(255, 255, 255, 0.2)"}}>
+                <h2 style={{color:"white"}}>Welcome to RESTORE</h2>
+                <h3 style={{color:"white"}}>"The greatest danger to our planet is the belief that someone else will save it"</h3>
+                
+                <Button htmlType="button" id="form-btn">
+                  <a href="https://sdgs.un.org/goals/goal14">Save Our Oceans</a>
+                </Button>
+          </div>
+        </SignUpFormContainer>
+      </Container>
     </Bg>
   );
 };

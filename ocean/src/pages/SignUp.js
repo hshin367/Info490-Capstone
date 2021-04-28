@@ -325,8 +325,8 @@ const RegistrationForm = () => {
       >
         <Checkbox>
           <TextBox color="white" display="inline">
-            I have read the
-            <a href=""> Terms or Service and Privacy Policy</a>
+            I have read and agree to the Terms and Service
+            <a href=""> </a>
           </TextBox>
         </Checkbox>
       </Form.Item>
@@ -339,14 +339,8 @@ const RegistrationForm = () => {
   }));
 
   return (
-    <Bg>
-      <Container>
-        <Row align="middle">
-          <LogoText>
-            <LogoImage large />
-            RESTORE
-          </LogoText>
-        </Row>
+    <Bg style={{justifyContent:"center"}}>
+      <Container style={{justifyContent:"center"}}>
         <Row>
           <SignUpFormContainer
             backgroundColor="opaque"
@@ -374,7 +368,9 @@ const RegistrationForm = () => {
                     {accountInfo}
                     {agreement}
                     <Form.Item className="button-form">
-                      <SignupButton onClick={signUp}>SIGN UP</SignupButton>
+                      <SignupButton onClick={signUp} style={{backgroundColor:"rgba(255, 255, 255, 0.2)", color:"white", width:"100%"}}>
+                        Create Account
+                      </SignupButton>
                     </Form.Item>
                   </Form>
                 </Col>
