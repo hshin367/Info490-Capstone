@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Container, Flex, TextBox } from "../../pages/styles/style.js";
+import { Blur, Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
   EventBox,
@@ -8,26 +8,30 @@ import {
   EventBoxesContainer,
   ScrollableContainer,
   Circle,
+  Container,
 } from "./style.js";
 import { MoreOutlined } from "@ant-design/icons";
 import { getGoingEvents } from "../../actions/actions";
-import { goingEvents, goingEventsSampleData } from "../../helpers/sampleData";
-import { sortByDate } from "../../helpers/dateCalculations";
+import { goingEvents, goingEventsSampleData } from "../../utils/sampleData";
+import { sortByDate } from "../../utils/dateCalculations";
 
 const YourEvents = () => {
   const userToken = JSON.parse(localStorage.getItem("user-info")).token;
 
   // Cases: This month and/or the months after.
   // Create components for absolute boxes
+  // TODO : set the default text color to white
   return (
     <>
-      <TextBox size="xxxl" color="black" bold>
+      <TextBox size="xxxl" color="white" bold>
         YOUR EVENTS
       </TextBox>
       <ScrollableContainer>
         <EventsContainer>
           <div style={{ position: "absolute", top: "-0.45rem" }}>
-            <TextBox style={{ padding: "0" }}>MARCH 2021</TextBox>
+            <TextBox style={{ padding: "0" }} color="white">
+              MARCH 2021
+            </TextBox>
           </div>
           <Circle />
           <Events token={userToken} />
@@ -59,7 +63,7 @@ const Events = () => {
     if (!allEvents) {
       setLoading(false);
       return (
-        <TextBox size="title">
+        <TextBox size="title" color="white">
           You Have no events that you have Registered for
         </TextBox>
       );
@@ -76,7 +80,7 @@ const Events = () => {
   return (
     <>
       {events.length === 0 ? (
-        <TextBox size="title">
+        <TextBox size="title" color="white">
           You Have no events that you have Registered for!{" "}
         </TextBox>
       ) : (

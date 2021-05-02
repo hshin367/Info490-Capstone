@@ -30,6 +30,11 @@ const EventBox = styled.div`
   }
 `;
 
+const Blur = styled.div`
+  filter: blur(2px);
+  background-color: white;
+`;
+
 const EventBoxesContainer = styled(Flex)`
   padding: 1.625rem 0.625rem 0px 0.625rem;
 `;
@@ -42,7 +47,7 @@ const ScrollableContainer = styled(Flex)`
 // contains the events boxes.
 // draws a solid border on the left.
 const EventsContainer = styled(Flex)`
-  border-left: 1.3px solid;
+  border-left: white 1.3px solid;
   position: relative;
   margin-top: ${(props) => props.theme.margins.xxl};
 `;
@@ -52,7 +57,7 @@ const Circle = styled.div`
   position: absolute;
   shape-outside: circle();
   clip-path: circle();
-  background: ${(props) => props.theme.colors.dark_blue};
+  background: ${(props) => props.theme.colors.white};
   top: 0;
   left: -5px;
   width: 10px;
@@ -77,12 +82,20 @@ const LocationTime = styled.div`
   font-size: ${(props) => props.theme.fontSizes.small};
 `;
 
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
 export {
   LocationTime,
   EventBox,
+  Blur,
   EventsContainer,
   EventBoxesContainer,
   Circle,
+  Container,
   TitleBarContainer,
   CircleCounter,
   ScrollableContainer,

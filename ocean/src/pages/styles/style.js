@@ -71,12 +71,33 @@ const Flex = styled.div`
       : props.paddingLeft === "xxl"
       ? props.theme.paddings.xxl
       : props.theme.paddings.base};
+  background-color: ${(props) => props.backgroundColor};
+  bottom: ${(props) => props.bottom};
+  background: ${(props) => props.background};
+  border: ${(props) => props.border};
+  border-radius: ${(props) => props.borderRadius};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
 `;
 
 const HorizontalScrollableContainer = styled(Flex)`
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+`;
+
+const Blur = styled.span`
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 30px;
+  z-index: 0;
 `;
 
 // TODO : take in a variable for the style (row, col)
@@ -130,10 +151,12 @@ const TextBox = styled.div`
       : props.padding === "xxl"
       ? props.theme.paddings.xl
       : props.theme.paddings.base};
+  z-index: 0;
 `;
 
 export {
   Bg,
+  Blur,
   Container,
   TextBox,
   SignUpFormContainer,
