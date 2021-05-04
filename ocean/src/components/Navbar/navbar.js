@@ -48,7 +48,7 @@ const Navbar = (props) => {
 
         <NavbarItemsContainer>
           <NavLink href="/">HOME</NavLink>
-          <NavLink href="/">AQUARIUM</NavLink>
+          <NavLink href="/aquarium">AQUARIUM</NavLink>
           <NavLink href="/events">EVENTS</NavLink>
           <NavLink href="/">ACCOUNT</NavLink>
           {localStorage.getItem("user-info") ? (
