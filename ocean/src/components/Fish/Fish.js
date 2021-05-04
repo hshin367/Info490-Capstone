@@ -5,7 +5,7 @@ import "./fish.css";
 import fishImg from "./../../img/clownFish.png";
 import flippedFish from "./../../img/Real-Clownfish.png";
 
-const Fish = () => {
+const Fish = (props) => {
   // TODO: move to util.
   // max inclusive 0 ~ 10, then includes 10 in ranNum
   const randomNum = (min, max) => {
@@ -33,12 +33,23 @@ const Fish = () => {
 
   const changeFishDir = () => {
     let newYPos = randomNum(imageSize, windowHeight - imageSize);
+    let newXPos = randomNum(30, windowWidth - imageSize);
+
     setXDir(!xDir);
+    // console.log(xDir);
     if (xDir === true) {
-      setXPos(windowWidth - imageSize);
+      while (newXPos <= xPos) {
+        newXPos = randomNum(0, windowWidth - imageSize);
+      }
     } else {
-      setXPos(0);
+      // console.log(`current XPos = ${xPos}`);
+      while (newXPos >= xPos) {
+        // console.log(`random `);
+        newXPos = randomNum(30, windowWidth - imageSize);
+      }
     }
+    // console.log(newXPos);
+    setXPos(newXPos);
     setyPos(newYPos);
   };
 
@@ -70,14 +81,15 @@ const Fish = () => {
   };
 
   return (
-    <div>
+    <>
       <img
         className={`fishImg`}
         style={fishStyle}
-        src={xDir ? fishImg : flippedFish}
+        src={xDir ? `${props.src}` : `${props.src}`}
+        // src={xDir ? `${fishImg}` : `${flippedFish}`}
         alt="fish"
       />
-    </div>
+    </>
   );
 };
 

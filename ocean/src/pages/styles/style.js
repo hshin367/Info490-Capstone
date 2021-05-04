@@ -21,6 +21,12 @@ const sizes = css`
     `}
 
   ${(props) =>
+    props.size === "xxl" &&
+    css`
+      ${props.theme.fontSizes.xxl}
+    `}
+      
+  ${(props) =>
     props.size === "xxxl" &&
     css`
       ${props.theme.fontSizes.xxxl}
@@ -60,7 +66,9 @@ const Flex = styled.div`
       ? props.theme.paddings.xl
       : props.padding === "xxl"
       ? props.theme.paddings.xxl
-      : props.theme.paddings.base};
+      : props.padding === "base"
+      ? props.theme.paddings.base
+      : props.padding};
   padding-left: ${(props) =>
     props.paddingLeft === "sm"
       ? props.theme.paddings.small
@@ -78,6 +86,8 @@ const Flex = styled.div`
   border-radius: ${(props) => props.borderRadius};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
+  margin: ${(props) => props.margin};
+  left: ${(props) => props.left};
 `;
 
 const HorizontalScrollableContainer = styled(Flex)`
@@ -87,16 +97,20 @@ const HorizontalScrollableContainer = styled(Flex)`
 `;
 
 const Blur = styled.span`
-  background: rgba(255, 255, 255, 0.25);
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  // backdrop-filter: blur(8px);
+  // -webkit-backdrop-filter: blur(8px);
   height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 30px;
+  border-radius: 15px;
   z-index: 0;
 `;
 
@@ -140,7 +154,13 @@ const TextBox = styled.div`
   display: ${(props) => props.display};
   font-size: ${sizes};
   font-weight: ${(props) =>
-    props.bold ? "700" : props.light ? "300" : "normal"};
+    props.bold
+      ? "700"
+      : props.semibold
+      ? "600"
+      : props.light
+      ? "300"
+      : "normal"};
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small

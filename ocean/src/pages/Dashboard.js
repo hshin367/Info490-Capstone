@@ -9,6 +9,7 @@ import {
 } from ".././pages/styles/style.js";
 import { Container } from "./styles/style";
 import Fish from "../components/Fish/Fish";
+import FishTank from "../components/FishTank/FishTank.js";
 // import { Container } from "../components/Carousel/style.js";
 
 const LowerHalf = () => {
@@ -18,12 +19,14 @@ const LowerHalf = () => {
     <>
       <Flex
         flexDirection="column"
-        paddingLeft="xxl"
         position="absolute"
-        bottom="30px"
-        border="white 2px solid"
-        borderRadius="30px"
-        margin="1rem"
+        bottom="0px"
+        padding="0px"
+        left="0px"
+        width="calc(100% - 20px)"
+        border="white 1.5px solid"
+        borderRadius="15px"
+        margin="10px"
       >
         <Blur />
         <YourEvents />
@@ -49,9 +52,7 @@ const Dashboard = () => {
         width="100vw"
         position="relative"
       >
-        {/* // TODO : place aquarium here.  */}
-        <Fish />
-        <Fish />
+        <FishTank />
         <LowerHalf />
       </Flex>
     </>

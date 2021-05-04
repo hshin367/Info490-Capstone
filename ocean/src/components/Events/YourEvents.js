@@ -23,13 +23,16 @@ const YourEvents = () => {
   // TODO : set the default text color to white
   return (
     <>
-      <TextBox size="xxxl" color="white" bold>
+      <TextBox size="xxxl" color="white" semibold>
         YOUR EVENTS
       </TextBox>
       <ScrollableContainer>
         <EventsContainer>
           <div style={{ position: "absolute", top: "-0.45rem" }}>
-            <TextBox style={{ padding: "0" }} color="white">
+            <TextBox
+              style={{ padding: "0", letterSpacing: "0.15em" }}
+              color="white"
+            >
               MARCH 2021
             </TextBox>
           </div>
