@@ -8,6 +8,7 @@ const TitleBarContainer = styled(Flex)`
   justify-content: space-between;
 `;
 
+// container for each event boxes
 const EventBox = styled.div`
   background: radial-gradient(
     100% 99.11% at 0% 0.89%,
@@ -21,7 +22,7 @@ const EventBox = styled.div`
     props.upcoming ? props.theme.paddings.small : props.theme.paddings.lg};
   margin: 0 ${(props) => props.theme.paddings.xxl} 0 0;
   min-width: ${(props) => (props.upcoming ? "500px" : "200px")};
-  max-height: 200px;
+  height: 200px;
   color: ${(props) => props.theme.colors.white};
 
   &:hover {

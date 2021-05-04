@@ -1,3 +1,4 @@
+import { PropertySafetyOutlined } from "@ant-design/icons";
 import styled, { css } from "styled-components";
 import img from "../../img/LoginBackground.png";
 
@@ -17,7 +18,7 @@ const sizes = css`
   ${(props) =>
     props.size === "title" &&
     css`
-      ${props.theme.fontSizes.xxl}
+      ${props.theme.fontSizes.titleSize}
     `}
 
   ${(props) =>
@@ -164,12 +165,44 @@ const TextBox = styled.div`
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small
+      : props.padding === "xs"
+      ? props.theme.paddings.xs
       : props.padding === "lg"
       ? props.theme.paddings.lg
       : props.padding === "xl"
       ? props.theme.paddings.xl
       : props.padding === "xxl"
       ? props.theme.paddings.xl
+      : props.padding === "none"
+      ? props.theme.paddings.none
+      : props.theme.paddings.base};
+  padding-top: ${(props) =>
+    props.paddingTop === "sm"
+      ? props.theme.paddings.small
+      : props.paddingTop === "xs"
+      ? props.theme.paddings.xs
+      : props.paddingTop === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingTop === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingTop === "xxl"
+      ? props.theme.paddings.xl
+      : props.paddingTop === "none"
+      ? props.theme.paddings.none
+      : props.theme.paddings.base};
+  padding-left: ${(props) =>
+    props.paddingLeft === "sm"
+      ? props.theme.paddings.small
+      : props.paddingLeft === "xs"
+      ? props.theme.paddings.xs
+      : props.paddingLeft === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingLeft === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "xxl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "none"
+      ? props.theme.paddings.none
       : props.theme.paddings.base};
   z-index: 0;
 `;

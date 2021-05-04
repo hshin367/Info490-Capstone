@@ -117,7 +117,7 @@ const FishTank = (props) => {
 
   return (
     <Container>
-      {"fishes"}
+      {fishes}
       {kelps}
     </Container>
   );

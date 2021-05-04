@@ -14,6 +14,7 @@ const fontSizes = {
 };
 
 const paddings = {
+  none: 0,
   xs: calcRem(3),
   small: calcRem(8),
   base: calcRem(10),

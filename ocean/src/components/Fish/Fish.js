@@ -65,18 +65,6 @@ const Fish = (props) => {
     height: imageSize,
   };
 
-  const setFishSrc = () => {
-    let src = "";
-    switch (props.left) {
-      case "clownFishImgLeft":
-        src = clownFishImgLeft;
-        break;
-
-      default:
-        src = "clownFishImgRight";
-    }
-  };
-
   return (
     <>
       <img

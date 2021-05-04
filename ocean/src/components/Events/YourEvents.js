@@ -33,7 +33,7 @@ const YourEvents = () => {
               style={{ padding: "0", letterSpacing: "0.15em" }}
               color="white"
             >
-              MARCH 2021
+              MAY 2021
             </TextBox>
           </div>
           <Circle />
@@ -47,6 +47,21 @@ const YourEvents = () => {
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const months = [
+    "January",
+    "Feburary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   // TODO : refactor later
   useEffect(() => {
@@ -71,13 +86,64 @@ const Events = () => {
         </TextBox>
       );
     }
-    await sortByDate(allEvents);
-    setEvents(allEvents);
+    let sortedEvents = await sortByDate(allEvents);
+    setEvents(sortedEvents);
     setLoading(false);
     // }
   };
 
   if (loading) return <TextBox size="title">Loading Data...</TextBox>;
+
+  // TODO: refactor TEXTBOX
+  let allEvents = events.map((singleEvent, ind) => {
+    let date = new Date(singleEvent.date);
+    return (
+      singleEvent !== null && (
+        <div key={ind}>
+          <EventBox today={singleEvent.date === "04/May" && true}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: 0,
+              }}
+            >
+              <TextBox
+                size="title"
+                paddingLeft="xs"
+                padding="none"
+                paddingTop="none"
+              >
+                {date.getDay()}
+              </TextBox>
+              <MoreOutlined style={{ fontSize: "25px" }} />
+            </div>
+            <TextBox
+              size="xs"
+              paddingLeft="xs"
+              paddingTop="none"
+              padding="xs"
+              semibold
+            >
+              {months[date.getMonth() + 1].toUpperCase()}
+            </TextBox>
+            {/* <TextBox padding="xs">{singleEvent.name}</TextBox> */}
+            <TextBox paddingTop="xl" paddingLeft="xs" light>
+              {singleEvent.fish}
+            </TextBox>
+            <LocationTime>
+              <TextBox size="xs" paddingTop="xl" padding="xs" paddingLeft="xs">
+                {singleEvent.location}
+              </TextBox>
+              <TextBox size="xs" paddingTop="xs" padding="xs" paddingLeft="xs">
+                {singleEvent.startTime} - {singleEvent.endTime}
+              </TextBox>
+            </LocationTime>
+          </EventBox>
+        </div>
+      )
+    );
+  });
 
   // TODO : error handle the null data
   return (
@@ -87,36 +153,7 @@ const Events = () => {
           You Have no events that you have Registered for!{" "}
         </TextBox>
       ) : (
-        <EventBoxesContainer>
-          {events.map(
-            (singleEvent, ind) =>
-              singleEvent !== null && (
-                <div key={ind}>
-                  <EventBox today={singleEvent.date === "05/March" && true}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <TextBox size="title">{singleEvent.date}</TextBox>
-                      <MoreOutlined style={{ fontSize: "25px" }} />
-                    </div>
-                    <TextBox padding="sm">{singleEvent.name}</TextBox>
-                    <TextBox padding="sm">{singleEvent.fish}</TextBox>
-                    <LocationTime>
-                      <TextBox size="xs" padding="sm">
-                        {singleEvent.location}
-                      </TextBox>
-                      <TextBox size="xs" padding="sm">
-                        {singleEvent.startTime} - {singleEvent.endTime}
-                      </TextBox>
-                    </LocationTime>
-                  </EventBox>
-                </div>
-              )
-          )}
-        </EventBoxesContainer>
+        <EventBoxesContainer>{allEvents}</EventBoxesContainer>
       )}
     </>
   );
