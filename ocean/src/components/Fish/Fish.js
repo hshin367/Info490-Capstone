@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
+import { randomNum, randomDir } from "../../utils/randomGenerators.js";
 import "./fish.css";
-import fishImg from "./../../img/clownFish.png";
-import flippedFish from "./../../img/Real-Clownfish.png";
+import clownFishImgLeft from "./../../img/clownFish_left.png";
+import clownFishImgRight from "./../../img/clownFish_right.png";
 
 const Fish = (props) => {
-  // TODO: move to util.
-  // max inclusive 0 ~ 10, then includes 10 in ranNum
-  const randomNum = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
-  // left or right
-  const randomDir = () => {
-    // true = right or bottom
-    // false = left or top
-    let dir = randomNum(0, 1) === 1 ? true : false;
-
-    return dir;
-  };
-
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
   const imageSize = 50;
@@ -28,7 +13,7 @@ const Fish = (props) => {
   const [xPos, setXPos] = useState(randomNum(0, windowWidth - imageSize));
   const [yPos, setyPos] = useState(randomNum(0, windowHeight - imageSize));
   const [xDir, setXDir] = useState(randomDir);
-  const [src, setSrc] = useState("./../../img/");
+  const [src, setSrc] = useState("ocean/src/img/");
   const [transformation, setTransformation] = useState("scaleX(1)");
 
   const changeFishDir = () => {
@@ -80,12 +65,24 @@ const Fish = (props) => {
     height: imageSize,
   };
 
+  const setFishSrc = () => {
+    let src = "";
+    switch (props.left) {
+      case "clownFishImgLeft":
+        src = clownFishImgLeft;
+        break;
+
+      default:
+        src = "clownFishImgRight";
+    }
+  };
+
   return (
     <>
       <img
         className={`fishImg`}
         style={fishStyle}
-        src={xDir ? `${props.src}` : `${props.src}`}
+        src={xDir ? `${props.left}` : `${props.right}`}
         // src={xDir ? `${fishImg}` : `${flippedFish}`}
         alt="fish"
       />

@@ -103,7 +103,7 @@ const Blur = styled.span`
     rgba(255, 255, 255, 0.04) 100%
   );
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  // backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   // -webkit-backdrop-filter: blur(8px);
   height: 100%;
   width: 100%;
