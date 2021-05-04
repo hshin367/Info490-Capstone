@@ -7,6 +7,11 @@ const api = {
     eventsGoing: "/events/going",
     eventsNotGoing: "/events/notgoing",
   },
+
+  user: {
+    getAllFriends: "/user/getAllFriends",
+    getFriendRequests: "/user/getAllRequests"
+  }
 };
 
 export default api;
