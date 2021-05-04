@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Container, Flex, TextBox } from "../../pages/styles/style.js";
+import { Blur, Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
   EventBox,
@@ -8,26 +8,33 @@ import {
   EventBoxesContainer,
   ScrollableContainer,
   Circle,
+  Container,
 } from "./style.js";
 import { MoreOutlined } from "@ant-design/icons";
 import { getGoingEvents } from "../../actions/actions";
-import { goingEvents, goingEventsSampleData } from "../../helpers/sampleData";
-import { sortByDate } from "../../helpers/dateCalculations";
+import { goingEvents, goingEventsSampleData } from "../../utils/sampleData";
+import { sortByDate } from "../../utils/dateCalculations";
 
 const YourEvents = () => {
   const userToken = JSON.parse(localStorage.getItem("user-info")).token;
 
   // Cases: This month and/or the months after.
   // Create components for absolute boxes
+  // TODO : set the default text color to white
   return (
     <>
-      <TextBox size="xxxl" color="black" bold>
+      <TextBox size="xxxl" color="white" semibold>
         YOUR EVENTS
       </TextBox>
       <ScrollableContainer>
         <EventsContainer>
           <div style={{ position: "absolute", top: "-0.45rem" }}>
-            <TextBox style={{ padding: "0" }}>MARCH 2021</TextBox>
+            <TextBox
+              style={{ padding: "0", letterSpacing: "0.15em" }}
+              color="white"
+            >
+              MAY 2021
+            </TextBox>
           </div>
           <Circle />
           <Events token={userToken} />
@@ -40,6 +47,21 @@ const YourEvents = () => {
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const months = [
+    "January",
+    "Feburary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   // TODO : refactor later
   useEffect(() => {
@@ -59,57 +81,79 @@ const Events = () => {
     if (!allEvents) {
       setLoading(false);
       return (
-        <TextBox size="title">
+        <TextBox size="title" color="white">
           You Have no events that you have Registered for
         </TextBox>
       );
     }
-    await sortByDate(allEvents);
-    setEvents(allEvents);
+    let sortedEvents = await sortByDate(allEvents);
+    setEvents(sortedEvents);
     setLoading(false);
     // }
   };
 
   if (loading) return <TextBox size="title">Loading Data...</TextBox>;
 
+  // TODO: refactor TEXTBOX
+  let allEvents = events.map((singleEvent, ind) => {
+    let date = new Date(singleEvent.date);
+    return (
+      singleEvent !== null && (
+        <div key={ind}>
+          <EventBox today={singleEvent.date === "04/May" && true}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: 0,
+              }}
+            >
+              <TextBox
+                size="title"
+                paddingLeft="xs"
+                padding="none"
+                paddingTop="none"
+              >
+                {date.getDay()}
+              </TextBox>
+              <MoreOutlined style={{ fontSize: "25px" }} />
+            </div>
+            <TextBox
+              size="xs"
+              paddingLeft="xs"
+              paddingTop="none"
+              padding="xs"
+              semibold
+            >
+              {months[date.getMonth() + 1].toUpperCase()}
+            </TextBox>
+            {/* <TextBox padding="xs">{singleEvent.name}</TextBox> */}
+            <TextBox paddingTop="xl" paddingLeft="xs" light>
+              {singleEvent.fish}
+            </TextBox>
+            <LocationTime>
+              <TextBox size="xs" paddingTop="xl" padding="xs" paddingLeft="xs">
+                {singleEvent.location}
+              </TextBox>
+              <TextBox size="xs" paddingTop="xs" padding="xs" paddingLeft="xs">
+                {singleEvent.startTime} - {singleEvent.endTime}
+              </TextBox>
+            </LocationTime>
+          </EventBox>
+        </div>
+      )
+    );
+  });
+
   // TODO : error handle the null data
   return (
     <>
       {events.length === 0 ? (
-        <TextBox size="title">
+        <TextBox size="title" color="white">
           You Have no events that you have Registered for!{" "}
         </TextBox>
       ) : (
-        <EventBoxesContainer>
-          {events.map(
-            (singleEvent, ind) =>
-              singleEvent !== null && (
-                <div key={ind}>
-                  <EventBox today={singleEvent.date === "05/March" && true}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <TextBox size="title">{singleEvent.date}</TextBox>
-                      <MoreOutlined style={{ fontSize: "25px" }} />
-                    </div>
-                    <TextBox padding="sm">{singleEvent.name}</TextBox>
-                    <TextBox padding="sm">{singleEvent.fish}</TextBox>
-                    <LocationTime>
-                      <TextBox size="xs" padding="sm">
-                        {singleEvent.location}
-                      </TextBox>
-                      <TextBox size="xs" padding="sm">
-                        {singleEvent.startTime} - {singleEvent.endTime}
-                      </TextBox>
-                    </LocationTime>
-                  </EventBox>
-                </div>
-              )
-          )}
-        </EventBoxesContainer>
+        <EventBoxesContainer>{allEvents}</EventBoxesContainer>
       )}
     </>
   );

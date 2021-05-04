@@ -1,11 +1,11 @@
 import React from "react";
-import { bannerEventSampleData } from "../../../helpers/sampleData";
+import { bannerEventSampleData } from "../../../utils/sampleData";
 import { MainContent, Flex } from "./style.js";
 import { TextBox } from "../../../pages/styles/style";
 import { WhiteButton } from "../.././Button/button.js";
 import { Button } from "antd";
 import { CircleCounter } from "../../Events/style.js";
-import { dateParser, dateCalculator } from "../../../helpers/dateCalculations";
+import { dateParser, dateCalculator } from "../../../utils/dateCalculations";
 
 // TODO : refactor CircleCounter into a component with tb
 const InfoContent = ({ date, interested, going }) => {

@@ -25,11 +25,16 @@ const FishImage = styled.div`
   background-blend-mode: multiply;
 `;
 
-const FinshPicContainer = styled.div`
+const FishPicContainer = styled.div`
   position: absolute;
   right: 0;
-  top: 0;
-  filter: drop-shadow(-200px 10px 41px rgb(255, 255, 255));
+  top: 500px;
+  transition: 2s linear;
+  // filter: drop-shadow(-200px 10px 41px rgb(255, 255, 255));
+`;
+
+const FishPicContainerEnd = styled(FishPicContainer)`
+  left: 450px;
 `;
 
 const FishText = styled(TextBox)`
@@ -43,4 +48,27 @@ const FishText = styled(TextBox)`
   color: white;
 `;
 
-export { FishImage, FishText, FishTextContainer, FinshPicContainer };
+const FishImg = styled.div`
+  background-image: url("/img/${(props) => props.url}");
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: 5s linear;
+  height: ${(props) => props.size}px;
+  width: ${(props) => props.size}px;
+`;
+
+const FishEnd = styled(FishImg)`
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
+`;
+
+export {
+  FishImg,
+  FishEnd,
+  FishImage,
+  FishText,
+  FishTextContainer,
+  FishPicContainer,
+  FishPicContainerEnd,
+};

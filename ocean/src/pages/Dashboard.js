@@ -5,20 +5,33 @@ import { YourEvents } from "../components/Events/YourEvents.js";
 import {
   Flex,
   HorizontalScrollableContainer,
+  Blur,
 } from ".././pages/styles/style.js";
-import Fish from "../components/Fish/Fish.js";
+import { Container } from "./styles/style";
+import Fish from "../components/Fish/Fish";
+import FishTank from "../components/FishTank/FishTank.js";
+// import { Container } from "../components/Carousel/style.js";
 
 const LowerHalf = () => {
   // if signed in, show YourEvents, if not, show Upcoming
   return (
-    <Flex flexDirection="column" paddingLeft="xxl" position="relative">
-      <YourEvents />
-      {/* <HorizontalScrollableContainer>
+    //  TODO : refactor this into a component
+    <>
+      <Flex
+        flexDirection="column"
+        position="absolute"
+        bottom="0px"
+        padding="0px"
+        left="0px"
+        width="calc(100% - 20px)"
+        border="white 1.5px solid"
+        borderRadius="15px"
+        margin="10px"
+      >
+        <Blur />
         <YourEvents />
-      </HorizontalScrollableContainer> */}
-
-      <Fish />
-    </Flex>
+      </Flex>
+    </>
   );
 };
 
@@ -32,8 +45,16 @@ const LowerHalf = () => {
 const Dashboard = () => {
   return (
     <>
-      <Banner />
-      <LowerHalf />
+      <Flex
+        flexDirection="column"
+        background="linear-gradient(#0E183F, #3B4782)"
+        height="100vh"
+        width="100vw"
+        position="relative"
+      >
+        <FishTank />
+        <LowerHalf />
+      </Flex>
     </>
   );
 };

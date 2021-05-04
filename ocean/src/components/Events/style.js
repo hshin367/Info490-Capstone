@@ -8,17 +8,22 @@ const TitleBarContainer = styled(Flex)`
   justify-content: space-between;
 `;
 
+// container for each event boxes
 const EventBox = styled.div`
-  background-color: ${(props) =>
-    props.today ? props.theme.colors.dark_blue : props.theme.colors.light_blue};
-  border-radius: 7px;
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(15, 25, 65, 0.48) 0%,
+    rgba(14, 24, 63, 0.12) 100%
+  );
+  backdrop-filter: blur(30px);
+  border-radius: 15px;
+  border: ${(props) => props.theme.border.thin_solid};
   padding: ${(props) =>
     props.upcoming ? props.theme.paddings.small : props.theme.paddings.lg};
-  margin: 0 ${(props) => props.theme.paddings.base};
-  min-width: ${(props) => (props.upcoming ? "500px" : "220px")};
-  max-height: 200px;
-  color: ${(props) =>
-    props.today ? props.theme.colors.white : props.theme.colors.dark_blue};
+  margin: 0 ${(props) => props.theme.paddings.xxl} 0 0;
+  min-width: ${(props) => (props.upcoming ? "500px" : "200px")};
+  height: 200px;
+  color: ${(props) => props.theme.colors.white};
 
   &:hover {
     background: ${darken(0.2, "white")};
@@ -30,21 +35,28 @@ const EventBox = styled.div`
   }
 `;
 
+const Blur = styled.div`
+  filter: blur(2px);
+  background-color: white;
+`;
+
 const EventBoxesContainer = styled(Flex)`
-  padding: 1.625rem 0.625rem 0px 0.625rem;
+  padding: 1.625rem 0rem 0px 0rem;
 `;
 
 const ScrollableContainer = styled(Flex)`
   overflow-x: scroll;
-  max-width: 70%;
+  max-width: 100%;
+  margin-bottom: 15px;
 `;
 
 // contains the events boxes.
 // draws a solid border on the left.
 const EventsContainer = styled(Flex)`
-  border-left: 1.3px solid;
+  border-left: white 1.3px solid;
   position: relative;
-  margin-top: ${(props) => props.theme.margins.xxl};
+  margin-top: ${(props) => props.theme.margins.lg};
+  padding-left: 20px;
 `;
 
 // For the circle that goes on top of the vertical line
@@ -52,7 +64,7 @@ const Circle = styled.div`
   position: absolute;
   shape-outside: circle();
   clip-path: circle();
-  background: ${(props) => props.theme.colors.dark_blue};
+  background: ${(props) => props.theme.colors.white};
   top: 0;
   left: -5px;
   width: 10px;
@@ -77,12 +89,20 @@ const LocationTime = styled.div`
   font-size: ${(props) => props.theme.fontSizes.small};
 `;
 
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
 export {
   LocationTime,
   EventBox,
+  Blur,
   EventsContainer,
   EventBoxesContainer,
   Circle,
+  Container,
   TitleBarContainer,
   CircleCounter,
   ScrollableContainer,

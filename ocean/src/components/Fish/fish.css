@@ -1,0 +1,7 @@
+.fishImg {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: 9s ease-out;
+  width: auto;
+}
