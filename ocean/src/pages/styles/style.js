@@ -1,6 +1,6 @@
 import { PropertySafetyOutlined } from "@ant-design/icons";
 import styled, { css } from "styled-components";
-import img from "../../img/LoginBackground.png";
+import img from "../../img/Background.png";
 
 const sizes = css`
   ${(props) =>
@@ -46,10 +46,10 @@ const Bg = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top left;
-
   display: flex;
-  justify-content: center;
-  min-height: 100vh;
+  min-height: 100vh;  
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
 `;
 
 const Flex = styled.div`
@@ -122,23 +122,49 @@ const Container = styled(Flex)`
 `;
 
 const LoginContainer = styled(Container)`
-  align-items: center;
+justify-content: ${(props) => props.justifyContent};
+background-color: ${(props) =>
+  props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
+flex-direction: ${(props) => props.flexDirection};
+width: ${(props) => props.width};
+padding: ${(props) => props.theme.paddings.xl}
+  ${(props) => props.theme.paddings.xxxl};
+height: 50%;
 `;
 
 const SignUpFormContainer = styled(Flex)`
   justify-content: ${(props) => props.justifyContent};
   background-color: ${(props) =>
-    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.3)" : ""};
+    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
   flex-direction: ${(props) => props.flexDirection};
   width: ${(props) => props.width};
   padding: ${(props) => props.theme.paddings.xl}
     ${(props) => props.theme.paddings.xxxl};
-  border-radius: 7px;
+  border-radius: 20px;
 `;
 
 const HalfFormContainer = styled(Flex)`
   justify-content: center;
   flex-wrap: wrap;
+`;
+
+const FriendsPageContainer = styled(Flex)`
+
+  background: linear-gradient(#0E183F, #3B4782);
+  height: 100%;
+  width: 100%;
+`
+
+const FriendContainer = styled(Flex)`
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 3% auto auto auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 93%;
+  width: 98%;
+  border: 1px solid white;
+  border-radius: 10px;
 `;
 
 // textbox
@@ -217,4 +243,6 @@ export {
   Flex,
   LoginContainer,
   HorizontalScrollableContainer,
+  FriendContainer,
+  FriendsPageContainer
 };

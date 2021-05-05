@@ -25,7 +25,7 @@ export class App extends Component {
   }
 
   switchMenuStatus = (newStatus) => {
-    if (newStatus === "aquarium" || newStatus === "events") {
+    if (newStatus === "aquarium" || newStatus === "events" || newStatus ==="friends") {
       //this.setState({ menuStatus: newStatus });
       this.setState((currState) => {
         let stateChanges = { menuStatus: newStatus };
