@@ -33,11 +33,12 @@ const NavbarWrapper = styled.div`
   }
 `;
 
+// TODO : fix the padding later with the Flxbox.
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
   // justify-content: space-between;
-  padding-left: 35%;
+  padding-left: 5%;
 `;
 
 const NavItem = styled.li`

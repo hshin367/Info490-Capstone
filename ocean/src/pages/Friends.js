@@ -2,14 +2,14 @@
  * Page for Upcoming Events
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Navbar from "../components/Navbar/navbar.js";
 import FriendList from "../components/Friends/FriendList.js";
 import FriendRequests from "../components/Friends/FriendRequests.js";
 import AddUsers from "../components/Friends/AddUsers.js";
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import { Flex, FriendContainer, FriendsPageContainer } from "./styles/style.js";
 
 /**
