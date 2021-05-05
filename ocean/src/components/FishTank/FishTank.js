@@ -40,7 +40,7 @@ const FishTank = (props) => {
     setHeight(window.innerHeigh);
   };
 
-  let sampleData = [
+  let fishSampleData = [
     {
       left: clownFishImgLeft,
       right: clownFishImgRight,
@@ -72,7 +72,6 @@ const FishTank = (props) => {
     } else {
       setLoading(false);
       console.log("got the fish");
-      console.log(allFishes);
       setFish(allFishes);
     }
   };
@@ -92,7 +91,7 @@ const FishTank = (props) => {
     setKelpData(kelpsData);
   };
 
-  let fishes = sampleData.map((fish) => {
+  let fishes = fishSampleData.map((fish) => {
     return <Fish left={fish.left} right={fish.right} src={fish} />;
   });
 

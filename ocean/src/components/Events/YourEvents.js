@@ -10,7 +10,7 @@ import {
   Circle,
   Container,
 } from "./style.js";
-import { MoreOutlined } from "@ant-design/icons";
+import MoreDetails from "./MoreDetail";
 import { getGoingEvents } from "../../actions/actions";
 import { goingEvents, goingEventsSampleData } from "../../utils/sampleData";
 import { sortByDate } from "../../utils/dateCalculations";
@@ -116,7 +116,7 @@ const Events = () => {
               >
                 {date.getDay()}
               </TextBox>
-              <MoreOutlined style={{ fontSize: "25px" }} />
+              <MoreDetails />
             </div>
             <TextBox
               size="xs"

@@ -4,4 +4,6 @@
   background-repeat: no-repeat;
   transition: 9s ease-out;
   width: auto;
+  transform: translateZ(0);
+  will-change: transform;
 }
