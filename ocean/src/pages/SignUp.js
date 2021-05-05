@@ -6,6 +6,7 @@ import { Bg, Container, TextBox, SignUpFormContainer } from "./styles/style.js";
 import { SignupButton } from "../components/Button/button.js";
 import { LogoText, LogoImage } from "../components/Logo/style";
 import Logo from "../components/Logo/Logo";
+import { borderRadius } from "polished";
 
 const { Option } = Select;
 
@@ -109,6 +110,7 @@ const RegistrationForm = () => {
               message: "Please input your First Name!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input placeholder="First Name*" />
         </Form.Item>
@@ -122,6 +124,7 @@ const RegistrationForm = () => {
               message: "Please input your Last Name!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input placeholder="Last Name*" />
         </Form.Item>
@@ -140,6 +143,7 @@ const RegistrationForm = () => {
             message: "Date of Birth* (yyyy/mm/dd)",
           },
         ]}
+        style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
       >
         <DatePicker
           style={{
@@ -166,6 +170,7 @@ const RegistrationForm = () => {
               message: "Please input your E-mail!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input
             placeholder="Email*"
@@ -184,6 +189,7 @@ const RegistrationForm = () => {
               message: "Please input your phone number!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input
             style={{
@@ -207,6 +213,7 @@ const RegistrationForm = () => {
             whitespace: true,
           },
         ]}
+        style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
       >
         <Input
           placeholder="Username"
@@ -224,6 +231,7 @@ const RegistrationForm = () => {
           },
         ]}
         hasFeedback
+        style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
       >
         <Input.Password
           placeholder="Password*"
@@ -253,6 +261,7 @@ const RegistrationForm = () => {
             },
           }),
         ]}
+        style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
       >
         <Input.Password
           placeholder="Confirm Password*"
@@ -274,6 +283,7 @@ const RegistrationForm = () => {
               message: "Please input your City!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input placeholder="City*" />
         </Form.Item>
@@ -288,6 +298,7 @@ const RegistrationForm = () => {
               message: "Please input your State!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input placeholder="State*" />
         </Form.Item>
@@ -302,6 +313,7 @@ const RegistrationForm = () => {
               message: "Please input your Zip Code!",
             },
           ]}
+          style={{backgroundColor:"rgba(15, 25, 65, 0.6)", borderRadius:"8px"}}
         >
           <Input placeholder="Zip Code" />
         </Form.Item>
@@ -325,8 +337,8 @@ const RegistrationForm = () => {
       >
         <Checkbox>
           <TextBox color="white" display="inline">
-            I have read the
-            <a href=""> Terms or Service and Privacy Policy</a>
+            I have read and agree to the Terms and Service
+            <a href=""> </a>
           </TextBox>
         </Checkbox>
       </Form.Item>
@@ -339,24 +351,18 @@ const RegistrationForm = () => {
   }));
 
   return (
-    <Bg>
-      <Container>
-        <Row align="middle">
-          <LogoText>
-            <LogoImage large />
-            RESTORE
-          </LogoText>
-        </Row>
+    <Bg style={{justifyContent:"center"}}>
+      <Container style={{justifyContent:"center", backdropFilter:"blur(3px)"}}>
         <Row>
           <SignUpFormContainer
             backgroundColor="opaque"
-            width="650px"
+            width="600px"
             borderRadius=""
             justifyContent="left"
           >
             <Row>
               <Row>
-                <LogoText>Create Account</LogoText>
+                <LogoText style={{marginBottom:"10%"}}>Create Account</LogoText>
               </Row>
               <Row justify="space-around" wrap="nowrap">
                 <Col span={17}>
@@ -374,7 +380,9 @@ const RegistrationForm = () => {
                     {accountInfo}
                     {agreement}
                     <Form.Item className="button-form">
-                      <SignupButton onClick={signUp}>SIGN UP</SignupButton>
+                      <SignupButton onClick={signUp} style={{backgroundColor:"rgba(255, 255, 255, 0.2)", color:"white", width:"100%"}}>
+                        Create Account
+                      </SignupButton>
                     </Form.Item>
                   </Form>
                 </Col>
