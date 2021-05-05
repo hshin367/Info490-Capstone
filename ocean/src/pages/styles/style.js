@@ -148,6 +148,25 @@ const HalfFormContainer = styled(Flex)`
   flex-wrap: wrap;
 `;
 
+const FriendsPageContainer = styled(Flex)`
+
+  background: linear-gradient(#0E183F, #3B4782);
+  height: 100%;
+  width: 100%;
+`
+
+const FriendContainer = styled(Flex)`
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 3% auto auto auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 93%;
+  width: 98%;
+  border: 1px solid white;
+  border-radius: 10px;
+`;
+
 // textbox
 const TextBox = styled.div`
   color: ${(props) =>
@@ -224,4 +243,6 @@ export {
   Flex,
   LoginContainer,
   HorizontalScrollableContainer,
+  FriendContainer,
+  FriendsPageContainer
 };

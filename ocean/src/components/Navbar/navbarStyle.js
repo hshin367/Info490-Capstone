@@ -4,6 +4,7 @@ import theme from "../../theme";
 const Container = styled.nav`
   display: flex;
   justify-content: center;
+  background-color: "lightblue";
   position: fixed;
   width: 100vw;
   z-index: 1030;
@@ -14,7 +15,6 @@ const NavbarWrapper = styled.div`
   position: relative;
   z-index: 1030;
   width: 1300px;
-
   padding: 10px 25px;
 
   display: flex;

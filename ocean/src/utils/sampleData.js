@@ -165,3 +165,6 @@ export const upcomingEventsSampleData = [
     zipCode: 98144,
   },
 ];
+
+export const SampleFriends = ["friend1", "friend2","friend3","friend4","friend5","friend6","friend7"]
+export const SampleFriendRequests = ["friend1", "friend2" , "friend3","friend4", "friend5","friend6"]
