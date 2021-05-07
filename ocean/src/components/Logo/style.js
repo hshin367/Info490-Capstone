@@ -2,7 +2,6 @@ import styled from "styled-components";
 import logo from "../../img/Logo.png";
 
 const LogoText = styled.h1`
-  letter-spacing: 5px;
   text-align: ${(props) => (props.alignCenter ? "center" : "left")};
 `;
 

@@ -10,7 +10,7 @@ import FriendRequests from "../components/Friends/FriendRequests.js";
 import AddUsers from "../components/Friends/AddUsers.js";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { Flex, FriendContainer, FriendsPageContainer } from "./styles/style.js";
+import { Flex, FriendContainer, PageContainer } from "./styles/style.js";
 
 /**
  * Event Component
@@ -21,7 +21,7 @@ import { Flex, FriendContainer, FriendsPageContainer } from "./styles/style.js";
 
 const Friends = () => {
   return (
-    <FriendsPageContainer>
+    <PageContainer>
       <FriendContainer>
         <Grid container spacing={0}>
           <Grid item xs={8}>
@@ -37,7 +37,7 @@ const Friends = () => {
           </Grid>
         </Grid>
       </FriendContainer>
-    </FriendsPageContainer>
+    </PageContainer>
   );
 };
 

@@ -148,7 +148,7 @@ const HalfFormContainer = styled(Flex)`
   flex-wrap: wrap;
 `;
 
-const FriendsPageContainer = styled(Flex)`
+const PageContainer = styled(Flex)`
 
   background: linear-gradient(#0E183F, #3B4782);
   height: 100%;
@@ -244,5 +244,5 @@ export {
   LoginContainer,
   HorizontalScrollableContainer,
   FriendContainer,
-  FriendsPageContainer
+  PageContainer
 };
