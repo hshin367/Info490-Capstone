@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   nav + div { 

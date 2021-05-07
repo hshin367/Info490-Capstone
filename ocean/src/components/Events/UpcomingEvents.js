@@ -20,8 +20,8 @@ import {
   dateParser,
   dateCalculator,
   sortByDate,
-} from "../../helpers/dateCalculations";
-import { upcomingEventsSampleData } from "../../helpers/sampleData";
+} from "../../utils/dateCalculations";
+import { upcomingEventsSampleData } from "../../utils/sampleData";
 import Search from "antd/lib/transfer/search";
 
 // TODO : import getDate() from the Banner component later (make it importable)

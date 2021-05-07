@@ -59,3 +59,81 @@ export const getGoingEvents = async () => {
     console.log("Failed to get Events");
   }
 };
+
+/**
+ *
+ * @returns fish images url.
+ */
+export const getFishes = async () => {
+  const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+
+  try {
+    const res = await axios({
+      method: "GET",
+      url: api.base + api.aquarium.getAllFishes,
+      headers: {
+        authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log("Failed to get Events");
+  }
+};
+
+/**
+ * post fishes
+ * { "type": "fishName" }
+ */
+export const addFishes = async () => {
+  const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+
+  try {
+    const res = await axios({
+      method: "POST",
+      url: api.base + api.aquarium.addFishes,
+      headers: {
+        authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log("Failed to get Events");
+  }
+};
+
+export const getFriends = async () => {
+  const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+
+  try {
+    const res = await axios({
+      method: "GET",
+      url: api.base + api.user.getAllFriends,
+      headers: {
+        authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    console.log("Failed to get Friends List");
+  }
+};
+
+export const getFriendRequests = async () => {
+  const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+
+  try {
+    const res = await axios({
+      method: "GET",
+      url: api.base + api.user.getFriendRequests,
+      headers: {
+        authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    console.log("Failed to get Friends List");
+  }
+};

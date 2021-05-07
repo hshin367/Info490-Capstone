@@ -7,6 +7,16 @@ const api = {
     eventsGoing: "/events/going",
     eventsNotGoing: "/events/notgoing",
   },
+
+  aquarium: {
+    getAllFishes: "/aquarium/getAllFishForUser",
+    addFishes: "/aquarium/fish/add",
+  },
+
+  user: {
+    getAllFriends: "/user/getAllFriends",
+    getFriendRequests: "/user/getAllRequests",
+  },
 };
 
 export default api;

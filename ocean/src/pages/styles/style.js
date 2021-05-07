@@ -1,5 +1,6 @@
+import { PropertySafetyOutlined } from "@ant-design/icons";
 import styled, { css } from "styled-components";
-import img from "../../img/LoginBackground.png";
+import img from "../../img/Background.png";
 
 const sizes = css`
   ${(props) =>
@@ -17,9 +18,15 @@ const sizes = css`
   ${(props) =>
     props.size === "title" &&
     css`
-      ${props.theme.fontSizes.xxl}
+      ${props.theme.fontSizes.titleSize}
     `}
 
+  ${(props) =>
+    props.size === "xxl" &&
+    css`
+      ${props.theme.fontSizes.xxl}
+    `}
+      
   ${(props) =>
     props.size === "xxxl" &&
     css`
@@ -39,10 +46,10 @@ const Bg = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top left;
-
   display: flex;
-  justify-content: center;
-  min-height: 100vh;
+  min-height: 100vh;  
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
 `;
 
 const Flex = styled.div`
@@ -60,7 +67,9 @@ const Flex = styled.div`
       ? props.theme.paddings.xl
       : props.padding === "xxl"
       ? props.theme.paddings.xxl
-      : props.theme.paddings.base};
+      : props.padding === "base"
+      ? props.theme.paddings.base
+      : props.padding};
   padding-left: ${(props) =>
     props.paddingLeft === "sm"
       ? props.theme.paddings.small
@@ -71,12 +80,39 @@ const Flex = styled.div`
       : props.paddingLeft === "xxl"
       ? props.theme.paddings.xxl
       : props.theme.paddings.base};
+  background-color: ${(props) => props.backgroundColor};
+  bottom: ${(props) => props.bottom};
+  background: ${(props) => props.background};
+  border: ${(props) => props.border};
+  border-radius: ${(props) => props.borderRadius};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  margin: ${(props) => props.margin};
+  left: ${(props) => props.left};
 `;
 
 const HorizontalScrollableContainer = styled(Flex)`
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+`;
+
+const Blur = styled.span`
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  // -webkit-backdrop-filter: blur(8px);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+  z-index: 0;
 `;
 
 // TODO : take in a variable for the style (row, col)
@@ -86,23 +122,49 @@ const Container = styled(Flex)`
 `;
 
 const LoginContainer = styled(Container)`
-  align-items: center;
+justify-content: ${(props) => props.justifyContent};
+background-color: ${(props) =>
+  props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
+flex-direction: ${(props) => props.flexDirection};
+width: ${(props) => props.width};
+padding: ${(props) => props.theme.paddings.xl}
+  ${(props) => props.theme.paddings.xxxl};
+height: 50%;
 `;
 
 const SignUpFormContainer = styled(Flex)`
   justify-content: ${(props) => props.justifyContent};
   background-color: ${(props) =>
-    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.3)" : ""};
+    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
   flex-direction: ${(props) => props.flexDirection};
   width: ${(props) => props.width};
   padding: ${(props) => props.theme.paddings.xl}
     ${(props) => props.theme.paddings.xxxl};
-  border-radius: 7px;
+  border-radius: 20px;
 `;
 
 const HalfFormContainer = styled(Flex)`
   justify-content: center;
   flex-wrap: wrap;
+`;
+
+const FriendsPageContainer = styled(Flex)`
+
+  background: linear-gradient(#0E183F, #3B4782);
+  height: 100%;
+  width: 100%;
+`
+
+const FriendContainer = styled(Flex)`
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 3% auto auto auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 93%;
+  width: 98%;
+  border: 1px solid white;
+  border-radius: 10px;
 `;
 
 // textbox
@@ -119,21 +181,61 @@ const TextBox = styled.div`
   display: ${(props) => props.display};
   font-size: ${sizes};
   font-weight: ${(props) =>
-    props.bold ? "700" : props.light ? "300" : "normal"};
+    props.bold
+      ? "700"
+      : props.semibold
+      ? "600"
+      : props.light
+      ? "300"
+      : "normal"};
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small
+      : props.padding === "xs"
+      ? props.theme.paddings.xs
       : props.padding === "lg"
       ? props.theme.paddings.lg
       : props.padding === "xl"
       ? props.theme.paddings.xl
       : props.padding === "xxl"
       ? props.theme.paddings.xl
+      : props.padding === "none"
+      ? props.theme.paddings.none
       : props.theme.paddings.base};
+  padding-top: ${(props) =>
+    props.paddingTop === "sm"
+      ? props.theme.paddings.small
+      : props.paddingTop === "xs"
+      ? props.theme.paddings.xs
+      : props.paddingTop === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingTop === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingTop === "xxl"
+      ? props.theme.paddings.xl
+      : props.paddingTop === "none"
+      ? props.theme.paddings.none
+      : props.theme.paddings.base};
+  padding-left: ${(props) =>
+    props.paddingLeft === "sm"
+      ? props.theme.paddings.small
+      : props.paddingLeft === "xs"
+      ? props.theme.paddings.xs
+      : props.paddingLeft === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingLeft === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "xxl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "none"
+      ? props.theme.paddings.none
+      : props.theme.paddings.base};
+  z-index: 0;
 `;
 
 export {
   Bg,
+  Blur,
   Container,
   TextBox,
   SignUpFormContainer,
@@ -141,4 +243,6 @@ export {
   Flex,
   LoginContainer,
   HorizontalScrollableContainer,
+  FriendContainer,
+  FriendsPageContainer
 };

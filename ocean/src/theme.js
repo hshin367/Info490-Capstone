@@ -14,6 +14,7 @@ const fontSizes = {
 };
 
 const paddings = {
+  none: 0,
   xs: calcRem(3),
   small: calcRem(8),
   base: calcRem(10),
@@ -61,6 +62,15 @@ const colors = {
   grey: "rgba(255, 255, 255, 0.35)",
 };
 
+const borderRadius = {
+  base: "15px",
+};
+
+const border = {
+  thick_solid: "0.5px solid " + colors.white,
+  thin_solid: "0.2px solid " + colors.white,
+};
+
 const theme = {
   fontSizes,
   colors,
@@ -69,6 +79,8 @@ const theme = {
   margins,
   interval,
   verticalInterval,
+  borderRadius,
+  border,
 };
 
 export default theme;
