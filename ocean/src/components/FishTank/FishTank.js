@@ -15,6 +15,29 @@ import smallLinedFishRight from "./../../img/small_linedFishRight.png";
 import largeLinedFishRight from "./../../img/large_linedFishRight.png";
 import largeLinedFishLeft from "./../../img/large_linedFishLeft.png";
 
+const fishSampleData = [
+  {
+    left: clownFishImgLeft,
+    right: clownFishImgRight,
+  },
+  {
+    left: clownFishImgLeft,
+    right: clownFishImgRight,
+  },
+  {
+    left: smallLinedFishLeft,
+    right: smallLinedFishRight,
+  },
+  {
+    left: smallLinedFishLeft,
+    right: smallLinedFishRight,
+  },
+  {
+    left: largeLinedFishLeft,
+    right: largeLinedFishRight,
+  },
+];
+
 const FishTank = (props) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -30,38 +53,7 @@ const FishTank = (props) => {
   useEffect(() => {
     getAllFishes();
     kelpsGenerator(5);
-    return () => {
-      window.removeEventListener("resize", updateWindowDimensions);
-    };
   }, []);
-
-  const updateWindowDimensions = () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeigh);
-  };
-
-  let fishSampleData = [
-    {
-      left: clownFishImgLeft,
-      right: clownFishImgRight,
-    },
-    {
-      left: clownFishImgLeft,
-      right: clownFishImgRight,
-    },
-    {
-      left: smallLinedFishLeft,
-      right: smallLinedFishRight,
-    },
-    {
-      left: smallLinedFishLeft,
-      right: smallLinedFishRight,
-    },
-    {
-      left: largeLinedFishLeft,
-      right: largeLinedFishRight,
-    },
-  ];
 
   const getAllFishes = async () => {
     const allFishes = await getFishes();
@@ -91,8 +83,8 @@ const FishTank = (props) => {
     setKelpData(kelpsData);
   };
 
-  let fishes = fishSampleData.map((fish) => {
-    return <Fish left={fish.left} right={fish.right} src={fish} />;
+  let fishes = fishSampleData.map((fish, index) => {
+    return <Fish key={index} left={fish.left} right={fish.right} src={fish} />;
   });
 
   let kelps = kelpData.map((kelp) => {
