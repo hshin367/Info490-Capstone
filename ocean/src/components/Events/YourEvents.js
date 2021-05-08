@@ -10,7 +10,7 @@ import {
   Circle,
   Container,
 } from "./style.js";
-import MoreDetails from "./MoreDetail";
+import MoreDetails from "../DropDownMenu/MoreDetail";
 import { getGoingEvents } from "../../actions/actions";
 import { goingEvents, goingEventsSampleData } from "../../utils/sampleData";
 import { sortByDate } from "../../utils/dateCalculations";
@@ -116,7 +116,7 @@ const Events = () => {
               >
                 {date.getDay()}
               </TextBox>
-              <MoreDetails />
+              <MoreDetails text={["Remove Event", "Invite Friends"]} />
             </div>
             <TextBox
               size="xs"

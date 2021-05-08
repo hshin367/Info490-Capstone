@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Fish from "../Fish/Fish";
+import { AquarButton } from "../Button/button";
 import { randomNum } from "../../utils/randomGenerators";
 import { Kelp, Container } from "./style";
 import { getFishes } from "../../actions/actions";
@@ -38,10 +39,25 @@ const fishSampleData = [
   },
 ];
 
+const fishesSampleData2 = [
+  {
+    type: "clownFish",
+    left: clownFishImgLeft,
+    right: clownFishImgRight,
+    count: 2,
+  },
+  {
+    type: "linedFish",
+    left: largeLinedFishLeft,
+    right: largeLinedFishRight,
+    count: 2,
+  },
+];
+
 const FishTank = (props) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-  const [fish, setFish] = useState([]);
+  const [fishes, setFishes] = useState([]);
   const [kelpData, setKelpData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -63,10 +79,30 @@ const FishTank = (props) => {
       console.log("did not get the fish");
     } else {
       setLoading(false);
-      console.log("got the fish");
-      setFish(allFishes);
+      console.log(allFishes);
+      setFishes(allFishes);
     }
   };
+
+  const groupByFishType = fishes.reduce((obj, fishType) => {
+    console.log(fishes);
+    console.log("object");
+    console.log(obj);
+    // let newArr = [];
+    obj["fishName"] = (obj[fishType] || 0) + 1;
+    // newArr.push(obj[fishType.fishName]);
+    // { [fishType.fishName]: count + 1 }
+    return obj;
+  }, []);
+
+  const newFish = () => {
+    for (let i = 0; i < fishes.length; i++) {
+      const element = fishes[i];
+      console.log(element);
+    }
+  };
+
+  newFish();
 
   const kelpsGenerator = (num) => {
     let kelpsData = [];
@@ -83,7 +119,7 @@ const FishTank = (props) => {
     setKelpData(kelpsData);
   };
 
-  let fishes = fishSampleData.map((fish, index) => {
+  let allFishes = fishSampleData.map((fish, index) => {
     return <Fish key={index} left={fish.left} right={fish.right} src={fish} />;
   });
 
@@ -108,8 +144,9 @@ const FishTank = (props) => {
 
   return (
     <Container>
-      {fishes}
+      {allFishes}
       {kelps}
+      <AquarButton />
     </Container>
   );
 };
