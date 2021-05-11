@@ -22,14 +22,10 @@ import { SearchOutlined } from "@ant-design/icons";
  */
 
 const Events = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [handle, setHandle] = useState();
   const [form] = Form.useForm();
   const onFinish = (values) => {};
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   const eventTitle = (
     <Form.Item
@@ -274,25 +270,6 @@ const Events = () => {
     </Form.Item>
   );
 
-  // get eventList from database
-  // const eventList = document.getElementById("eventList");
-  // let filteredEvents = [];
-  // document.addEventListener("DOMContentLoaded", function (event) {
-  //   searchBar.addEventListener("keyup", (e) => {
-  //     if(e) {
-  //     const searchString = e.target.value.toLowerCase();
-  //     const filteredEvents = events.filter((singleEvent) => {
-  //       return singleEvent.name.toLowerCase().includes(searchString);
-  //     });
-  //     console.log(filteredEvents);
-  //     displayEvents(filteredEvents);
-  //   }
-  //   });
-  // });
-
-  let eventsArr = [];
-  let allEvents = [];
-
   useEffect(() => {
     loadEvents();
   }, []);
@@ -302,31 +279,17 @@ const Events = () => {
       const res = await fetch(
         "https://us-central1-restore-uw.cloudfunctions.net/api/events"
       );
-      eventsArr = await res.json();
-      setEvents(eventsArr);
-      allEvents = await res.json();
+      const eventsArr = await res.json();
+      setAllEvents(eventsArr);
+      setFilteredEvents(eventsArr);
       // displayEvents(events);
     } catch (err) {
       console.error(err);
     }
   };
-  // const displayEvents = (singleEvent) => {
-  //   const htmlString = events
-  //     .map((singleEvent) => {
-  //       return `
-  //               <li>
-  //                   <h2>${singleEvent.name}</h2>
-  //                   <p>${singleEvent.organizerName}</p>
-  //                   <p>${singleEvent.startTime}</p>
-  //               </li>
-  //           `;
-  //     })
-  //     .join("");
-  //   eventList.innerHTML = htmlString;
-  // };
 
   // create a mapped result of the filtered events from the handleChagne fn.
-  let filteredEvents = events.map((singleEvent) => {
+  let searchEventResult = filteredEvents.map((singleEvent) => {
     return (
       <li>
         <h2>{singleEvent.name}</h2>
@@ -336,24 +299,16 @@ const Events = () => {
     );
   });
 
-  console.log(filteredEvents);
-
   function handleChange(e) {
     const searchString = e.target.value.toLowerCase();
     if (searchString !== "") {
-      console.log(eventsArr);
-      const filteredEvents1 = eventsArr.filter((singleEvent) => {
+      const filteredEvents = allEvents.filter((singleEvent) => {
         return singleEvent.name.toLowerCase().includes(searchString);
       });
-
-      setEvents(filteredEvents1);
+      setFilteredEvents(filteredEvents);
     } else {
-      setEvents(allEvents);
+      setFilteredEvents(allEvents);
     }
-
-    console.log(searchString);
-
-    console.log(filteredEvents);
   }
 
   return (
@@ -376,7 +331,7 @@ const Events = () => {
                   prefix={<SearchOutlined />}
                   onChange={handleChange}
                 />
-                <ul>{filteredEvents}</ul>
+                <ul>{searchEventResult}</ul>
               </div>
             </SignUpFormContainer>
           </Row>
