@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Fish from "../Fish/Fish";
-import { AquarButton } from "../Button/button";
+import Customizer from "./Customizer/Customizer";
+import { AquarButton, AquarBtnImg } from "../Button/button";
 import { randomNum } from "../../utils/randomGenerators";
 import { Kelp, Container } from "./style";
 import { getFishes } from "../../actions/actions";
@@ -61,6 +62,7 @@ const FishTank = (props) => {
   const [kelpData, setKelpData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
@@ -84,6 +86,7 @@ const FishTank = (props) => {
     }
   };
 
+  /*
   const groupByFishType = fishes.reduce((obj, fishType) => {
     console.log(fishes);
     console.log("object");
@@ -103,6 +106,7 @@ const FishTank = (props) => {
   };
 
   newFish();
+  */
 
   const kelpsGenerator = (num) => {
     let kelpsData = [];
@@ -142,11 +146,18 @@ const FishTank = (props) => {
     );
   });
 
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
   return (
     <Container>
       {allFishes}
       {kelps}
-      <AquarButton />
+      <AquarButton clicked={isClicked}>
+        <AquarBtnImg onClick={handleClick} />
+        {isClicked && <Customizer />}
+      </AquarButton>
     </Container>
   );
 };
