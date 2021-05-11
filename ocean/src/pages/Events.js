@@ -2,7 +2,7 @@
  * Page for Upcoming Events
  */
 import React, { useState, useEffect } from "react";
-import { Form, Input, Row, Col, DatePicker, TimePicker } from "antd";
+import { Form, Input, Row, Col, DatePicker, TimePicker, Select } from "antd";
 import "./Login.css";
 import { SignupButton } from "../components/Button/button.js";
 import { LogoText } from "../components/Logo/style";
@@ -12,6 +12,7 @@ import {
   Container,
   SignUpFormContainer,
 } from "./styles/style.js";
+import { SearchOutlined } from "@ant-design/icons";
 
 /**
  * Event Component
@@ -264,54 +265,66 @@ const Events = () => {
       ]}
       style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
     >
-      <Input placeholder="Type Reward" />
+          <Select placeholder="Select Reward">
+            <Select.Option value="demo">Clownfish</Select.Option>
+            <Select.Option value="demo">Large Moorish Idol</Select.Option>
+            <Select.Option value="demo">Small Moorish Idol</Select.Option>
+          </Select>    
     </Form.Item>
   );
 
-    // get eventList from database
-    const eventList = document.getElementById("eventList");
-    const searchBar = document.getElementById("searchBar");
-    let events = [];
-  
+  // get eventList from database
+  // const eventList = document.getElementById("eventList");
+  let events = [];
+  // let filteredEvents = [];
+  // document.addEventListener("DOMContentLoaded", function (event) {
+  //   searchBar.addEventListener("keyup", (e) => {
+  //     if(e) {
+  //     const searchString = e.target.value.toLowerCase();
+  //     const filteredEvents = events.filter((singleEvent) => {
+  //       return singleEvent.name.toLowerCase().includes(searchString);
+  //     });
+  //     console.log(filteredEvents);
+  //     displayEvents(filteredEvents);
+  //   }
+  //   });
+  // });
 
-  
-  
-    const loadEvents = async () => {
-      try {
-        const res = await fetch(
-          "https://us-central1-restore-uw.cloudfunctions.net/api/events"
-        );
-        events = await res.json();
-        displayEvents(events);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    const displayEvents = (singleEvent) => {
-      const htmlString = events
-        .map((singleEvent) => {
-          return `
-                <li>
-                    <h2>${singleEvent.name}</h2>
-                    <p>leader: ${singleEvent.organizerName}</p>
-                    <p>going: ${singleEvent.startTime}</p>                  
-                </li>
-            `;
-        })
-        .join("");
-      eventList.innerHTML = htmlString;
-    };    
-    
-    searchBar.addEventListener("keyup", (e) => {
-      const searchString = e.target.value.toLowerCase();
-      const filteredEvents = events.filter((singleEvent) => {
-        return singleEvent.name.toLowerCase().includes(searchString);
-      });
-      console.log(filteredEvents);
-      displayEvents(filteredEvents);
+  const loadEvents = async () => {
+    try {
+      const res = await fetch(
+        "https://us-central1-restore-uw.cloudfunctions.net/api/events"
+      );
+      events = await res.json();
+      // displayEvents(events);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  // const displayEvents = (singleEvent) => {
+  //   const htmlString = events
+  //     .map((singleEvent) => {
+  //       return `
+  //               <li>
+  //                   <h2>${singleEvent.name}</h2>
+  //                   <p>${singleEvent.organizerName}</p>
+  //                   <p>${singleEvent.startTime}</p>
+  //               </li>
+  //           `;
+  //     })
+  //     .join("");
+  //   eventList.innerHTML = htmlString;
+  // };
+
+  function handleChange(e) {
+    const searchString = e.target.value.toLowerCase();
+    const filteredEvents = events.filter((singleEvent) => {
+      return singleEvent.name.toLowerCase().includes(searchString);
     });
+    console.log(searchString + filteredEvents.length);
+  }
+loadEvents();
 
-    loadEvents();
 
   return (
     <PageContainer>
@@ -325,8 +338,15 @@ const Events = () => {
               width="600px"
             >
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <Input placeholder="Search Event" id="searchBar" type="text" name="searchBar"/>
-                <ul id="eventList"></ul>
+                <Input
+                  placeholder="Search Event"
+                  id="searchBar"
+                  type="text"
+                  name="searchBar"
+                  prefix={<SearchOutlined />}
+                  onChange={handleChange}
+                />
+
               </div>
             </SignUpFormContainer>
           </Row>
