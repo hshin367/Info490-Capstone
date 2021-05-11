@@ -29,6 +29,7 @@ const Events = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {};
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+  const [events, setEvents] = useState([]);
 
   const eventTitle = (
     <Form.Item
@@ -265,17 +266,16 @@ const Events = () => {
       ]}
       style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
     >
-          <Select placeholder="Select Reward">
-            <Select.Option value="demo">Clownfish</Select.Option>
-            <Select.Option value="demo">Large Moorish Idol</Select.Option>
-            <Select.Option value="demo">Small Moorish Idol</Select.Option>
-          </Select>    
+      <Select placeholder="Select Reward">
+        <Select.Option value="demo">Clownfish</Select.Option>
+        <Select.Option value="demo">Large Moorish Idol</Select.Option>
+        <Select.Option value="demo">Small Moorish Idol</Select.Option>
+      </Select>
     </Form.Item>
   );
 
   // get eventList from database
   // const eventList = document.getElementById("eventList");
-  let events = [];
   // let filteredEvents = [];
   // document.addEventListener("DOMContentLoaded", function (event) {
   //   searchBar.addEventListener("keyup", (e) => {
@@ -290,12 +290,21 @@ const Events = () => {
   //   });
   // });
 
+  let eventsArr = [];
+  let allEvents = [];
+
+  useEffect(() => {
+    loadEvents();
+  }, []);
+
   const loadEvents = async () => {
     try {
       const res = await fetch(
         "https://us-central1-restore-uw.cloudfunctions.net/api/events"
       );
-      events = await res.json();
+      eventsArr = await res.json();
+      setEvents(eventsArr);
+      allEvents = await res.json();
       // displayEvents(events);
     } catch (err) {
       console.error(err);
@@ -316,15 +325,36 @@ const Events = () => {
   //   eventList.innerHTML = htmlString;
   // };
 
+  // create a mapped result of the filtered events from the handleChagne fn.
+  let filteredEvents = events.map((singleEvent) => {
+    return (
+      <li>
+        <h2>{singleEvent.name}</h2>
+        <p>{singleEvent.organizerName}</p>
+        <p>{singleEvent.startTime}</p>
+      </li>
+    );
+  });
+
+  console.log(filteredEvents);
+
   function handleChange(e) {
     const searchString = e.target.value.toLowerCase();
-    const filteredEvents = events.filter((singleEvent) => {
-      return singleEvent.name.toLowerCase().includes(searchString);
-    });
-    console.log(searchString + filteredEvents.length);
-  }
-loadEvents();
+    if (searchString !== "") {
+      console.log(eventsArr);
+      const filteredEvents1 = eventsArr.filter((singleEvent) => {
+        return singleEvent.name.toLowerCase().includes(searchString);
+      });
 
+      setEvents(filteredEvents1);
+    } else {
+      setEvents(allEvents);
+    }
+
+    console.log(searchString);
+
+    console.log(filteredEvents);
+  }
 
   return (
     <PageContainer>
@@ -346,7 +376,7 @@ loadEvents();
                   prefix={<SearchOutlined />}
                   onChange={handleChange}
                 />
-
+                <ul>{filteredEvents}</ul>
               </div>
             </SignUpFormContainer>
           </Row>
