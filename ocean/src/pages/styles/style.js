@@ -222,7 +222,7 @@ const TextBox = styled.div`
       : props.paddingTop === "xl"
       ? props.theme.paddings.xl
       : props.paddingTop === "xxl"
-      ? props.theme.paddings.xl
+      ? props.theme.paddings.xxl
       : props.paddingTop === "none"
       ? props.theme.paddings.none
       : props.theme.paddings.base};

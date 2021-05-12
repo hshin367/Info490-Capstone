@@ -38,7 +38,7 @@ const Navbar = (props) => {
           <NavLink href="/friends">FRIENDS</NavLink>
           <NavLink href="/events">EVENTS</NavLink>
           <AccountDropdown toggleTheme={props.toggleTheme} bgCol={props.bgCol}>
-            <NavItem>ACCOUNT</NavItem>
+            <NavItem padding="0 5px 0 20px">ACCOUNT</NavItem>
           </AccountDropdown>
           {/* {localStorage.getItem("user-info") ? (
             <WhiteButton onClick={logout}>Log Out</WhiteButton>

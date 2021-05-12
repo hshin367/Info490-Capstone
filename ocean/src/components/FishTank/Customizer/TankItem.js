@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import kelpImg from "../../../img/kelp_1.png";
 import { convertStrToBool } from "../../../utils/convertStrToBool";
 import { TankItemContainer, TankItemInfoContainer, TankItemImg } from "./style";
 import { Checkbox } from "antd";

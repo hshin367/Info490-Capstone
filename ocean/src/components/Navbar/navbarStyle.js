@@ -44,7 +44,7 @@ const NavbarItemsContainer = styled.div`
 const NavItem = styled.li`
   text-decoration: none;
   list-style: none;
-  padding: 0 20px;
+  padding: ${(props) => (props.padding ? props.padding : "0 20px")};
   color: ${theme.colors.white};
   a {
     color: ${theme.colors.white};
