@@ -1,5 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
-import theme from "./theme";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   h1 { 

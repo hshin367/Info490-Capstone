@@ -1,58 +1,48 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import Routes from "./Routes/index.js";
-
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import theme from "./theme";
+import Navbar from "./components/Navbar/navbar.js";
+import { convertStrToBool } from "./utils/convertStrToBool";
 // import UserContext from "./components/User/User.js";
 
-import Navbar from "./components/Navbar/navbar.js";
+let boolDisplayKelps = convertStrToBool(window.localStorage.getItem("kelps"));
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: this.props.user,
-      events: this.props.events,
-      menuStatus: "aquarium",
-      scrollPosition: 0,
-      displayScroll: true,
-      themeMode: window.localStorage.getItem("theme") || "dark",
-    };
-  }
+export const AppContext = createContext();
+const App = () => {
+  const [themeMode, setThemeMode] = useState(
+    window.localStorage.getItem("theme") || "dark"
+  );
+  const [displayKelps, setDisplayKelps] = useState(
+    boolDisplayKelps === undefined ? true : boolDisplayKelps
+  );
 
-  toggleTheme = (style) => {
+  const toggleTheme = (style) => {
     window.localStorage.setItem("theme", style);
-    this.setState({
-      themeMode: style,
-    });
+    setThemeMode(style);
   };
 
-  setDefaultTheme = () => {
+  const setDefaultTheme = () => {
     window.localStorage.setItem("theme", "dark");
   };
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+  useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
-    localTheme
-      ? this.setState({
-          themeMode: localTheme,
-        })
-      : this.setDefaultTheme();
-  }
+    localTheme ? setThemeMode(localTheme) : setDefaultTheme();
+  }, []);
 
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyle mode={this.state.themeMode} />
-        <div className="wrapper">
-          <Navbar toggleTheme={this.toggleTheme} bgCol={this.state.themeMode} />
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle mode={themeMode} />
+      <div className="wrapper">
+        <AppContext.Provider value={[displayKelps, setDisplayKelps]}>
+          <Navbar toggleTheme={toggleTheme} bgCol={themeMode} />
           <Routes />
-        </div>
-      </ThemeProvider>
-    );
-  }
-}
+        </AppContext.Provider>
+      </div>
+    </ThemeProvider>
+  );
+};
 
 export default App;

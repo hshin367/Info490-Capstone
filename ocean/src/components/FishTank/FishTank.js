@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { AppContext } from "../../App";
 import Fish from "../Fish/Fish";
 import Kelps from "./Kelps/Kelps";
 import { CustomizerBox } from "./Customizer/Customizer";
@@ -7,6 +8,7 @@ import { AquarButton, AquarBtnImg } from "../Button/button";
 import { randomNum } from "../../utils/randomGenerators";
 import { Container } from "./style";
 import { getFishes } from "../../actions/actions";
+import { convertStrToBool } from "../../utils/convertStrToBool";
 // import kelp_1 from "../../img/kelp_1.png";
 // import kelp_2 from "../../img/kelp_2.png";
 import "./fish_tank.css";
@@ -63,8 +65,8 @@ const FishTank = (props) => {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-  const [displayKelps, setDisplayKelps] = useState(true);
 
+  const [displayKelps, setDisplayKelps] = useContext(AppContext);
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
 
@@ -117,6 +119,7 @@ const FishTank = (props) => {
 
   const handleKelpCustomzClick = () => {
     setDisplayKelps(!displayKelps);
+    window.localStorage.setItem("kelps", !displayKelps);
   };
 
   let AquarBtn = (
@@ -128,7 +131,6 @@ const FishTank = (props) => {
 
   return (
     <Container>
-      {/* {allFishes} */}
       {displayKelps && <Kelps />}
       {props.showCustBtn && AquarBtn}
     </Container>

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import kelpImg from "../../../img/kelp_1.png";
+import { convertStrToBool } from "../../../utils/convertStrToBool";
 import { TankItemContainer, TankItemInfoContainer, TankItemImg } from "./style";
 import { Checkbox } from "antd";
 
 const TankItem = (props) => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(
+    convertStrToBool(window.localStorage.getItem("kelps"))
+  );
 
   const onChange = (e) => {
     setChecked(!checked);
