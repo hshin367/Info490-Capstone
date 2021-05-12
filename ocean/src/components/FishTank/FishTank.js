@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Fish from "../Fish/Fish";
+import Customizer from "./Customizer/Customizer";
+import { AquarButton, AquarBtnImg } from "../Button/button";
 import { randomNum } from "../../utils/randomGenerators";
 import { Kelp, Container } from "./style";
 import { getFishes } from "../../actions/actions";
@@ -15,13 +17,52 @@ import smallLinedFishRight from "./../../img/small_linedFishRight.png";
 import largeLinedFishRight from "./../../img/large_linedFishRight.png";
 import largeLinedFishLeft from "./../../img/large_linedFishLeft.png";
 
+const fishSampleData = [
+  {
+    left: clownFishImgLeft,
+    right: clownFishImgRight,
+  },
+  {
+    left: clownFishImgLeft,
+    right: clownFishImgRight,
+  },
+  {
+    left: smallLinedFishLeft,
+    right: smallLinedFishRight,
+  },
+  {
+    left: smallLinedFishLeft,
+    right: smallLinedFishRight,
+  },
+  {
+    left: largeLinedFishLeft,
+    right: largeLinedFishRight,
+  },
+];
+
+const fishesSampleData2 = [
+  {
+    type: "clownFish",
+    left: clownFishImgLeft,
+    right: clownFishImgRight,
+    count: 2,
+  },
+  {
+    type: "linedFish",
+    left: largeLinedFishLeft,
+    right: largeLinedFishRight,
+    count: 2,
+  },
+];
+
 const FishTank = (props) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-  const [fish, setFish] = useState([]);
+  const [fishes, setFishes] = useState([]);
   const [kelpData, setKelpData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
@@ -30,38 +71,7 @@ const FishTank = (props) => {
   useEffect(() => {
     getAllFishes();
     kelpsGenerator(5);
-    return () => {
-      window.removeEventListener("resize", updateWindowDimensions);
-    };
   }, []);
-
-  const updateWindowDimensions = () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeigh);
-  };
-
-  let fishSampleData = [
-    {
-      left: clownFishImgLeft,
-      right: clownFishImgRight,
-    },
-    {
-      left: clownFishImgLeft,
-      right: clownFishImgRight,
-    },
-    {
-      left: smallLinedFishLeft,
-      right: smallLinedFishRight,
-    },
-    {
-      left: smallLinedFishLeft,
-      right: smallLinedFishRight,
-    },
-    {
-      left: largeLinedFishLeft,
-      right: largeLinedFishRight,
-    },
-  ];
 
   const getAllFishes = async () => {
     const allFishes = await getFishes();
@@ -71,10 +81,32 @@ const FishTank = (props) => {
       console.log("did not get the fish");
     } else {
       setLoading(false);
-      console.log("got the fish");
-      setFish(allFishes);
+      console.log(allFishes);
+      setFishes(allFishes);
     }
   };
+
+  /*
+  const groupByFishType = fishes.reduce((obj, fishType) => {
+    console.log(fishes);
+    console.log("object");
+    console.log(obj);
+    // let newArr = [];
+    obj["fishName"] = (obj[fishType] || 0) + 1;
+    // newArr.push(obj[fishType.fishName]);
+    // { [fishType.fishName]: count + 1 }
+    return obj;
+  }, []);
+
+  const newFish = () => {
+    for (let i = 0; i < fishes.length; i++) {
+      const element = fishes[i];
+      console.log(element);
+    }
+  };
+
+  newFish();
+  */
 
   const kelpsGenerator = (num) => {
     let kelpsData = [];
@@ -91,8 +123,8 @@ const FishTank = (props) => {
     setKelpData(kelpsData);
   };
 
-  let fishes = fishSampleData.map((fish) => {
-    return <Fish left={fish.left} right={fish.right} src={fish} />;
+  let allFishes = fishSampleData.map((fish, index) => {
+    return <Fish key={index} left={fish.left} right={fish.right} src={fish} />;
   });
 
   let kelps = kelpData.map((kelp) => {
@@ -114,10 +146,18 @@ const FishTank = (props) => {
     );
   });
 
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
   return (
     <Container>
-      {fishes}
+      {allFishes}
       {kelps}
+      <AquarButton clicked={isClicked}>
+        <AquarBtnImg onClick={handleClick} />
+        {isClicked && <Customizer />}
+      </AquarButton>
     </Container>
   );
 };

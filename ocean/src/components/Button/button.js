@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { Button } from "antd";
 import { darken, lighten } from "polished";
 import theme from "../../theme";
+import aquarImg from "../../img/aquarImg.png";
 
 // TODO : look for a better way of css ordering for the colors part.
 // TODO : esp. the button:hover, active.
@@ -52,6 +53,41 @@ const sizes = css`
       width: 10rem;
       font-size: ${theme.fontSizes.small};
     `}
+`;
+
+const AquarButton = styled.div`
+  // background-image: url(${aquarImg});
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  height: ${(props) => (props.clicked ? "50vh" : "3vh")};
+  width: ${(props) => (props.clicked ? "45vw" : "3vh")};
+  background: ${(props) =>
+    props.clicked
+      ? `radial-gradient(100% 99.11% at 0% 0.89%, rgba(15, 25, 65, 0.48) 0%, rgba(14, 24, 63, 0.12) 100%)`
+      : ""};
+  backdrop-filter: ${(props) => (props.clicked ? "blur(30px)" : "")};
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 2rem;
+  border: ${(props) => props.theme.border.thin_solid};
+  border-radius: ${(props) => props.theme.borderRadius.base};
+  z-index: 3;
+`;
+
+const AquarBtnImg = styled.div`
+  background-image: url(${aquarImg});
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 3vh;
+  width: 3vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  padding: 2rem;
+  z-index: 4;
 `;
 
 const StyledButton = styled(Button)`
@@ -111,4 +147,4 @@ Button.defaultProps = {
   color: theme.colors.dark_blue,
 };
 
-export { SignupButton, WhiteButton, DarkBlueButton };
+export { SignupButton, WhiteButton, DarkBlueButton, AquarButton, AquarBtnImg };

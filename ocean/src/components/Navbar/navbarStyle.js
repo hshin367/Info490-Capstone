@@ -37,8 +37,8 @@ const NavbarWrapper = styled.div`
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
-  // justify-content: space-between;
-  padding-left: 5%;
+  justify-content: space-between;
+  // padding-left: 5%;
 `;
 
 const NavItem = styled.li`

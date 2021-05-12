@@ -5,11 +5,11 @@ import "./fish.css";
 import clownFishImgLeft from "./../../img/clownFish_left.png";
 import clownFishImgRight from "./../../img/clownFish_right.png";
 
-const Fish = (props) => {
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-  const imageSize = 50;
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+const imageSize = 50;
 
+const Fish = (props) => {
   const [xPos, setXPos] = useState(randomNum(0, windowWidth - imageSize));
   const [yPos, setyPos] = useState(randomNum(0, windowHeight - imageSize));
   const [xDir, setXDir] = useState(randomDir);
@@ -23,15 +23,11 @@ const Fish = (props) => {
     setXDir(!xDir);
     // console.log(xDir);
     if (xDir === true) {
-      while (newXPos <= xPos) {
-        newXPos = randomNum(0, windowWidth - imageSize);
-      }
+      newXPos = randomNum(xPos, windowWidth - imageSize);
     } else {
       // console.log(`current XPos = ${xPos}`);
-      while (newXPos >= xPos) {
-        // console.log(`random `);
-        newXPos = randomNum(30, windowWidth - imageSize);
-      }
+      // console.log(`random `);
+      newXPos = randomNum(0, xPos);
     }
     // console.log(newXPos);
     setXPos(newXPos);
@@ -41,17 +37,15 @@ const Fish = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       changeFishDir();
-
-      return () => {
-        clearTimeout(timer);
-      };
+      console.log("useEffect");
     }, 100);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      changeFishDir();
-    }, 9050);
+    const timer = setTimeout(changeFishDir, 9050);
 
     return () => {
       clearTimeout(timer);
