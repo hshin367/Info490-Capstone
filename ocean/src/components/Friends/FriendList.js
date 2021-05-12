@@ -23,21 +23,32 @@ function FriendList() {
     friendsList = SampleFriends;
     if (!friendsList) {
       setLoading(false);
-      return <TextBox size="title">No Results</TextBox>;
+      return (
+        <TextBox size="xxl" color="white">
+          No Results
+        </TextBox>
+      );
     }
 
     setFriends(friendsList);
     setLoading(false);
   };
 
-  if (loading) return <TextBox size="title">Loading Data...</TextBox>;
+  if (loading)
+    return (
+      <TextBox size="xxl" color="white">
+        Loading Data...
+      </TextBox>
+    );
 
   return (
     <FriendListContainer>
       <TitleBox>FRIENDS</TitleBox>
       <FriendSearchBar />
       {friends.length === 0 ? (
-        <TextBox size="title">No Results </TextBox>
+        <TextBox size="xxl" color="white">
+          No Results{" "}
+        </TextBox>
       ) : (
         <ListContainer>
           {friends.map((singleFriend, ind) => (

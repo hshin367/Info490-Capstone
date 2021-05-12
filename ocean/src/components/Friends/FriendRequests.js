@@ -33,7 +33,12 @@ function FriendRequests() {
     setLoading(false);
   };
 
-  if (loading) return <TextBox size="title">Loading Data...</TextBox>;
+  if (loading)
+    return (
+      <TextBox size="xxl" color="white">
+        Loading Data...
+      </TextBox>
+    );
 
   return (
     <>

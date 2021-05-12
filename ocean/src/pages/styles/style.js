@@ -150,8 +150,6 @@ const HalfFormContainer = styled(Flex)`
 
 const FriendsPageContainer = styled(Flex)`
   flexdirection: column;
-  background: linear-gradient(#0e183f, #3b4782);
-
   height: 100vh;
   width: 100vw;
   position: relative;

@@ -73,7 +73,11 @@ const AccountDropdown = (props) => {
     </>
   );
 
-  const menu = <Menu onClick={handleMenuClick}>{menuContent}</Menu>;
+  const menu = (
+    <Menu onClick={handleMenuClick} className="account-dropdown">
+      {menuContent}
+    </Menu>
+  );
 
   return (
     <>
@@ -82,7 +86,6 @@ const AccountDropdown = (props) => {
         trigger={["click"]}
         visible={isVisible}
         onVisibleChange={handleVisibleChange}
-        // onClick={props.}
       >
         <div className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
           {props.children}

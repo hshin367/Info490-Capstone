@@ -12,7 +12,7 @@ const MoreDetails = (props) => {
     return <MoreOutlined style={{ fontSize: "25px" }} />;
   };
 
-  const menu = <Menu>{menuContent}</Menu>;
+  const menu = <Menu className="more-detail-dropdown">{menuContent}</Menu>;
 
   return (
     <>
