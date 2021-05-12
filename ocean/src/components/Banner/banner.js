@@ -1,5 +1,5 @@
 import React from "react";
-import SlidingCarousel from "../Carousel/slidingcarousel.js";
+// import SlidingCarousel from "../Carousel/slidingcarousel.js";
 import PropTypes from "prop-types";
 
 import { Container, DateContent, TDate } from "./style.js";
@@ -30,8 +30,6 @@ const Banner = () => {
         {/* Month */}
         <div>{`/ ${today[1]}`}</div>
       </DateContent>
-
-      <SlidingCarousel date={today} />
     </Container>
   );
 };

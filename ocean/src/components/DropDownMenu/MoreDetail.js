@@ -1,7 +1,6 @@
-import { Menu, Dropdown, message } from "antd";
+import { Menu, Dropdown } from "antd";
 import React from "react";
 import { MoreOutlined } from "@ant-design/icons";
-import { DownOutlined } from "@ant-design/icons";
 import "./more_detail.css";
 
 const MoreDetails = (props) => {
@@ -10,13 +9,7 @@ const MoreDetails = (props) => {
   });
 
   const style = () => {
-    if (props.style === "dot") {
-      return <MoreOutlined style={{ fontSize: "25px" }} />;
-    } else if (props.style === "arrow") {
-      return <DownOutlined />;
-    } else {
-      return <DownOutlined />;
-    }
+    return <MoreOutlined style={{ fontSize: "25px" }} />;
   };
 
   const menu = <Menu>{menuContent}</Menu>;

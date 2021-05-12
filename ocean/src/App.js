@@ -17,40 +17,37 @@ export class App extends Component {
       menuStatus: "aquarium",
       scrollPosition: 0,
       displayScroll: true,
-      themeMode: "light",
+      themeMode: window.localStorage.getItem("theme") || "dark",
     };
   }
 
-  toggleTheme = () => {
+  toggleTheme = (style) => {
+    window.localStorage.setItem("theme", style);
     this.setState({
-      themeMode: this.state.themeMode === "light" ? "dark" : "light",
+      themeMode: style,
     });
+  };
+
+  setDefaultTheme = () => {
+    window.localStorage.setItem("theme", "dark");
   };
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+    const localTheme = window.localStorage.getItem("theme");
+    localTheme
+      ? this.setState({
+          themeMode: localTheme,
+        })
+      : this.setDefaultTheme();
   }
-
-  switchMenuStatus = (newStatus) => {
-    if (
-      newStatus === "aquarium" ||
-      newStatus === "events" ||
-      newStatus === "friends"
-    ) {
-      //this.setState({ menuStatus: newStatus });
-      this.setState((currState) => {
-        let stateChanges = { menuStatus: newStatus };
-        return stateChanges;
-      });
-    }
-  };
 
   render() {
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle mode={this.state.themeMode} />
         <div className="wrapper">
-          <Navbar toggleTheme={this.toggleTheme} />
+          <Navbar toggleTheme={this.toggleTheme} bgCol={this.state.themeMode} />
           <Routes />
         </div>
       </ThemeProvider>

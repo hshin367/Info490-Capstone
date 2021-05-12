@@ -27,7 +27,7 @@ const Kelps = () => {
     setKelpData(kelpsData);
   };
 
-  let kelps = kelpData.map((kelp) => {
+  let kelps = kelpData.map((kelp, ind) => {
     let imgSrc = "";
     switch (kelp.imgNum) {
       case 1:
@@ -42,7 +42,13 @@ const Kelps = () => {
     }
 
     return (
-      <Kelp src={imgSrc} left={kelp.left} bottom={kelp.bottom} alt="kelp_4" />
+      <Kelp
+        key={ind}
+        src={imgSrc}
+        left={kelp.left}
+        bottom={kelp.bottom}
+        alt="kelp_4"
+      />
     );
   });
 
