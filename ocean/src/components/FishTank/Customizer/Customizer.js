@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import TankItem from "./TankItem";
 
-const Customizer = () => {
+const Customizer = () => {};
+
+const CustomizerBox = () => {
   return (
     <>
       This is Customeizer!!!
@@ -10,4 +12,4 @@ const Customizer = () => {
   );
 };
 
-export default Customizer;
+export { CustomizerBox, Customizer };

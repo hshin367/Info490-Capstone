@@ -18,27 +18,28 @@ import FishTank from ".././components/FishTank/FishTank.js";
  * @property {string}
  */
 
-// <FishTank />
-
 const Friends = () => {
   return (
-    <FriendsPageContainer>
-      <FriendContainer>
-        <Grid container spacing={0}>
-          <Grid item xs={8}>
-            <FriendList />
-          </Grid>
-          <Grid container spacing={5} xs={4}>
-            <Grid item xs={12}>
-              <FriendRequests />
+    <>
+      <FriendsPageContainer>
+        <FishTank />
+        <FriendContainer>
+          <Grid container spacing={0}>
+            <Grid item xs={8}>
+              <FriendList />
             </Grid>
-            <Grid item xs={12}>
-              <AddUsers />
+            <Grid container spacing={5} xs={4}>
+              <Grid item xs={12}>
+                <FriendRequests />
+              </Grid>
+              <Grid item xs={12}>
+                <AddUsers />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </FriendContainer>
-    </FriendsPageContainer>
+        </FriendContainer>
+      </FriendsPageContainer>
+    </>
   );
 };
 

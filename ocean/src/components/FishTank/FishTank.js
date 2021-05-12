@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Fish from "../Fish/Fish";
-import Customizer from "./Customizer/Customizer";
+import { CustomizerBox } from "./Customizer/Customizer";
 import { AquarButton, AquarBtnImg } from "../Button/button";
 import { randomNum } from "../../utils/randomGenerators";
 import { Kelp, Container } from "./style";
@@ -150,14 +150,18 @@ const FishTank = (props) => {
     setIsClicked(!isClicked);
   };
 
+  let AquarBtn = (
+    <AquarButton clicked={isClicked}>
+      <AquarBtnImg onClick={handleClick} />
+      {isClicked && <CustomizerBox />}
+    </AquarButton>
+  );
+
   return (
     <Container>
       {allFishes}
       {kelps}
-      <AquarButton clicked={isClicked}>
-        <AquarBtnImg onClick={handleClick} />
-        {isClicked && <Customizer />}
-      </AquarButton>
+      {props.showCustBtn && AquarBtn}
     </Container>
   );
 };

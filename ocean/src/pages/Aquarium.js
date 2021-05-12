@@ -12,7 +12,7 @@ const Aquarium = () => {
       width="100vw"
       position="relative"
     >
-      <FishTank />
+      <FishTank showCustBtn={true} />
     </Flex>
   );
 };
