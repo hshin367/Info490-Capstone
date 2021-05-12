@@ -37,19 +37,23 @@ const NavbarWrapper = styled.div`
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
-  // justify-content: space-between;
-  padding-left: 5%;
+  justify-content: space-between;
+  // padding-left: 5%;
 `;
 
 const NavItem = styled.li`
   text-decoration: none;
   list-style: none;
-  padding: 0 20px;
+  padding: ${(props) => (props.padding ? props.padding : "0 20px")};
   color: ${theme.colors.white};
   a {
     color: ${theme.colors.white};
   }
   font-size: ${theme.fontSizes.xl};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export { Container, NavbarItemsContainer, NavItem, NavbarWrapper };

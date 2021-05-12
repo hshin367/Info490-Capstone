@@ -1,15 +1,13 @@
 // import PropTypes from "prop-types";
 import React from "react";
-// import styled from "styled-components";
 import {
   Container,
   NavbarWrapper,
   NavbarItemsContainer,
   NavItem,
 } from "./navbarStyle.js";
+import AccountDropdown from "../DropDownMenu/AccountDropdown";
 import { withRouter } from "react-router";
-import { useHistory } from "react-router-dom";
-import { WhiteButton } from "../Button/button.js";
 import Logo from "../Logo/Logo";
 
 const NavLink = ({ href, children }) => (
@@ -19,18 +17,6 @@ const NavLink = ({ href, children }) => (
 );
 
 const Navbar = (props) => {
-  let user = JSON.parse(localStorage.getItem("user-info"));
-  // console.warn(user);
-
-  const history = useHistory();
-
-  function logout() {
-    alert("logging out");
-    // console.log("loggin out");
-    localStorage.clear();
-    history.push({ pathname: "/login" });
-  }
-
   if (
     props.location.pathname === "/login" ||
     props.location.pathname === "/signup"
@@ -51,10 +37,12 @@ const Navbar = (props) => {
           <NavLink href="/aquarium">AQUARIUM</NavLink>
           <NavLink href="/friends">FRIENDS</NavLink>
           <NavLink href="/events">EVENTS</NavLink>
-          <NavLink href="/">ACCOUNT</NavLink>
-          {localStorage.getItem("user-info") ? (
+          <AccountDropdown toggleTheme={props.toggleTheme} bgCol={props.bgCol}>
+            <NavItem padding="0 5px 0 20px">ACCOUNT</NavItem>
+          </AccountDropdown>
+          {/* {localStorage.getItem("user-info") ? (
             <WhiteButton onClick={logout}>Log Out</WhiteButton>
-          ) : null}
+          ) : null} */}
         </NavbarItemsContainer>
       </NavbarWrapper>
     </Container>

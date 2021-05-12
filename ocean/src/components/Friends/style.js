@@ -116,6 +116,11 @@ const FriendRequestsContainer = styled(Flex)`
   border-radius: 10px;
 `;
 
+const RequestImage = styled(Image)`
+  height: 50px;
+  width: 50px;
+`
+
 const SearchUserContainer = styled(Flex)`
   height: 60%;
   width: 100%;
@@ -124,9 +129,26 @@ const SearchUserContainer = styled(Flex)`
   border-radius: 7px;
 `;
 
-
+const SingleRequestContainer = styled(Flex)`
+border-radius: 7px;
+padding: 2rem;
+margin-top: 1rem;
+margin-bottom: 1rem;
+width: 95%;
+height: 10%;
+color: "grey";
+&:hover {
+  background: ${darken(0.2, "white")};
+  cursor: pointer;
+}
+&:active {
+  background: ${darken(0.1, "white")};
+  cursor: pointer;
+}
+`;
 
 export {
+  SingleRequestContainer,
   FriendRequestTitleBox,
   TitleBarContainer,
   FriendBox,
@@ -138,5 +160,6 @@ export {
   FriendRequestsContainer,
   RequestsListContainer,
   SearchContainer,
-  AddFriendTitleBox
+  AddFriendTitleBox,
+  RequestImage
 };

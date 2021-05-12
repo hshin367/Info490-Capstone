@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <>
       <LogoContainer>
-        <LogoImage marginRight />
+        <LogoImage large marginRight />
         <SmallLogoText>RESTORE</SmallLogoText>
       </LogoContainer>
     </>

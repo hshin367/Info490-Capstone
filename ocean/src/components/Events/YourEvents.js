@@ -10,7 +10,7 @@ import {
   Circle,
   Container,
 } from "./style.js";
-import MoreDetails from "./MoreDetail";
+import MoreDetails from "../DropDownMenu/MoreDetail";
 import { getGoingEvents } from "../../actions/actions";
 import { goingEvents, goingEventsSampleData } from "../../utils/sampleData";
 import { sortByDate } from "../../utils/dateCalculations";
@@ -87,12 +87,18 @@ const Events = () => {
       );
     }
     let sortedEvents = await sortByDate(allEvents);
+    console.log(sortedEvents);
     setEvents(sortedEvents);
     setLoading(false);
     // }
   };
 
-  if (loading) return <TextBox size="title">Loading Data...</TextBox>;
+  if (loading)
+    return (
+      <TextBox size="xxl" color="white">
+        Loading Data...
+      </TextBox>
+    );
 
   // TODO: refactor TEXTBOX
   let allEvents = events.map((singleEvent, ind) => {
@@ -114,9 +120,9 @@ const Events = () => {
                 padding="none"
                 paddingTop="none"
               >
-                {date.getDay()}
+                {date.getDate()}
               </TextBox>
-              <MoreDetails />
+              <MoreDetails text={["Remove Event", "Invite Friends"]} />
             </div>
             <TextBox
               size="xs"
@@ -125,7 +131,7 @@ const Events = () => {
               padding="xs"
               semibold
             >
-              {months[date.getMonth() + 1].toUpperCase()}
+              {months[date.getMonth()].toUpperCase()}
             </TextBox>
             {/* <TextBox padding="xs">{singleEvent.name}</TextBox> */}
             <TextBox paddingTop="xl" paddingLeft="xs" light>
@@ -149,7 +155,7 @@ const Events = () => {
   return (
     <>
       {events.length === 0 ? (
-        <TextBox size="title" color="white">
+        <TextBox size="xxl" color="white" paddingTop="xxl">
           You Have no events that you have Registered for!{" "}
         </TextBox>
       ) : (
