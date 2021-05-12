@@ -6,7 +6,7 @@ import {
   NavbarItemsContainer,
   NavItem,
 } from "./navbarStyle.js";
-import MoreDetails from "../DropDownMenu/MoreDetail";
+import AccountDropdown from "../DropDownMenu/AccountDropdown";
 import { withRouter } from "react-router";
 import { useHistory } from "react-router-dom";
 import { WhiteButton } from "../Button/button.js";
@@ -50,10 +50,9 @@ const Navbar = (props) => {
           <NavLink href="/aquarium">AQUARIUM</NavLink>
           <NavLink href="/friends">FRIENDS</NavLink>
           <NavLink href="/events">EVENTS</NavLink>
-          <NavLink href="/">
-            ACCOUNT
-            <MoreDetails text={["text", "abe"]} />
-          </NavLink>
+          <AccountDropdown text={["text", "abe"]}>
+            <NavItem> ACCOUNT</NavItem>
+          </AccountDropdown>
           {localStorage.getItem("user-info") ? (
             <WhiteButton onClick={logout}>Log Out</WhiteButton>
           ) : null}

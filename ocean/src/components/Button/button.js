@@ -71,6 +71,7 @@ const AquarButton = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   padding: 2rem;
+  transition: ease 0.3s;
   border: ${(props) => props.theme.border.thin_solid};
   border-radius: ${(props) => props.theme.borderRadius.base};
   z-index: 3;

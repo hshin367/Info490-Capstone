@@ -47,7 +47,7 @@ const Bg = styled.div`
   background-repeat: no-repeat;
   background-position: top left;
   display: flex;
-  min-height: 100vh;  
+  min-height: 100vh;
   -webkit-backdrop-filter: blur(100px);
   backdrop-filter: blur(100px);
 `;
@@ -122,14 +122,14 @@ const Container = styled(Flex)`
 `;
 
 const LoginContainer = styled(Container)`
-justify-content: ${(props) => props.justifyContent};
-background-color: ${(props) =>
-  props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
-flex-direction: ${(props) => props.flexDirection};
-width: ${(props) => props.width};
-padding: ${(props) => props.theme.paddings.xl}
-  ${(props) => props.theme.paddings.xxxl};
-height: 50%;
+  justify-content: ${(props) => props.justifyContent};
+  background-color: ${(props) =>
+    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
+  flex-direction: ${(props) => props.flexDirection};
+  width: ${(props) => props.width};
+  padding: ${(props) => props.theme.paddings.xl}
+    ${(props) => props.theme.paddings.xxxl};
+  height: 50%;
 `;
 
 const SignUpFormContainer = styled(Flex)`
@@ -149,14 +149,13 @@ const HalfFormContainer = styled(Flex)`
 `;
 
 const FriendsPageContainer = styled(Flex)`
-  flexDirection:column;
-  background:linear-gradient(#0E183F, #3B4782);
-  
-  height:100vh;
-  width:100vw;
-  position:relative;
+  flexdirection: column;
+  background: linear-gradient(#0e183f, #3b4782);
 
-`
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+`;
 
 const FriendContainer = styled(Flex)`
   justify-content: center;
@@ -255,5 +254,5 @@ export {
   LoginContainer,
   HorizontalScrollableContainer,
   FriendContainer,
-  FriendsPageContainer
+  FriendsPageContainer,
 };

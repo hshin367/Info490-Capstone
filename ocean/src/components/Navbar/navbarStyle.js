@@ -50,6 +50,10 @@ const NavItem = styled.li`
     color: ${theme.colors.white};
   }
   font-size: ${theme.fontSizes.xl};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export { Container, NavbarItemsContainer, NavItem, NavbarWrapper };

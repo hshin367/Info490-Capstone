@@ -17,15 +17,26 @@ export class App extends Component {
       menuStatus: "aquarium",
       scrollPosition: 0,
       displayScroll: true,
+      themeMode: "light",
     };
   }
+
+  toggleTheme = () => {
+    this.setState({
+      themeMode: this.state.themeMode === "light" ? "dark" : "light",
+    });
+  };
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
 
   switchMenuStatus = (newStatus) => {
-    if (newStatus === "aquarium" || newStatus === "events" || newStatus ==="friends") {
+    if (
+      newStatus === "aquarium" ||
+      newStatus === "events" ||
+      newStatus === "friends"
+    ) {
       //this.setState({ menuStatus: newStatus });
       this.setState((currState) => {
         let stateChanges = { menuStatus: newStatus };
@@ -34,50 +45,15 @@ export class App extends Component {
     }
   };
 
-  //Scroll Stuff
-  // handleScroll = (event) => {
-  //   console.log("hi");
-  //   let e = event.target;
-  //   this.setState(
-  //     {
-  //       scrollPosition: window.pageYOffset,
-  //     },
-  //     this.checkScroll
-  //   );
-  // };
-
-  // checkScroll = () => {
-  //   if (this.state.scrollPosition < 250) {
-  //     console.log(this.state.scrollPosition);
-  //     this.setState({
-  //       displayScroll: true,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       displayScroll: false,
-  //     });
-  //   }
-  // };
-
-  // handleClickScrollButton = () => {
-  //   window.scroll({
-  //     top: 570,
-  //     left: 0,
-  //     behavior: "smooth",
-  //   });
-  // };
-
   render() {
     return (
-      <>
-        <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle mode={this.state.themeMode} />
         <div className="wrapper">
-          <ThemeProvider theme={theme}>
-            <Navbar />
-            <Routes />
-          </ThemeProvider>
+          <Navbar toggleTheme={this.toggleTheme} />
+          <Routes />
         </div>
-      </>
+      </ThemeProvider>
     );
   }
 }

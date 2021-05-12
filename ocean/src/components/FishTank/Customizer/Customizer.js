@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import TankItem from "./TankItem";
+import { CustTankItemsContainer } from "./style";
 
 const Customizer = () => {};
 
-const CustomizerBox = () => {
+const CustomizerBox = (props) => {
   return (
-    <>
-      This is Customeizer!!!
-      <TankItem />
-    </>
+    <CustTankItemsContainer>
+      <TankItem showKelps={props.showKelps} />
+    </CustTankItemsContainer>
   );
 };
 

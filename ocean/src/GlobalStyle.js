@@ -32,6 +32,11 @@ const GlobalStyle = createGlobalStyle`
     height: 2.25rem;
   }
 
+  body { 
+    background: ${({ theme, mode }) =>
+      mode === "light" ? theme.lightBg.gradient : theme.darkBg.gradient};
+  }
+
 `;
 
 GlobalStyle.displayName = "GlobalStyle";

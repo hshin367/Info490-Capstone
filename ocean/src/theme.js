@@ -64,11 +64,20 @@ const colors = {
 
 const borderRadius = {
   base: "15px",
+  sm: "10px",
 };
 
 const border = {
   thick_solid: "0.5px solid " + colors.white,
   thin_solid: "0.2px solid " + colors.white,
+};
+
+const lightBg = {
+  gradient: "linear-gradient(180deg, #27569D 32.29%, #112482 100%)",
+};
+
+const darkBg = {
+  gradient: "linear-gradient(#0E183F, #3B4782);",
 };
 
 const theme = {
@@ -81,6 +90,8 @@ const theme = {
   verticalInterval,
   borderRadius,
   border,
+  lightBg,
+  darkBg,
 };
 
 export default theme;

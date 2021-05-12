@@ -7,7 +7,6 @@ const Aquarium = () => {
   return (
     <Flex
       flexDirection="column"
-      background="linear-gradient(#0E183F, #3B4782)"
       height="100vh"
       width="100vw"
       position="relative"
