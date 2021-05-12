@@ -149,10 +149,13 @@ const HalfFormContainer = styled(Flex)`
 `;
 
 const FriendsPageContainer = styled(Flex)`
+  flexDirection:column;
+  background:linear-gradient(#0E183F, #3B4782);
+  
+  height:100vh;
+  width:100vw;
+  position:relative;
 
-  background: linear-gradient(#0E183F, #3B4782);
-  height: 100%;
-  width: 100%;
 `
 
 const FriendContainer = styled(Flex)`
@@ -160,11 +163,19 @@ const FriendContainer = styled(Flex)`
   align-items: stretch;
   flex-wrap: wrap;
   margin: 3% auto auto auto;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  // -webkit-backdrop-filter: blur(8px);
   height: 93%;
   width: 98%;
   border: 1px solid white;
   border-radius: 10px;
+  position: absolute;
 `;
 
 // textbox

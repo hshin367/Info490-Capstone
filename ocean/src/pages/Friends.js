@@ -9,15 +9,16 @@ import FriendList from "../components/Friends/FriendList.js";
 import FriendRequests from "../components/Friends/FriendRequests.js";
 import AddUsers from "../components/Friends/AddUsers.js";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import { Flex, FriendContainer, FriendsPageContainer } from "./styles/style.js";
-
+import FishTank from ".././components/FishTank/FishTank.js";
 /**
  * Event Component
  * @description Renders image filled banner on the main page.
  *
  * @property {string}
  */
+
+// <FishTank />
 
 const Friends = () => {
   return (

@@ -3,12 +3,15 @@ import { getFriendRequests } from "../../actions/actions";
 import { Container, Flex, TextBox } from "../../pages/styles/style.js";
 import FriendSearchBar from "../../components/InputForms/FriendSearchBar.js";
 import { SampleFriendRequests } from "../../utils/sampleData";
+import RequestRow from "./RequestRow.js";
+
 import {
   FriendBox,
   FriendRequestsContainer,
   RequestsListContainer,
   FriendRequestTitleBox,
 } from "./style.js";
+
 function FriendRequests() {
   const [friendRequests, setFriendRequests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,7 +44,7 @@ function FriendRequests() {
         ) : (
           <RequestsListContainer>
             {friendRequests.map((singleRequest, ind) => (
-              <FriendBox>{singleRequest}</FriendBox>
+              <RequestRow requestHandle={singleRequest} />
             ))}
           </RequestsListContainer>
         )}

@@ -20,7 +20,6 @@ const NavLink = ({ href, children }) => (
 
 const Navbar = (props) => {
   let user = JSON.parse(localStorage.getItem("user-info"));
-  // console.warn(user);
 
   const history = useHistory();
 
