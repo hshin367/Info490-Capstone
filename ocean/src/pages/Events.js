@@ -33,7 +33,7 @@ const Events = () => {
   const [date, setDate] = useState();
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-  //   const [deadline, setDeadline] = useState();
+  const [deadline, setDeadline] = useState();
   const [location, setLocation] = useState();
   const [city, setCity] = useState();
   const [state, setState] = useState();
@@ -193,27 +193,27 @@ const Events = () => {
     </Row>
   );
 
-  // const eventDeadline = (
-  //   <Form.Item
-  //     name="eventDeadline"
-  //     rules={[
-  //       {
-  //         required: true,
-  //         message: "Select Registration Deadline",
-  //       },
-  //     ]}
-  //     style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
-  //   >
-  //     <DatePicker
-  //       style={{
-  //         width: "100%",
-  //       }}
-  //       placeholder="Registration Deadline*"
-  //       value={deadline}
-  //       onChange={(e) => setDeadline(e.target.value)}
-  //     />
-  //   </Form.Item>
-  // );
+  const eventDeadline = (
+    <Form.Item
+      name="eventDeadline"
+      rules={[
+        {
+          required: true,
+          message: "Select Registration Deadline",
+        },
+      ]}
+      style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
+    >
+      <DatePicker
+        style={{
+          width: "100%",
+        }}
+        placeholder="Registration Deadline*"
+        value={deadline}
+        onChange={(e) => setDeadline(e.target.value)}
+      />
+    </Form.Item>
+  );
 
   const eventLocation = (
     <div>
