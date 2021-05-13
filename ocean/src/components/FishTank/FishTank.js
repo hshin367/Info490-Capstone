@@ -138,7 +138,7 @@ const FishTank = (props) => {
 
   return (
     <Container>
-      {allFishes}
+      {/* {allFishes} */}
       {displayKelps && <Kelps />}
       {props.showCustBtn && AquarBtn}
     </Container>

@@ -9,6 +9,8 @@ const CustTankItemsContainer = styled.div`
 const TankItemContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const TankItemInfoContainer = styled.div`
@@ -28,9 +30,26 @@ const TankItemImg = styled.div`
   margin-right: ${(props) => props.theme.margins.xxl};
 `;
 
+const TankItemTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${(props) => props.theme.colors.white};
+`;
+
+const TankItemText = styled.div`
+  font-size: ${(props) =>
+    props.type === "title"
+      ? props.theme.fontSizes.lg
+      : props.theme.fontSizes.xs};
+
+  font-weight: ${(props) => (props.type === "title" ? 600 : 100)};
+`;
+
 export {
   CustTankItemsContainer,
   TankItemContainer,
   TankItemInfoContainer,
   TankItemImg,
+  TankItemTextContainer,
+  TankItemText,
 };

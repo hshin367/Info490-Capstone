@@ -60,6 +60,24 @@ export const getGoingEvents = async () => {
   }
 };
 
+export const unRegisterForEvent = async (eid) => {
+  const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+
+  try {
+    const res = await axios({
+      method: "POST",
+      url: api.base + api.events.eventsUnGoing.replace("eid", eid),
+      headers: {
+        authorization: `Bearer ${userToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    console.log("Failed to unregister for an event");
+  }
+};
+
 /**
  *
  * @returns fish images url.

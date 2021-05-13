@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { convertStrToBool } from "../../../utils/convertStrToBool";
-import { TankItemContainer, TankItemInfoContainer, TankItemImg } from "./style";
+import {
+  TankItemContainer,
+  TankItemInfoContainer,
+  TankItemImg,
+  TankItemTextContainer,
+  TankItemText,
+} from "./style";
 import { Checkbox } from "antd";
+import "./tankItem.css";
 
 const TankItem = (props) => {
   const [checked, setChecked] = useState(
@@ -15,12 +22,14 @@ const TankItem = (props) => {
 
   return (
     <TankItemContainer>
-      <TankItemImg />
       <TankItemInfoContainer>
-        <div>Kelps</div>
-        <div>date</div>
-        <Checkbox checked={checked} onChange={onChange} />
+        <TankItemImg />
+        <TankItemTextContainer>
+          <TankItemText type="title">Kelps</TankItemText>
+          <TankItemText>Received on : MAY 01, 2021</TankItemText>
+        </TankItemTextContainer>
       </TankItemInfoContainer>
+      <Checkbox className="tank-item" checked={checked} onChange={onChange} />
     </TankItemContainer>
   );
 };

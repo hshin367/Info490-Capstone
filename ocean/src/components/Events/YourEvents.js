@@ -102,6 +102,7 @@ const Events = () => {
 
   // TODO: refactor TEXTBOX
   let allEvents = events.map((singleEvent, ind) => {
+    console.log(singleEvent);
     let date = new Date(singleEvent.date);
     return (
       singleEvent !== null && (
@@ -122,7 +123,7 @@ const Events = () => {
               >
                 {date.getDate()}
               </TextBox>
-              <MoreDetails text={["Remove Event", "Invite Friends"]} />
+              <MoreDetails />
             </div>
             <TextBox
               size="xs"

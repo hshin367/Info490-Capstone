@@ -5,7 +5,7 @@ const api = {
     getEvents: "/events",
     registerforEvent: "/event/",
     eventsGoing: "/events/going",
-    eventsNotGoing: "/events/notgoing",
+    eventsUnGoing: `/events/eid/ungoing`,
   },
 
   aquarium: {
