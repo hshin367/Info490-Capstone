@@ -2,7 +2,7 @@
   background-color: transparent;
   border-radius: 0;
   border: none;
-  border-bottom: 2px solid #0c0745;
+  border-bottom: 1px solid white;
   color: #0c0745;
 }
 
@@ -14,9 +14,15 @@
 .friendsearchbar .ant-input-affix-wrapper.ant-input-affix-wrapper-borderless {
   background-color: transparent;
   border-radius: 0;
-  border: none;
-  border-bottom: 2px solid #0c0745;
-  color: #0c0745;
+  border-bottom: 1px solid white;
+}
+
+.add-user
+  .friendsearchbar
+  .ant-input-affix-wrapper.ant-input-affix-wrapper-borderless {
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom: none;
 }
 
 .friendsearchbar {

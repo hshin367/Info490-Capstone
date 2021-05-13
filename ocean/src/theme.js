@@ -69,7 +69,7 @@ const borderRadius = {
 
 const border = {
   thick_solid: "0.5px solid " + colors.white,
-  thin_solid: "0.2px solid " + colors.white,
+  thin_solid: "0.2px solid #b7b7b7",
 };
 
 const lightBg = {

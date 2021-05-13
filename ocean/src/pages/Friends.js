@@ -1,7 +1,3 @@
-/**
- * Page for Upcoming Events
- */
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Navbar from "../components/Navbar/navbar.js";
@@ -11,6 +7,7 @@ import AddUsers from "../components/Friends/AddUsers.js";
 import Grid from "@material-ui/core/Grid";
 import { Flex, FriendContainer, FriendsPageContainer } from "./styles/style.js";
 import FishTank from ".././components/FishTank/FishTank.js";
+import { Row, Col } from "antd";
 /**
  * Event Component
  * @description Renders image filled banner on the main page.
@@ -22,21 +19,20 @@ const Friends = () => {
   return (
     <>
       <FriendsPageContainer>
-        <FishTank />
         <FriendContainer>
-          <Grid container spacing={0}>
-            <Grid item xs={8}>
+          <Row>
+            <Col span={12}>
               <FriendList />
-            </Grid>
-            <Grid container spacing={5} xs={4}>
-              <Grid item xs={12}>
+            </Col>
+            <Col span={12}>
+              <Row>
                 <FriendRequests />
-              </Grid>
-              <Grid item xs={12}>
+              </Row>
+              <Row>
                 <AddUsers />
-              </Grid>
-            </Grid>
-          </Grid>
+              </Row>
+            </Col>
+          </Row>
         </FriendContainer>
       </FriendsPageContainer>
     </>
