@@ -58,6 +58,16 @@ const Flex = styled.div`
   align-items: ${(props) => props.alignItems};
   flex-direction: ${(props) => props.flexDirection};
   position: ${(props) => props.position};
+  padding-left: ${(props) =>
+    props.paddingLeft === "sm"
+      ? props.theme.paddings.small
+      : props.paddingLeft === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingLeft === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "xxl"
+      ? props.theme.paddings.xxl
+      : props.theme.paddings.base};
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small
@@ -70,16 +80,6 @@ const Flex = styled.div`
       : props.padding === "base"
       ? props.theme.paddings.base
       : props.padding};
-  padding-left: ${(props) =>
-    props.paddingLeft === "sm"
-      ? props.theme.paddings.small
-      : props.paddingLeft === "lg"
-      ? props.theme.paddings.lg
-      : props.paddingLeft === "xl"
-      ? props.theme.paddings.xl
-      : props.paddingLeft === "xxl"
-      ? props.theme.paddings.xxl
-      : props.theme.paddings.base};
   background-color: ${(props) => props.backgroundColor};
   bottom: ${(props) => props.bottom};
   background: ${(props) => props.background};
@@ -148,18 +148,19 @@ const HalfFormContainer = styled(Flex)`
   flex-wrap: wrap;
 `;
 
-const FriendsPageContainer = styled(Flex)`
-  flexdirection: column;
-  height: 100vh;
+const FriendsPageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 3.5rem;
+  height: 100%;
   width: 100vw;
   position: relative;
 `;
 
-const FriendContainer = styled(Flex)`
+const FriendContainer = styled.div`
   justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
-  margin: 3% auto auto auto;
   background: radial-gradient(
     100% 99.11% at 0% 0.89%,
     rgba(255, 255, 255, 0.2) 0%,
@@ -168,11 +169,12 @@ const FriendContainer = styled(Flex)`
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(8px);
   // -webkit-backdrop-filter: blur(8px);
-  height: 93%;
-  width: 98%;
+  height: 97%;
+  width: 95%;
   border: 1px solid white;
   border-radius: 10px;
-  position: absolute;
+  position: relative;
+  padding: 1rem;
 `;
 
 // textbox

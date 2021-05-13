@@ -49,7 +49,7 @@ function FriendRequests() {
         ) : (
           <RequestsListContainer>
             {friendRequests.map((singleRequest, ind) => (
-              <RequestRow requestHandle={singleRequest} />
+              <RequestRow key={ind} requestHandle={singleRequest} />
             ))}
           </RequestsListContainer>
         )}

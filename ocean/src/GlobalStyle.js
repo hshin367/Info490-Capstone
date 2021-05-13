@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: "Montserrat", sans-serif;
+    color: white;
   }
 
   nav + div { 

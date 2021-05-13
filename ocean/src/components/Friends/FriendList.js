@@ -8,14 +8,31 @@ import {
   FriendListContainer,
   ListContainer,
   TitleBox,
+  AddFriendBtn,
 } from "./style.js";
 function FriendList() {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+      renderSearchResult();
+    } else {
+      // in prod. there would be friends in db
+      // in dev. there would be sampleD
+      setSearchResult(friends);
+    }
+  }, [searchTerm]);
 
   useEffect(() => {
     getFriendsList();
   }, []);
+
+  const handleChange = (e) => {
+    setSearchTerm(e);
+  };
 
   const getFriendsList = async () => {
     let friendsList;
@@ -32,6 +49,7 @@ function FriendList() {
 
     setFriends(friendsList);
     setLoading(false);
+    setSearchResult(friendsList);
   };
 
   if (loading)
@@ -41,18 +59,33 @@ function FriendList() {
       </TextBox>
     );
 
+  // searches for event names
+  const renderSearchResult = () => {
+    console.log(searchTerm);
+    let searchResult = friends.filter((frnd) => {
+      const nameIndex = frnd
+        ? frnd.toLowerCase().indexOf(searchTerm.toLowerCase())
+        : "";
+      return nameIndex > -1;
+    });
+    setSearchResult(searchResult);
+  };
+
   return (
     <FriendListContainer>
       <TitleBox>FRIENDS</TitleBox>
-      <FriendSearchBar />
-      {friends.length === 0 ? (
+      <FriendSearchBar handleChange={handleChange} />
+      {searchResult.length === 0 ? (
         <TextBox size="xxl" color="white">
           No Results{" "}
         </TextBox>
       ) : (
         <ListContainer>
-          {friends.map((singleFriend, ind) => (
-            <FriendBox>{singleFriend}</FriendBox>
+          {searchResult.map((singleFriend, ind) => (
+            <FriendBox key={ind}>
+              {singleFriend}
+              <AddFriendBtn>Add Friend</AddFriendBtn>
+            </FriendBox>
           ))}
         </ListContainer>
       )}
