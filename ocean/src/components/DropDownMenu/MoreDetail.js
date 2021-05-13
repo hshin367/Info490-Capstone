@@ -20,7 +20,7 @@ const MoreDetails = (props) => {
       <Menu.Item
         key="0"
         className="more-detail-dropdown"
-        onClick={handleRemoveEvent}
+        onClick={() => props.handleRemove(props.event)}
       >
         Remove Event
       </Menu.Item>
