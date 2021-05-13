@@ -3,6 +3,7 @@
  */
 import React, { useState, useEffect } from "react";
 import { Form, Input, Row, Col, DatePicker, TimePicker, Select } from "antd";
+import { useHistory } from "react-router-dom";
 import "./Login.css";
 import { SignupButton } from "../components/Button/button.js";
 import { LogoText } from "../components/Logo/style";
@@ -23,9 +24,60 @@ import { SearchOutlined } from "@ant-design/icons";
 
 const Events = () => {
   const [form] = Form.useForm();
-  const onFinish = (values) => {};
   const [allEvents, setAllEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
+
+
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [date, setDate] = useState();
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
+  //   const [deadline, setDeadline] = useState();
+  const [location, setLocation] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [zipCode, setZipCode] = useState();
+  const [organizerName, setOrganizerName] = useState();
+  const [contactNumber, setContactNumber] = useState();
+  const [fish, setFish] = useState();
+
+  const history = useHistory();
+  useEffect(() => {
+    if (localStorage.getItem("user-info")) {
+      history.push("/events");
+    }
+  });
+
+  function handleErrors(response) {
+    if (!response.ok) throw Error(response.statusText);
+    return response;
+  }
+
+  function createEvent() {
+    let item = { name, description, date, startTime, endTime, location, city, state, zipCode, organizerName, contactNumber, fish};
+    console.warn(item);
+
+    fetch("https://us-central1-restore-uw.cloudfunctions.net/api/event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(item),
+    })
+      .then(handleErrors)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        localStorage.setItem("user-info", JSON.stringify(result));
+        history.push("/events");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const eventTitle = (
     <Form.Item
@@ -38,7 +90,31 @@ const Events = () => {
       ]}
       style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
     >
-      <Input placeholder="Event Title" />
+      <Input
+        // placeholder="Event Title"
+        // value={name}ç
+        // onChange={(e) => setName(e.target.value)}
+      />        
+      {console.log("test")}
+    </Form.Item>
+  );
+
+  const eventDescription = (
+    <Form.Item
+      name="Event Description"
+      rules={[
+        {
+          required: true,
+          message: "Please input your First Name!",
+        },
+      ]}
+      style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
+    >
+      <Input
+        placeholder="Event Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
     </Form.Item>
   );
 
@@ -58,11 +134,13 @@ const Events = () => {
           width: "100%",
         }}
         placeholder="Event Date*"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
       />
     </Form.Item>
   );
 
-  const time = (
+  const eventTime = (
     <Row gutter={24}>
       <Col span={12}>
         <Form.Item
@@ -83,6 +161,8 @@ const Events = () => {
               width: "100%",
             }}
             placeholder="Event Start Time*"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
           />
         </Form.Item>
       </Col>
@@ -105,31 +185,35 @@ const Events = () => {
               width: "100%",
             }}
             placeholder="Event End Time*"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
           />
         </Form.Item>
       </Col>
     </Row>
   );
 
-  const eventDeadline = (
-    <Form.Item
-      name="eventDeadline"
-      rules={[
-        {
-          required: true,
-          message: "Select Registration Deadline",
-        },
-      ]}
-      style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
-    >
-      <DatePicker
-        style={{
-          width: "100%",
-        }}
-        placeholder="Registration Deadline*"
-      />
-    </Form.Item>
-  );
+  // const eventDeadline = (
+  //   <Form.Item
+  //     name="eventDeadline"
+  //     rules={[
+  //       {
+  //         required: true,
+  //         message: "Select Registration Deadline",
+  //       },
+  //     ]}
+  //     style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
+  //   >
+  //     <DatePicker
+  //       style={{
+  //         width: "100%",
+  //       }}
+  //       placeholder="Registration Deadline*"
+  //       value={deadline}
+  //       onChange={(e) => setDeadline(e.target.value)}
+  //     />
+  //   </Form.Item>
+  // );
 
   const eventLocation = (
     <div>
@@ -146,7 +230,11 @@ const Events = () => {
           borderRadius: "8px",
         }}
       >
-        <Input placeholder="Event Location*" />
+        <Input
+          placeholder="Event Location*"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
       </Form.Item>
 
       <Row gutter={24}>
@@ -164,7 +252,11 @@ const Events = () => {
               borderRadius: "8px",
             }}
           >
-            <Input placeholder="City*" />
+            <Input
+              placeholder="City*"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
           </Form.Item>
         </Col>
 
@@ -182,7 +274,11 @@ const Events = () => {
               borderRadius: "8px",
             }}
           >
-            <Input placeholder="State*" />
+            <Input
+              placeholder="State*"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            />
           </Form.Item>
         </Col>
 
@@ -200,14 +296,18 @@ const Events = () => {
               borderRadius: "8px",
             }}
           >
-            <Input placeholder="Zip Code" />
+            <Input
+              placeholder="Zip Code"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+            />
           </Form.Item>
         </Col>
       </Row>
     </div>
   );
 
-  const organizationInfo = (
+  const eventOrganizer = (
     <Row gutter={24}>
       <Col span={12}>
         <Form.Item
@@ -223,7 +323,11 @@ const Events = () => {
             borderRadius: "8px",
           }}
         >
-          <Input placeholder="Organization Name" />
+          <Input
+            placeholder="Organization Name"
+            value={organizerName}
+            onChange={(e) => setOrganizerName(e.target.value)}
+          />
         </Form.Item>
       </Col>
       <Col span={12}>
@@ -245,13 +349,15 @@ const Events = () => {
               width: "100%",
             }}
             placeholder="Phone Number"
+            value={contactNumber}
+            onChange={(e) => setContactNumber(e.target.value)}
           />
         </Form.Item>
       </Col>
     </Row>
   );
 
-  const eventAward = (
+  const eventFish = (
     <Form.Item
       name="Award"
       rules={[
@@ -262,7 +368,11 @@ const Events = () => {
       ]}
       style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
     >
-      <Select placeholder="Select Reward">
+      <Select
+        placeholder="Select Reward"
+        value={fish}
+        onChange={(e) => setFish(e.target.value)}
+      >
         <Select.Option value="demo">Clownfish</Select.Option>
         <Select.Option value="demo">Large Moorish Idol</Select.Option>
         <Select.Option value="demo">Small Moorish Idol</Select.Option>
@@ -357,20 +467,20 @@ const Events = () => {
                     <Form
                       form={form}
                       name="register"
-                      onFinish={onFinish}
                       scrollToFirstError
                       className="signup"
                     >
                       {eventTitle}
+                      {/* {eventDescription}
                       {eventStartDate}
-                      {time}
+                      {eventTime}
                       {eventDeadline}
-                      {eventLocation}
-                      {organizationInfo}
-                      {eventAward}
+                      {eventLocation
+                      {eventOrganizer}
+                      {eventFish} */}
                       <Form.Item className="button-form">
                         <SignupButton
-                          onClick={console.log("click")}
+                          onClick={createEvent}
                           style={{
                             backgroundColor: "rgba(255, 255, 255, 0.2)",
                             color: "white",
