@@ -71,7 +71,7 @@ const FishTank = (props) => {
   const windowWidth = window.innerWidth;
 
   useEffect(() => {
-    getAllFishes();
+    // getAllFishes();
   }, []);
 
   const getAllFishes = async () => {
@@ -109,8 +109,15 @@ const FishTank = (props) => {
   newFish();
   */
 
-  let allFishes = fishSampleData.map((fish, index) => {
-    return <Fish key={index} left={fish.left} right={fish.right} src={fish} />;
+  let allFishes = fishes.map((fish, index) => {
+    return (
+      <Fish
+        key={index}
+        left={fish.leftFish}
+        right={fish.rightFish}
+        src={fish}
+      />
+    );
   });
 
   const handleClick = () => {
@@ -131,6 +138,7 @@ const FishTank = (props) => {
 
   return (
     <Container>
+      {/* {allFishes} */}
       {displayKelps && <Kelps />}
       {props.showCustBtn && AquarBtn}
     </Container>

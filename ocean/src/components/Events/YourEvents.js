@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import firebase from "firebase/app";
 import { Blur, Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
@@ -44,10 +45,13 @@ const YourEvents = () => {
   );
 };
 
+let sampleData = goingEventsSampleData;
+
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log(events, "initializ.");
   const months = [
     "January",
     "Feburary",
@@ -65,9 +69,17 @@ const Events = () => {
 
   // TODO : refactor later
   useEffect(() => {
-    getAllEvents();
+    // getAllEvents();
+    console.log("called useEffect");
+    getSampleEvents();
   }, []);
 
+  const getSampleEvents = () => {
+    let sortedEvents = sortByDate(sampleData);
+    console.log(sortedEvents);
+    setEvents(sortedEvents);
+    setLoading(false);
+  };
   const getAllEvents = async () => {
     // let sampleData = goingEventsSampleData;
     // commented out for the dev. for now.
@@ -93,6 +105,39 @@ const Events = () => {
     // }
   };
 
+  //https://stackoverflow.com/questions/43452822/how-to-get-id-of-object-from-firebase-database-in-reactjs/43454454
+  // const findObjId = () => {
+  //   const rootRef = firebase.database().ref("events");
+  //   // const fooRef = rootRef.child("foo");
+  //   rootRef.on("value", (snap) => {
+  //     const data = snap.val();
+  //     if (data !== null) {
+  //       Object.keys(data).forEach((key) => {
+  //         // The ID is the key
+  //         console.log(key);
+  //         // The Object is foo[key]
+  //         console.log(data[key]);
+  //       });
+  //     }
+  //   });
+  // };
+
+  const handleRemove = (eData) => {
+    let eventsArr = events;
+    eventsArr.forEach((element) => {
+      if (
+        element.createdAt === eData.createdAt &&
+        element.description === eData.description
+      ) {
+        console.log("removed", element);
+        eventsArr.splice(element, 1);
+        console.log(eventsArr);
+        setEvents([...eventsArr]);
+        console.log(events, "events after arr removal");
+      }
+    });
+  };
+
   if (loading)
     return (
       <TextBox size="xxl" color="white">
@@ -100,8 +145,8 @@ const Events = () => {
       </TextBox>
     );
 
-  // TODO: refactor TEXTBOX
-  let allEvents = events.map((singleEvent, ind) => {
+  const allEvents = events.map((singleEvent, ind) => {
+    console.log(singleEvent, "single Event");
     let date = new Date(singleEvent.date);
     return (
       singleEvent !== null && (
@@ -122,7 +167,7 @@ const Events = () => {
               >
                 {date.getDate()}
               </TextBox>
-              <MoreDetails text={["Remove Event", "Invite Friends"]} />
+              <MoreDetails event={singleEvent} handleRemove={handleRemove} />
             </div>
             <TextBox
               size="xs"
@@ -150,6 +195,8 @@ const Events = () => {
       )
     );
   });
+
+  // TODO: refactor TEXTBOX
 
   // TODO : error handle the null data
   return (

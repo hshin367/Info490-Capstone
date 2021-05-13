@@ -12,3 +12,15 @@
 .ant-dropdown-menu-item {
   color: white;
 }
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child.ant-dropdown-menu-item {
+  background-color: transparent;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-active.ant-dropdown-menu-item {
+  background-color: #a0a0a0;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item {
+  background-color: transparent;
+}
