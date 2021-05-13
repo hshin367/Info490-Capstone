@@ -51,7 +51,6 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(events, "initializ.");
   const months = [
     "January",
     "Feburary",
@@ -70,13 +69,11 @@ const Events = () => {
   // TODO : refactor later
   useEffect(() => {
     // getAllEvents();
-    console.log("called useEffect");
     getSampleEvents();
   }, []);
 
   const getSampleEvents = () => {
     let sortedEvents = sortByDate(sampleData);
-    console.log(sortedEvents);
     setEvents(sortedEvents);
     setLoading(false);
   };
@@ -99,7 +96,6 @@ const Events = () => {
       );
     }
     let sortedEvents = await sortByDate(allEvents);
-    console.log(sortedEvents);
     setEvents(sortedEvents);
     setLoading(false);
     // }
@@ -129,11 +125,8 @@ const Events = () => {
         element.createdAt === eData.createdAt &&
         element.description === eData.description
       ) {
-        console.log("removed", element);
         eventsArr.splice(element, 1);
-        console.log(eventsArr);
         setEvents([...eventsArr]);
-        console.log(events, "events after arr removal");
       }
     });
   };
@@ -146,7 +139,6 @@ const Events = () => {
     );
 
   const allEvents = events.map((singleEvent, ind) => {
-    console.log(singleEvent, "single Event");
     let date = new Date(singleEvent.date);
     return (
       singleEvent !== null && (
