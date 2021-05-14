@@ -41,12 +41,12 @@ const Events = () => {
   const [contactNumber, setContactNumber] = useState();
   const [fish, setFish] = useState();
 
-  const history = useHistory();
-  useEffect(() => {
-    if (localStorage.getItem("user-info")) {
-      history.push("/events");
-    }
-  }, []);
+  // const history = useHistory();
+  // useEffect(() => {
+  //   if (localStorage.getItem("user-info")) {
+  //     history.push("/events");
+  //   }
+  // }, []);
 
   function handleErrors(response) {
     if (!response.ok) throw Error(response.statusText);
@@ -69,28 +69,21 @@ const Events = () => {
       contactNumber,
       fish,
     };
-    console.log(item);
     console.warn(item);
 
     fetch("https://us-central1-restore-uw.cloudfunctions.net/api/event", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(item),
     })
       .then(handleErrors)
       .then((response) => {
         return response.json();
       })
-      .then((result) => {
-        localStorage.setItem("user-info", JSON.stringify(result));
-        history.push("/events");
-      })
       .catch((error) => {
-        console.log(error);
+        console.error("There was an error!", error);
       });
+      console.log(item);
   }
 
   const eventTitle = (
