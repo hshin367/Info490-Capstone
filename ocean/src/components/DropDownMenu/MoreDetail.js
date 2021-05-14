@@ -1,20 +1,29 @@
 import { Menu, Dropdown, Modal, Button, Input } from "antd";
 import React, { useState } from "react";
 import { MoreOutlined } from "@ant-design/icons";
-import { unRegisterForEvent } from "../../actions/actions";
+import { unRegisterForEvent, inviteFriend } from "../../actions/actions";
 import "./more_detail.css";
 
 const MoreDetails = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [recipient, setRecipient] = useState("");
 
   const style = () => {
     return <MoreOutlined style={{ fontSize: "25px" }} />;
   };
 
   const handleRemoveEvent = async () => {
+    let eventId = props.event.eventId;
     console.log("clicked remove");
-    let response = await unRegisterForEvent();
+    let response = await unRegisterForEvent(eventId);
     console.log(response);
+  };
+
+  const handleInviteSubmit = async () => {
+    let eName = props.event.name;
+    let userHandle = recipient;
+    let response = await inviteFriend(eName, userHandle);
+    alert(response.message);
   };
 
   const handleInvite = () => {
@@ -22,7 +31,7 @@ const MoreDetails = (props) => {
   };
 
   const handleOk = () => {
-    alert("sent invitation");
+    handleInviteSubmit();
     setIsModalVisible(false);
   };
 
@@ -30,14 +39,12 @@ const MoreDetails = (props) => {
     setIsModalVisible(false);
   };
 
-  const handleInviteSubmit = (e) => console.log(e);
-
   const menuContent = (
     <>
       <Menu.Item
         key="0"
         className="more-detail-dropdown"
-        onClick={() => props.handleRemove(props.event)}
+        onClick={handleRemoveEvent}
       >
         Remove Event
       </Menu.Item>
@@ -59,7 +66,11 @@ const MoreDetails = (props) => {
           Enter the email address of the person that you want to invite to the
           event
         </p>
-        <Input placeholder="input user email" size="large" />
+        <Input
+          placeholder="input user email"
+          size="large"
+          onChange={(e) => setRecipient(e.target.value)}
+        />
       </Modal>
     </>
   );

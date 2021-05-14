@@ -68,8 +68,8 @@ const Events = () => {
 
   // TODO : refactor later
   useEffect(() => {
-    // getAllEvents();
-    getSampleEvents();
+    getAllEvents();
+    // getSampleEvents();
   }, []);
 
   const getSampleEvents = () => {
@@ -97,6 +97,7 @@ const Events = () => {
     }
     let sortedEvents = await sortByDate(allEvents);
     setEvents(sortedEvents);
+    console.log(sortedEvents);
     setLoading(false);
     // }
   };
