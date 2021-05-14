@@ -167,19 +167,12 @@ export const upcomingEventsSampleData = [
 ];
 
 export const SampleFriends = [
-  "friend1",
-  "friend2",
-  "friend3",
-  "friend4",
-  "friend5",
-  "friend6",
-  "friend7",
+  "Chris Yee",
+  "Thomas Luk",
+  "Hannah Shin",
+  "Tanduro",
+  "David Kim",
+  "Lisa Lee",
+  "Jay Park",
 ];
-export const SampleFriendRequests = [
-  "friend1",
-  "friend2",
-  "friend3",
-  "friend4",
-  "friend5",
-  "friend6",
-];
+export const SampleFriendRequests = ["Jin Son", "Harry Potter", "Bubble Tea"];
