@@ -167,7 +167,7 @@ const HalfFormContainer = styled(Flex)`
 const FriendsPageContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 3.5rem;
+  padding-top: 4rem;
   height: 100%;
   width: 100vw;
   position: relative;

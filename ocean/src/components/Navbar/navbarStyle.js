@@ -15,7 +15,7 @@ const NavbarWrapper = styled.div`
   position: relative;
   z-index: 1030;
   width: 1300px;
-  padding: 10px 25px;
+  padding: 15px 25px;
   min-width: 100vw;
   display: flex;
   align-items: center;
