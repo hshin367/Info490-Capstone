@@ -20,7 +20,7 @@ const Friends = () => {
     <>
       <FriendsPageContainer>
         <FriendContainer>
-          <Row>
+          <Row style={{ height: "100%" }}>
             <Col span={12}>
               <FriendList />
             </Col>

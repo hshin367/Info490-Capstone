@@ -9,11 +9,16 @@ const TitleBarContainer = styled(Flex)`
 `;
 
 const ListContainer = styled(Flex)`
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid white;
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(15, 25, 65, 0.48) 0%,
+    rgba(14, 24, 63, 0.12) 100%
+  );
+  // background-color: rgba(0, 0, 0, 0.1);
+  border: ${(props) => props.theme.border.thin_solid};
   border-radius: 10px;
-  height: 80%;
-  max-height: 35rem;
+  padding: 1rem;
+  flex: 11 1 0;
   width: 100%;
   align-contents: flex-start;
   flex-direction: column;
@@ -34,6 +39,7 @@ const TitleBox = styled.div`
   font-size: 2em;
   font-weight: bold;
   color: white;
+  padding-bottom: 1em;
 `;
 
 const AddFriendTitleBox = styled.div`
@@ -113,7 +119,7 @@ const FriendListContainer = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   border-radius: 7px;
-  padding-right: 20%;
+  padding-right: 5vw;
 `;
 
 const SearchContainer = styled(Flex)`
@@ -135,7 +141,7 @@ const FriendRequestsContainer = styled.div`
   align-items: flex-start;
   justify-content: space-evenly;
   background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid white;
+  border: ${(props) => props.theme.border.thin_solid};
   border-radius: 10px;
   padding: ${(props) => props.theme.paddings.xl};
   margin-bottom: ${(props) => props.theme.paddings.xl};
@@ -162,7 +168,6 @@ const SingleRequestContainer = styled.div`
   border-radius: 7px;
   padding: 1.5rem 0.3rem;
   width: 100%;
-  height: 10%;
 `;
 
 const SingleRequestFrdName = styled.div`

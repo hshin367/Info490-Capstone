@@ -28,6 +28,7 @@
 .friendsearchbar {
   width: 100%;
   right: 100px;
+  flex: 1 0;
 }
 
 .friendsearchbar

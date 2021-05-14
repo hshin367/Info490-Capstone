@@ -37,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
       mode === "light" ? theme.lightBg.gradient : theme.darkBg.gradient};
   }
 
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
 `;
 
 GlobalStyle.displayName = "GlobalStyle";

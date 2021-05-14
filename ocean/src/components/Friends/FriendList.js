@@ -81,12 +81,14 @@ function FriendList() {
         </TextBox>
       ) : (
         <ListContainer>
-          {searchResult.map((singleFriend, ind) => (
-            <FriendBox key={ind}>
-              {singleFriend}
-              {/* <AddFriendBtn>Add Friend</AddFriendBtn> */}
-            </FriendBox>
-          ))}
+          <div>
+            {searchResult.map((singleFriend, ind) => (
+              <FriendBox key={ind}>
+                {singleFriend}
+                {/* <AddFriendBtn>Add Friend</AddFriendBtn> */}
+              </FriendBox>
+            ))}
+          </div>
         </ListContainer>
       )}
     </FriendListContainer>
