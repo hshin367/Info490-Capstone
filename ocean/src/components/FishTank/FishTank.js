@@ -71,7 +71,7 @@ const FishTank = (props) => {
   const windowWidth = window.innerWidth;
 
   useEffect(() => {
-    // getAllFishes();
+    getAllFishes();
   }, []);
 
   const getAllFishes = async () => {
@@ -138,7 +138,7 @@ const FishTank = (props) => {
 
   return (
     <Container>
-      {/* {allFishes} */}
+      {allFishes}
       {displayKelps && <Kelps />}
       {props.showCustBtn && AquarBtn}
     </Container>
