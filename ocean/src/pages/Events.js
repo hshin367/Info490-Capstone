@@ -47,7 +47,7 @@ const Events = () => {
     if (localStorage.getItem("user-info")) {
       history.push("/events");
     }
-  });
+  }, []);
 
   function handleErrors(response) {
     if (!response.ok) throw Error(response.statusText);
