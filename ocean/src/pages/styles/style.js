@@ -143,6 +143,19 @@ const SignUpFormContainer = styled(Flex)`
   border-radius: 20px;
 `;
 
+const EventSearchFormContainer = styled(Flex)`
+  justify-content: ${(props) => props.justifyContent};
+  background-color: ${(props) =>
+    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
+  flex-direction: ${(props) => props.flexDirection};
+  width: ${(props) => props.width};
+  padding: ${(props) => props.theme.paddings.xl}
+    ${(props) => props.theme.paddings.xxxl};
+  border-radius: 20px;
+  height: 85%;
+  overflow-y: scroll;
+`;
+
 const HalfFormContainer = styled(Flex)`
   justify-content: center;
   flex-wrap: wrap;
@@ -255,4 +268,5 @@ export {
   HorizontalScrollableContainer,
   FriendContainer,
   FriendsPageContainer,
+  EventSearchFormContainer,
 };
