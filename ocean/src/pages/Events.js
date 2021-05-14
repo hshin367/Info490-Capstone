@@ -3,9 +3,18 @@
  */
 import React, { useState, useEffect } from "react";
 import { Form, Input, Row, Col, DatePicker, TimePicker, Select } from "antd";
+
+import { EnvironmentOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
+import "./styles/Events.css";
 import "./Login.css";
-import { SignupButton } from "../components/Button/button.js";
+import {
+  FriendListContainer,
+  FriendRequestTitleBox,
+  ListContainer,
+  TitleBox,
+} from "../components/Friends/style";
+import { EventSubmitBtn } from "../components/Button/button.js";
 import { LogoText } from "../components/Logo/style";
 import {
   FriendContainer,
@@ -15,6 +24,7 @@ import {
   EventSearchFormContainer,
 } from "./styles/style.js";
 import { SearchOutlined } from "@ant-design/icons";
+import FriendSearchBar from "../components/InputForms/FriendSearchBar";
 
 /**
  * Event Component
@@ -104,9 +114,10 @@ const Events = () => {
       style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
     >
       <Input
-      // placeholder="Event Title"
-      // value={name}ç
-      // onChange={(e) => setName(e.target.value)}
+        placeholder="Event Title"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="create-event"
       />
       {console.log("test")}
     </Form.Item>
@@ -127,6 +138,7 @@ const Events = () => {
         placeholder="Event Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        className="create-event"
       />
     </Form.Item>
   );
@@ -149,6 +161,7 @@ const Events = () => {
         placeholder="Event Date*"
         value={date}
         onChange={(e) => setDate(e.target.value)}
+        className="create-event"
       />
     </Form.Item>
   );
@@ -176,6 +189,7 @@ const Events = () => {
             placeholder="Event Start Time*"
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
+            className="create-event"
           />
         </Form.Item>
       </Col>
@@ -200,6 +214,7 @@ const Events = () => {
             placeholder="Event End Time*"
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
+            className="create-event"
           />
         </Form.Item>
       </Col>
@@ -224,6 +239,7 @@ const Events = () => {
         placeholder="Registration Deadline*"
         value={deadline}
         onChange={(e) => setDeadline(e.target.value)}
+        className="create-event"
       />
     </Form.Item>
   );
@@ -247,6 +263,7 @@ const Events = () => {
           placeholder="Event Location*"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+          className="create-event"
         />
       </Form.Item>
 
@@ -269,6 +286,7 @@ const Events = () => {
               placeholder="City*"
               value={city}
               onChange={(e) => setCity(e.target.value)}
+              className="create-event"
             />
           </Form.Item>
         </Col>
@@ -291,6 +309,7 @@ const Events = () => {
               placeholder="State*"
               value={state}
               onChange={(e) => setState(e.target.value)}
+              className="create-event"
             />
           </Form.Item>
         </Col>
@@ -313,6 +332,7 @@ const Events = () => {
               placeholder="Zip Code"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
+              className="create-event"
             />
           </Form.Item>
         </Col>
@@ -340,6 +360,7 @@ const Events = () => {
             placeholder="Organization Name"
             value={organizerName}
             onChange={(e) => setOrganizerName(e.target.value)}
+            className="create-event"
           />
         </Form.Item>
       </Col>
@@ -364,6 +385,7 @@ const Events = () => {
             placeholder="Phone Number"
             value={contactNumber}
             onChange={(e) => setContactNumber(e.target.value)}
+            className="create-event"
           />
         </Form.Item>
       </Col>
@@ -413,17 +435,33 @@ const Events = () => {
 
   // create a mapped result of the filtered events from the handleChagne fn.
   let searchEventResult = filteredEvents.map((singleEvent) => {
+    console.log(singleEvent);
     return (
       <div className="event-card">
-        <h1 className="event-card-title">{singleEvent.name}</h1>
-        <p>{singleEvent.organizerName}</p>
-        <p>{singleEvent.startTime}</p>
+        <div className="event-card-times">
+          <div className="event-card-startTime">{singleEvent.startTime}</div>
+          <div className="event-card-endTime">{singleEvent.endTime}</div>
+        </div>
+        <div className="event-card-info">
+          <div className="event-card-names">
+            <h1 className="event-card-title">{singleEvent.name}</h1>
+            <p>{singleEvent.organizerName}</p>
+          </div>
+          <div className="event-card-location">
+            <p>
+              <EnvironmentOutlined /> &nbsp; {singleEvent.location}
+            </p>
+          </div>
+          <div className="event-card-fish">
+            <p>{singleEvent.fish}</p>
+          </div>
+        </div>
       </div>
     );
   });
 
   function handleChange(e) {
-    const searchString = e.target.value.toLowerCase();
+    const searchString = e.toLowerCase();
     if (searchString !== "") {
       const filteredEvents = allEvents.filter((singleEvent) => {
         return singleEvent.name.toLowerCase().includes(searchString);
@@ -437,76 +475,55 @@ const Events = () => {
   return (
     <FriendsPageContainer>
       <FriendContainer>
-        <Row gutter={16}>
-          <Col span={10}>
-            <EventSearchFormContainer
-              backgroundColor="rgba(255, 255, 255, 0.1)"
-              width="auto"
-            >
-              <div
-                className="eventSearch"
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <div style={{ paddingBottom: "1rem" }}>
-                  <Input
-                    placeholder="Search Event"
-                    id="searchBar"
-                    type="text"
-                    name="searchBar"
-                    prefix={<SearchOutlined />}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div>{searchEventResult}</div>
-              </div>
-            </EventSearchFormContainer>
+        <Row style={{ height: "100%" }}>
+          <Col className="events-left">
+            <FriendListContainer>
+              <TitleBox>EVENTS</TitleBox>
+              <FriendSearchBar
+                handleChange={handleChange}
+                text="Search Event"
+              />
+              <ListContainer>{searchEventResult}</ListContainer>
+            </FriendListContainer>
           </Col>
-          {/* </Row> */}
 
-          <Col span={14}>
-            {/* <Row> */}
+          <Col className="events-right">
             <EventSearchFormContainer
-              backgroundColor="rgba(255, 255, 255, 0.1)"
               width="auto"
               borderRadius=""
               justifyContent="left"
             >
               <Row>
-                <Row>
-                  <LogoText style={{ marginBottom: "10%" }}>
-                    CREATE EVENT
-                  </LogoText>
-                </Row>
+                <FriendRequestTitleBox style={{ marginBottom: "5%" }}>
+                  CREATE EVENT
+                </FriendRequestTitleBox>
                 <Row justify="space-around" wrap="nowrap">
-                  <Col span={17}>
-                    <Form
-                      form={form}
-                      name="register"
-                      scrollToFirstError
-                      className="signup"
-                    >
-                      {eventTitle}
-                      {eventDescription}
-                      {eventStartDate}
-                      {eventTime}
-                      {eventDeadline}
-                      {eventLocation}
-                      {eventOrganizer}
-                      {eventFish}
-                      <Form.Item className="button-form">
-                        <SignupButton
-                          onClick={createEvent}
-                          style={{
-                            backgroundColor: "rgba(255, 255, 255, 0.2)",
-                            color: "white",
-                            width: "100%",
-                          }}
-                        >
-                          Submit Event
-                        </SignupButton>
-                      </Form.Item>
-                    </Form>
-                  </Col>
+                  <Form
+                    form={form}
+                    name="register"
+                    scrollToFirstError
+                    className="signup create-events"
+                  >
+                    {eventTitle}
+                    {eventDescription}
+                    {eventStartDate}
+                    {eventTime}
+                    {eventDeadline}
+                    {eventLocation}
+                    {eventOrganizer}
+                    {eventFish}
+                    <Form.Item className="button-form">
+                      <EventSubmitBtn
+                        onClick={createEvent}
+                        color="#6f6f6f33"
+                        style={{
+                          width: "100%",
+                        }}
+                      >
+                        Submit Event
+                      </EventSubmitBtn>
+                    </Form.Item>
+                  </Form>
                 </Row>
               </Row>
             </EventSearchFormContainer>

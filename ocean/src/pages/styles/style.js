@@ -143,17 +143,20 @@ const SignUpFormContainer = styled(Flex)`
   border-radius: 20px;
 `;
 
-const EventSearchFormContainer = styled(Flex)`
-  justify-content: ${(props) => props.justifyContent};
-  background-color: ${(props) =>
-    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
-  flex-direction: ${(props) => props.flexDirection};
+const EventSearchFormContainer = styled.div`
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(15, 25, 65, 0.48) 0%,
+    rgba(14, 24, 63, 0.12) 100%
+  );
+  // background-color: rgba(0, 0, 0, 0.1);
   width: ${(props) => props.width};
   padding: ${(props) => props.theme.paddings.xl}
+    ${(props) => props.theme.paddings.xxxl} 0
     ${(props) => props.theme.paddings.xxxl};
   border-radius: 20px;
-  height: 85%;
-  overflow-y: scroll;
+  border: ${(props) => props.theme.border.thin_solid};
+  height: 100%;
 `;
 
 const HalfFormContainer = styled(Flex)`

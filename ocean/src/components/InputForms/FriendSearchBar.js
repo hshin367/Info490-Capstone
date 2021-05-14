@@ -4,7 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import "./searchbar.css";
 import "antd/dist/antd.css";
 
-const FriendSearchBar = ({ handleChange }) => {
+const FriendSearchBar = ({ handleChange, text }) => {
   const onChange = (e) => {
     handleChange(e.target.value);
   };
@@ -12,7 +12,7 @@ const FriendSearchBar = ({ handleChange }) => {
   return (
     <div className="friendsearchbar">
       <Input
-        placeholder="Search Friends"
+        placeholder={text ? text : "Search Friends"}
         bordered={false}
         onChange={onChange}
         prefix={

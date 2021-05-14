@@ -16,21 +16,21 @@ const NavbarWrapper = styled.div`
   z-index: 1030;
   width: 1300px;
   padding: 10px 25px;
-
+  min-width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  @media (min-width: ${({ theme }) => theme.sizes.xs}) {
-  }
-  @media (min-width: ${({ theme }) => theme.sizes.sm}) {
-    // max-width: ${({ theme }) => theme.sizes.m};
-  }
-  @media (min-width: ${({ theme }) => theme.sizes.m}) {
-    // max-width: ${({ theme }) => theme.sizes.l};
-  }
-  @media (min-width: ${({ theme }) => theme.sizes.l}) {
-  }
+  // @media (min-width: ${({ theme }) => theme.sizes.xs}) {
+  // }
+  // @media (min-width: ${({ theme }) => theme.sizes.sm}) {
+  //   // max-width: ${({ theme }) => theme.sizes.m};
+  // }
+  // @media (min-width: ${({ theme }) => theme.sizes.m}) {
+  //   // max-width: ${({ theme }) => theme.sizes.l};
+  // }
+  // @media (min-width: ${({ theme }) => theme.sizes.l}) {
+  // }
 `;
 
 // TODO : fix the padding later with the Flxbox.

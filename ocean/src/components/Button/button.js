@@ -116,6 +116,31 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const EventSubmitBtn = styled(Button)`
+  display: inline-flex;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  align-items: center;
+  font-weight: normal;
+  // colors
+  background-color: #6f6f6f33;
+  justify-content: center;
+  color: ${(props) => props.textcolor === "white" && "white"};
+  // Size
+  ${sizes}
+  &:hover {
+    background: ${darken(0.2, "white")};
+  }
+  &:active {
+    background: ${darken(0.1, "white")};
+  }
+`;
+
 // const Button = ({ children, ...rest }) => {
 //   return <StyledButton {...rest}>{children}</StyledButton>;
 // };
@@ -148,4 +173,11 @@ Button.defaultProps = {
   color: theme.colors.dark_blue,
 };
 
-export { SignupButton, WhiteButton, DarkBlueButton, AquarButton, AquarBtnImg };
+export {
+  SignupButton,
+  WhiteButton,
+  DarkBlueButton,
+  AquarButton,
+  AquarBtnImg,
+  EventSubmitBtn,
+};
