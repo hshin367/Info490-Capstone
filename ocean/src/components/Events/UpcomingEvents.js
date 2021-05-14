@@ -13,7 +13,11 @@ import SearchBar from "../../components/InputForms/SearchBar.js";
 import { DarkBlueButton } from "../Button/button.js";
 import Modals from "../Modals/Modal.js";
 import { Row, Col, Checkbox, Form, Button } from "antd";
-import { ShareAltOutlined, StarOutlined } from "@ant-design/icons";
+import {
+  ControlOutlined,
+  ShareAltOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
 import UserContext from "../User/User";
 import { getEvents, registerForEvent } from "../../actions/actions";
 import {
@@ -89,6 +93,7 @@ const Events = ({ searchTerm }) => {
   const getAllEvents = async () => {
     let allEvents = await getEvents("");
     let sortedEvents = sortByDate(allEvents.data);
+    console.log(allEvents);
     setEvents(sortedEvents);
     setSearchResult(sortedEvents);
     setLoading(false);

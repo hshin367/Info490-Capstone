@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import FishTank from ".././components/FishTank/FishTank.js";
 import { Flex } from "./styles/style";
 
@@ -7,12 +7,11 @@ const Aquarium = () => {
   return (
     <Flex
       flexDirection="column"
-      background="linear-gradient(#0E183F, #3B4782)"
       height="100vh"
       width="100vw"
       position="relative"
     >
-      <FishTank />
+      <FishTank showCustBtn={true} />
     </Flex>
   );
 };

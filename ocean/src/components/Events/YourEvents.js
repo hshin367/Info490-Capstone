@@ -10,7 +10,7 @@ import {
   Circle,
   Container,
 } from "./style.js";
-import MoreDetails from "./MoreDetail";
+import MoreDetails from "../DropDownMenu/MoreDetail";
 import { getGoingEvents } from "../../actions/actions";
 import { goingEvents, goingEventsSampleData } from "../../utils/sampleData";
 import { sortByDate } from "../../utils/dateCalculations";
@@ -44,6 +44,8 @@ const YourEvents = () => {
   );
 };
 
+let sampleData = goingEventsSampleData;
+
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -66,7 +68,14 @@ const Events = () => {
   // TODO : refactor later
   useEffect(() => {
     getAllEvents();
+    // getSampleEvents();
   }, []);
+
+  const getSampleEvents = () => {
+    let sortedEvents = sortByDate(sampleData);
+    setEvents(sortedEvents);
+    setLoading(false);
+  };
 
   const getAllEvents = async () => {
     // let sampleData = goingEventsSampleData;
@@ -88,14 +97,40 @@ const Events = () => {
     }
     let sortedEvents = await sortByDate(allEvents);
     setEvents(sortedEvents);
+    console.log(sortedEvents);
     setLoading(false);
     // }
   };
 
-  if (loading) return <TextBox size="title">Loading Data...</TextBox>;
+  //https://stackoverflow.com/questions/43452822/how-to-get-id-of-object-from-firebase-database-in-reactjs/43454454
+  // const findObjId = () => {
+  //   const rootRef = firebase.database().ref("events");
+  //   // const fooRef = rootRef.child("foo");
+  //   rootRef.on("value", (snap) => {
+  //     const data = snap.val();
+  //     if (data !== null) {
+  //       Object.keys(data).forEach((key) => {
+  //         // The ID is the key
+  //         console.log(key);
+  //         // The Object is foo[key]
+  //         console.log(data[key]);
+  //       });
+  //     }
+  //   });
+  // };
 
-  // TODO: refactor TEXTBOX
-  let allEvents = events.map((singleEvent, ind) => {
+  const handleRemove = () => {
+    getAllEvents();
+  };
+
+  if (loading)
+    return (
+      <TextBox size="xxl" color="white">
+        Loading Data...
+      </TextBox>
+    );
+
+  const allEvents = events.map((singleEvent, ind) => {
     let date = new Date(singleEvent.date);
     return (
       singleEvent !== null && (
@@ -114,9 +149,9 @@ const Events = () => {
                 padding="none"
                 paddingTop="none"
               >
-                {date.getDay()}
+                {date.getDate()}
               </TextBox>
-              <MoreDetails />
+              <MoreDetails event={singleEvent} handleRemove={handleRemove} />
             </div>
             <TextBox
               size="xs"
@@ -125,7 +160,7 @@ const Events = () => {
               padding="xs"
               semibold
             >
-              {months[date.getMonth() + 1].toUpperCase()}
+              {months[date.getMonth()].toUpperCase()}
             </TextBox>
             {/* <TextBox padding="xs">{singleEvent.name}</TextBox> */}
             <TextBox paddingTop="xl" paddingLeft="xs" light>
@@ -145,11 +180,13 @@ const Events = () => {
     );
   });
 
+  // TODO: refactor TEXTBOX
+
   // TODO : error handle the null data
   return (
     <>
       {events.length === 0 ? (
-        <TextBox size="title" color="white">
+        <TextBox size="xxl" color="white" paddingTop="xxl">
           You Have no events that you have Registered for!{" "}
         </TextBox>
       ) : (

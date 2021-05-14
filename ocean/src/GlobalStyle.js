@@ -1,5 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
-import theme from "./theme";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   h1 { 
@@ -12,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: "Montserrat", sans-serif;
+    color: white;
   }
 
   nav + div { 
@@ -30,6 +30,11 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 1rem;
     padding-right: 1rem;
     height: 2.25rem;
+  }
+
+  body { 
+    background: ${({ theme, mode }) =>
+      mode === "light" ? theme.lightBg.gradient : theme.darkBg.gradient};
   }
 
 `;

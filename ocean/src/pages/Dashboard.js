@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, createContext } from "react";
 import PropTypes from "prop-types";
-import Banner from "../components/Banner/banner.js";
 import { YourEvents } from "../components/Events/YourEvents.js";
 import {
   Flex,
@@ -47,7 +46,6 @@ const Dashboard = () => {
     <>
       <Flex
         flexDirection="column"
-        background="linear-gradient(#0E183F, #3B4782)"
         height="100vh"
         width="100vw"
         position="relative"

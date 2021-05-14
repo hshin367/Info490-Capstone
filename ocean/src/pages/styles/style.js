@@ -47,7 +47,7 @@ const Bg = styled.div`
   background-repeat: no-repeat;
   background-position: top left;
   display: flex;
-  min-height: 100vh;  
+  min-height: 100vh;
   -webkit-backdrop-filter: blur(100px);
   backdrop-filter: blur(100px);
 `;
@@ -58,6 +58,16 @@ const Flex = styled.div`
   align-items: ${(props) => props.alignItems};
   flex-direction: ${(props) => props.flexDirection};
   position: ${(props) => props.position};
+  padding-left: ${(props) =>
+    props.paddingLeft === "sm"
+      ? props.theme.paddings.small
+      : props.paddingLeft === "lg"
+      ? props.theme.paddings.lg
+      : props.paddingLeft === "xl"
+      ? props.theme.paddings.xl
+      : props.paddingLeft === "xxl"
+      ? props.theme.paddings.xxl
+      : props.theme.paddings.base};
   padding: ${(props) =>
     props.padding === "sm"
       ? props.theme.paddings.small
@@ -70,16 +80,6 @@ const Flex = styled.div`
       : props.padding === "base"
       ? props.theme.paddings.base
       : props.padding};
-  padding-left: ${(props) =>
-    props.paddingLeft === "sm"
-      ? props.theme.paddings.small
-      : props.paddingLeft === "lg"
-      ? props.theme.paddings.lg
-      : props.paddingLeft === "xl"
-      ? props.theme.paddings.xl
-      : props.paddingLeft === "xxl"
-      ? props.theme.paddings.xxl
-      : props.theme.paddings.base};
   background-color: ${(props) => props.backgroundColor};
   bottom: ${(props) => props.bottom};
   background: ${(props) => props.background};
@@ -122,14 +122,14 @@ const Container = styled(Flex)`
 `;
 
 const LoginContainer = styled(Container)`
-justify-content: ${(props) => props.justifyContent};
-background-color: ${(props) =>
-  props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
-flex-direction: ${(props) => props.flexDirection};
-width: ${(props) => props.width};
-padding: ${(props) => props.theme.paddings.xl}
-  ${(props) => props.theme.paddings.xxxl};
-height: 50%;
+  justify-content: ${(props) => props.justifyContent};
+  background-color: ${(props) =>
+    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
+  flex-direction: ${(props) => props.flexDirection};
+  width: ${(props) => props.width};
+  padding: ${(props) => props.theme.paddings.xl}
+    ${(props) => props.theme.paddings.xxxl};
+  height: 50%;
 `;
 
 const SignUpFormContainer = styled(Flex)`
@@ -143,28 +143,51 @@ const SignUpFormContainer = styled(Flex)`
   border-radius: 20px;
 `;
 
+const EventSearchFormContainer = styled(Flex)`
+  justify-content: ${(props) => props.justifyContent};
+  background-color: ${(props) =>
+    props.backgroundColor === "opaque" ? "rgba(255, 255, 255, 0.2)" : ""};
+  flex-direction: ${(props) => props.flexDirection};
+  width: ${(props) => props.width};
+  padding: ${(props) => props.theme.paddings.xl}
+    ${(props) => props.theme.paddings.xxxl};
+  border-radius: 20px;
+  height: 85%;
+  overflow-y: scroll;
+`;
+
 const HalfFormContainer = styled(Flex)`
   justify-content: center;
   flex-wrap: wrap;
 `;
 
-const FriendsPageContainer = styled(Flex)`
-
-  background: linear-gradient(#0E183F, #3B4782);
+const FriendsPageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 3.5rem;
   height: 100%;
-  width: 100%;
-`
+  width: 100vw;
+  position: relative;
+`;
 
-const FriendContainer = styled(Flex)`
+const FriendContainer = styled.div`
   justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
-  margin: 3% auto auto auto;
-  background-color: rgba(255, 255, 255, 0.1);
-  height: 93%;
-  width: 98%;
+  background: radial-gradient(
+    100% 99.11% at 0% 0.89%,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  // -webkit-backdrop-filter: blur(8px);
+  height: 97%;
+  width: 95%;
   border: 1px solid white;
   border-radius: 10px;
+  position: relative;
+  padding: 1rem;
 `;
 
 // textbox
@@ -212,7 +235,7 @@ const TextBox = styled.div`
       : props.paddingTop === "xl"
       ? props.theme.paddings.xl
       : props.paddingTop === "xxl"
-      ? props.theme.paddings.xl
+      ? props.theme.paddings.xxl
       : props.paddingTop === "none"
       ? props.theme.paddings.none
       : props.theme.paddings.base};
@@ -244,5 +267,6 @@ export {
   LoginContainer,
   HorizontalScrollableContainer,
   FriendContainer,
-  FriendsPageContainer
+  FriendsPageContainer,
+  EventSearchFormContainer,
 };

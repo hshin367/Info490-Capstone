@@ -1,85 +1,48 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import Routes from "./Routes/index.js";
-
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import theme from "./theme";
+import Navbar from "./components/Navbar/navbar.js";
+import { convertStrToBool } from "./utils/convertStrToBool";
 // import UserContext from "./components/User/User.js";
 
-import Navbar from "./components/Navbar/navbar.js";
+let boolDisplayKelps = convertStrToBool(window.localStorage.getItem("kelps"));
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: this.props.user,
-      events: this.props.events,
-      menuStatus: "aquarium",
-      scrollPosition: 0,
-      displayScroll: true,
-    };
-  }
+export const AppContext = createContext();
+const App = () => {
+  const [themeMode, setThemeMode] = useState(
+    window.localStorage.getItem("theme") || "dark"
+  );
+  const [displayKelps, setDisplayKelps] = useState(
+    boolDisplayKelps === undefined ? true : boolDisplayKelps
+  );
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  switchMenuStatus = (newStatus) => {
-    if (newStatus === "aquarium" || newStatus === "events" || newStatus ==="friends") {
-      //this.setState({ menuStatus: newStatus });
-      this.setState((currState) => {
-        let stateChanges = { menuStatus: newStatus };
-        return stateChanges;
-      });
-    }
+  const toggleTheme = (style) => {
+    window.localStorage.setItem("theme", style);
+    setThemeMode(style);
   };
 
-  //Scroll Stuff
-  // handleScroll = (event) => {
-  //   console.log("hi");
-  //   let e = event.target;
-  //   this.setState(
-  //     {
-  //       scrollPosition: window.pageYOffset,
-  //     },
-  //     this.checkScroll
-  //   );
-  // };
+  const setDefaultTheme = () => {
+    window.localStorage.setItem("theme", "dark");
+  };
 
-  // checkScroll = () => {
-  //   if (this.state.scrollPosition < 250) {
-  //     console.log(this.state.scrollPosition);
-  //     this.setState({
-  //       displayScroll: true,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       displayScroll: false,
-  //     });
-  //   }
-  // };
+  useEffect(() => {
+    const localTheme = window.localStorage.getItem("theme");
+    localTheme ? setThemeMode(localTheme) : setDefaultTheme();
+  }, []);
 
-  // handleClickScrollButton = () => {
-  //   window.scroll({
-  //     top: 570,
-  //     left: 0,
-  //     behavior: "smooth",
-  //   });
-  // };
-
-  render() {
-    return (
-      <>
-        <GlobalStyle />
-        <div className="wrapper">
-          <ThemeProvider theme={theme}>
-            <Navbar />
-            <Routes />
-          </ThemeProvider>
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle mode={themeMode} />
+      <div className="wrapper">
+        <AppContext.Provider value={[displayKelps, setDisplayKelps]}>
+          <Navbar toggleTheme={toggleTheme} bgCol={themeMode} />
+          <Routes />
+        </AppContext.Provider>
+      </div>
+    </ThemeProvider>
+  );
+};
 
 export default App;

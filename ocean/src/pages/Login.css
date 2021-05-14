@@ -85,9 +85,29 @@ span svg {
   padding-top: 40px;
 }
 
+.event-card {
+  color: white;
+}
+
+.event-card-title {
+  color: white;
+}
+
 /* horizontal divider */
 .ant-divider-horizontal.ant-divider-with-text {
   border-top-color: rgba(255, 255, 255, 0.5);
+}
+
+.eventSearch .ant-input-affix-wrapper {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid white;
+  color: #0c0745;
+}
+
+.eventSearch {
+  overflow-y: scroll;
 }
 
 /* #components-form-demo-normal-login .login-form-forgot {

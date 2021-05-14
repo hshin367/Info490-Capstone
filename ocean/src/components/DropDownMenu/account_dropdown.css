@@ -1,0 +1,49 @@
+.account-dropdown.ant-dropdown-menu {
+  position: absolute;
+  margin: 0px 100px 0 0;
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
+  background-color: #686e88;
+  border: 0.5px solid #ffffff;
+  color: white;
+  border-radius: 5px;
+}
+
+.ant-dropdown-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-dropdown-menu-item {
+  color: white;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child.tank-setting {
+  background-color: transparent;
+  cursor: default;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-active.tank-setting {
+  background-color: transparent;
+  cursor: default;
+}
+
+.ant-dropdown-menu-item.tank-setting {
+  background-color: transparent;
+  cursor: default;
+}
+
+.tank-setting .dark .ant-checkbox .ant-checkbox-inner {
+  background: linear-gradient(180deg, #0f1940 0%, #3b4781 100%);
+}
+
+.tank-setting .light .ant-checkbox .ant-checkbox-inner {
+  background: linear-gradient(180deg, #27569d 32.29%, #112482 100%);
+}
+
+.tank-setting .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: white;
+}
