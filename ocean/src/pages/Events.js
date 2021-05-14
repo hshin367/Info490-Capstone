@@ -27,7 +27,6 @@ const Events = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
 
-
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
@@ -47,7 +46,7 @@ const Events = () => {
     if (localStorage.getItem("user-info")) {
       history.push("/events");
     }
-  });
+  }, []);
 
   function handleErrors(response) {
     if (!response.ok) throw Error(response.statusText);
@@ -55,7 +54,22 @@ const Events = () => {
   }
 
   function createEvent() {
-    let item = { name, description, date, startTime, endTime, location, city, state, zipCode, organizerName, contactNumber, fish};
+    let item = {
+      name,
+      description,
+      date,
+      startTime,
+      endTime,
+      deadline,
+      location,
+      city,
+      state,
+      zipCode,
+      organizerName,
+      contactNumber,
+      fish,
+    };
+    console.log(item);
     console.warn(item);
 
     fetch("https://us-central1-restore-uw.cloudfunctions.net/api/event", {
@@ -91,11 +105,10 @@ const Events = () => {
       style={{ backgroundColor: "rgba(15, 25, 65, 0.6)", borderRadius: "8px" }}
     >
       <Input
-        // placeholder="Event Title"
-        // value={name}ç
-        // onChange={(e) => setName(e.target.value)}
-      />        
-      {console.log("test")}
+        placeholder="Event Title"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
     </Form.Item>
   );
 
@@ -135,7 +148,7 @@ const Events = () => {
         }}
         placeholder="Event Date*"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={(time, timeString) => setDate(timeString)}
       />
     </Form.Item>
   );
@@ -162,7 +175,7 @@ const Events = () => {
             }}
             placeholder="Event Start Time*"
             value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
+            onChange={(time, timeString) => setStartTime(timeString)}
           />
         </Form.Item>
       </Col>
@@ -186,7 +199,7 @@ const Events = () => {
             }}
             placeholder="Event End Time*"
             value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
+            onChange={(time, timeString) => setEndTime(timeString)}
           />
         </Form.Item>
       </Col>
@@ -210,7 +223,7 @@ const Events = () => {
         }}
         placeholder="Registration Deadline*"
         value={deadline}
-        onChange={(e) => setDeadline(e.target.value)}
+        onChange={(time, timeString) => setDeadline(timeString)}
       />
     </Form.Item>
   );
@@ -371,11 +384,15 @@ const Events = () => {
       <Select
         placeholder="Select Reward"
         value={fish}
-        onChange={(e) => setFish(e.target.value)}
+        onChange={(value, option) => setFish(value)}
       >
-        <Select.Option value="demo">Clownfish</Select.Option>
-        <Select.Option value="demo">Large Moorish Idol</Select.Option>
-        <Select.Option value="demo">Small Moorish Idol</Select.Option>
+        <Select.Option value="clownfish">Clownfish</Select.Option>
+        <Select.Option value="largeMoorishIdol">
+          Large Moorish Idol
+        </Select.Option>
+        <Select.Option value="smallMoorishIdol">
+          Small Moorish Idol
+        </Select.Option>
       </Select>
     </Form.Item>
   );
@@ -471,13 +488,13 @@ const Events = () => {
                       className="signup"
                     >
                       {eventTitle}
-                      {/* {eventDescription}
+                      {eventDescription}
                       {eventStartDate}
                       {eventTime}
                       {eventDeadline}
-                      {eventLocation
+                      {eventLocation}
                       {eventOrganizer}
-                      {eventFish} */}
+                      {eventFish}
                       <Form.Item className="button-form">
                         <SignupButton
                           onClick={createEvent}
