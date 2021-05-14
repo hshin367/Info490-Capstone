@@ -16,6 +16,7 @@ const MoreDetails = (props) => {
     let eventId = props.event.eventId;
     console.log("clicked remove");
     let response = await unRegisterForEvent(eventId);
+    props.handleRemove();
     console.log(response);
   };
 

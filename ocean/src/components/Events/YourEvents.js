@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import firebase from "firebase/app";
 import { Blur, Flex, TextBox } from "../../pages/styles/style.js";
 import {
   LocationTime,
@@ -77,6 +76,7 @@ const Events = () => {
     setEvents(sortedEvents);
     setLoading(false);
   };
+
   const getAllEvents = async () => {
     // let sampleData = goingEventsSampleData;
     // commented out for the dev. for now.
@@ -119,17 +119,8 @@ const Events = () => {
   //   });
   // };
 
-  const handleRemove = (eData) => {
-    let eventsArr = events;
-    eventsArr.forEach((element) => {
-      if (
-        element.createdAt === eData.createdAt &&
-        element.description === eData.description
-      ) {
-        eventsArr.splice(element, 1);
-        setEvents([...eventsArr]);
-      }
-    });
+  const handleRemove = () => {
+    getAllEvents();
   };
 
   if (loading)
