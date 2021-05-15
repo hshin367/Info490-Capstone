@@ -14,6 +14,7 @@ import {
   SignUpFormContainer,
 } from "./styles/style.js";
 import { SearchOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 /**
  * Event Component
@@ -53,7 +54,7 @@ const Events = () => {
     return response;
   }
 
-  function createEvent() {
+  const createEvent = async () => {
     let item = {
       name,
       description,
@@ -69,22 +70,39 @@ const Events = () => {
       contactNumber,
       fish,
     };
+
     console.warn(item);
 
-    fetch("https://us-central1-restore-uw.cloudfunctions.net/api/event", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(item),
-    })
-      .then(handleErrors)
-      .then((response) => {
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
+    const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+    const reqConfig = {
+      headers: {
+        authorization: `Bearer ${userToken}`,
+      },
+    };
+
+    try {
+      const res = await axios({
+        method: "POST",
+        url: "https://us-central1-restore-uw.cloudfunctions.net/api/event",
+        headers: {
+          authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify(item)
       });
-      console.log(item);
-  }
+      return res;
+    } catch (err) {
+      if (err.response) {
+        console.log(
+          "Failed to post event Error Status: " +
+            err.response.status
+        );
+        return err.response;
+      }
+    }
+
+    console.log(item);
+  };
 
   const eventTitle = (
     <Form.Item
