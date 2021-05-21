@@ -329,4 +329,8 @@ const EventRegistrationAgreementForm = () => {
   );
 };
 
-export default UpcomingEvents;
+export {
+  UpcomingEvents,
+  EventRegistrationModal,
+  EventRegistrationAgreementForm,
+};

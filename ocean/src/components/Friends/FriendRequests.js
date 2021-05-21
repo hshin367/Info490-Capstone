@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getFriendRequests } from "../../actions/actions";
+import { getFriendRequests, handleFriendRequests } from "../../actions/actions";
 import { Container, Flex, TextBox } from "../../pages/styles/style.js";
 import FriendSearchBar from "../../components/InputForms/FriendSearchBar.js";
 import { SampleFriendRequests } from "../../utils/sampleData";
@@ -21,9 +21,10 @@ function FriendRequests() {
   }, []);
 
   const getRequests = async () => {
+    console.log("getreq");
     let friendRequests;
-    // friendRequests = await getFriendRequests();
-    friendRequests = SampleFriendRequests;
+    friendRequests = await getFriendRequests();
+    // friendRequests = SampleFriendRequests;
     if (!friendRequests) {
       setLoading(false);
       return <TextBox size="title">No Results</TextBox>;
@@ -31,6 +32,19 @@ function FriendRequests() {
 
     setFriendRequests(friendRequests);
     setLoading(false);
+  };
+
+  const handleDeclineRequest = async (reqHandle) => {
+    let result = await handleFriendRequests(reqHandle, false);
+    alert(result.message);
+    getRequests();
+  };
+
+  const handleAccept = async (reqHandle) => {
+    let result = await handleFriendRequests(reqHandle, true);
+    console.log(result);
+    alert(result.message);
+    getRequests();
   };
 
   if (loading)
@@ -49,7 +63,12 @@ function FriendRequests() {
         ) : (
           <RequestsListContainer>
             {friendRequests.map((singleRequest, ind) => (
-              <RequestRow key={ind} requestHandle={singleRequest} />
+              <RequestRow
+                key={ind}
+                requestHandle={singleRequest}
+                handleAccept={handleAccept}
+                handleDeclineRequest={handleDeclineRequest}
+              />
             ))}
           </RequestsListContainer>
         )}

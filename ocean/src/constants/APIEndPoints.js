@@ -17,6 +17,7 @@ const api = {
   user: {
     getAllFriends: "/user/getAllFriends",
     getFriendRequests: "/user/getAllRequests",
+    handleFriendRequest: "/user/handleFriendRequest",
   },
 };
 
