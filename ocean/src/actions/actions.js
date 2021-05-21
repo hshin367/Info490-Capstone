@@ -1,6 +1,9 @@
 import axios from "axios";
 import api from "../constants/APIEndPoints";
 
+const POST = "POST";
+const GET = "GET";
+
 // TODO : additional error display on the webpage
 export const getEvents = async (query) => {
   try {
@@ -166,7 +169,7 @@ export const getFriendRequests = async () => {
 
   try {
     const res = await axios({
-      method: "GET",
+      method: GET,
       url: api.base + api.user.getFriendRequests,
       headers: {
         authorization: `Bearer ${userToken}`,
@@ -176,5 +179,37 @@ export const getFriendRequests = async () => {
   } catch (err) {
     console.log(err);
     console.log("Failed to get Friends List");
+  }
+};
+
+/**
+ * input: 
+ * {
+	  "friend": "friendtest3",
+	  "accept": true
+   }
+
+ * @returns message of the status 
+ */
+export const handleFriendRequests = async (friend, isAccepted) => {
+  const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+
+  try {
+    const res = await axios({
+      method: POST,
+      url: api.base + api.user.handleFriendRequest,
+      headers: {
+        authorization: `Bearer ${userToken}`,
+        "Content-Type": "application/json",
+      },
+      data: {
+        friend: friend,
+        accept: isAccepted,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    console.log("Failed to handle friend request");
   }
 };

@@ -25,6 +25,10 @@ import {
 } from "./styles/style.js";
 import { SearchOutlined } from "@ant-design/icons";
 import FriendSearchBar from "../components/InputForms/FriendSearchBar";
+import {
+  EventRegistrationModal,
+  EventRegistrationAgreementForm,
+} from "../components/Events/UpcomingEvents";
 
 /**
  * Event Component
@@ -51,6 +55,8 @@ const Events = () => {
   const [organizerName, setOrganizerName] = useState();
   const [contactNumber, setContactNumber] = useState();
   const [fish, setFish] = useState();
+  const [modalVisible, setModalVisble] = useState(false);
+  const [eventId, setEventId] = useState("");
 
   const history = useHistory();
   useEffect(() => {
@@ -119,7 +125,6 @@ const Events = () => {
         onChange={(e) => setName(e.target.value)}
         className="create-event"
       />
-      {console.log("test")}
     </Form.Item>
   );
 
@@ -433,11 +438,22 @@ const Events = () => {
     }
   };
 
+  const openModal = (eid) => {
+    setModalVisble(true);
+    setEventId(eid);
+  };
+
+  const closeModal = () => {
+    setModalVisble(false);
+  };
+
   // create a mapped result of the filtered events from the handleChagne fn.
   let searchEventResult = filteredEvents.map((singleEvent) => {
-    console.log(singleEvent);
     return (
-      <div className="event-card">
+      <div
+        className="event-card"
+        onClick={() => openModal(singleEvent.eventId)}
+      >
         <div className="event-card-times">
           <div className="event-card-startTime">{singleEvent.startTime}</div>
           <div className="event-card-endTime">{singleEvent.endTime}</div>
@@ -484,6 +500,11 @@ const Events = () => {
                 text="Search Event"
               />
               <ListContainer>{searchEventResult}</ListContainer>
+              <EventRegistrationModal
+                visible={modalVisible}
+                closeModal={closeModal}
+                eventId={eventId}
+              />
             </FriendListContainer>
           </Col>
 
