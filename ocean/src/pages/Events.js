@@ -29,6 +29,7 @@ import {
   EventRegistrationModal,
   EventRegistrationAgreementForm,
 } from "../components/Events/UpcomingEvents";
+import axios from "axios";
 
 /**
  * Event Component
@@ -58,25 +59,26 @@ const Events = () => {
   const [modalVisible, setModalVisble] = useState(false);
   const [eventId, setEventId] = useState("");
 
-  const history = useHistory();
-  useEffect(() => {
-    if (localStorage.getItem("user-info")) {
-      history.push("/events");
-    }
-  }, []);
+  // const history = useHistory();
+  // useEffect(() => {
+  //   if (localStorage.getItem("user-info")) {
+  //     history.push("/events");
+  //   }
+  // }, []);
 
   function handleErrors(response) {
     if (!response.ok) throw Error(response.statusText);
     return response;
   }
 
-  function createEvent() {
+  const createEvent = async () => {
     let item = {
       name,
       description,
       date,
       startTime,
       endTime,
+      deadline,
       location,
       city,
       state,
@@ -85,28 +87,36 @@ const Events = () => {
       contactNumber,
       fish,
     };
-    console.warn(item);
 
-    fetch("https://us-central1-restore-uw.cloudfunctions.net/api/event", {
-      method: "POST",
+    const userToken = JSON.parse(localStorage.getItem("user-info")).token;
+    const reqConfig = {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        authorization: `Bearer ${userToken}`,
       },
-      body: JSON.stringify(item),
-    })
-      .then(handleErrors)
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        localStorage.setItem("user-info", JSON.stringify(result));
-        history.push("/events");
-      })
-      .catch((error) => {
-        console.log(error);
+    };
+
+    try {
+      const res = await axios({
+        method: "POST",
+        url: "https://us-central1-restore-uw.cloudfunctions.net/api/event",
+        headers: {
+          authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(item),
       });
-  }
+      return res;
+    } catch (err) {
+      if (err.response) {
+        console.log(
+          "Failed to post event Error Status: " + err.response.status
+        );
+        return err.response;
+      }
+    }
+
+    console.log(item);
+  };
 
   const eventTitle = (
     <Form.Item
@@ -165,8 +175,8 @@ const Events = () => {
         }}
         placeholder="Event Date*"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
         className="create-event"
+        onChange={(time, timeString) => setDate(timeString)}
       />
     </Form.Item>
   );
@@ -193,8 +203,8 @@ const Events = () => {
             }}
             placeholder="Event Start Time*"
             value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
             className="create-event"
+            onChange={(time, timeString) => setStartTime(timeString)}
           />
         </Form.Item>
       </Col>
@@ -218,8 +228,8 @@ const Events = () => {
             }}
             placeholder="Event End Time*"
             value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
             className="create-event"
+            onChange={(time, timeString) => setEndTime(timeString)}
           />
         </Form.Item>
       </Col>
@@ -411,11 +421,15 @@ const Events = () => {
       <Select
         placeholder="Select Reward"
         value={fish}
-        onChange={(e) => setFish(e.target.value)}
+        onChange={(value, option) => setFish(value)}
       >
-        <Select.Option value="demo">Clownfish</Select.Option>
-        <Select.Option value="demo">Large Moorish Idol</Select.Option>
-        <Select.Option value="demo">Small Moorish Idol</Select.Option>
+        <Select.Option value="clownfish">Clownfish</Select.Option>
+        <Select.Option value="largeMoorishIdol">
+          Large Moorish Idol
+        </Select.Option>
+        <Select.Option value="smallMoorishIdol">
+          Small Moorish Idol
+        </Select.Option>
       </Select>
     </Form.Item>
   );
